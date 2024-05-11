@@ -1,6 +1,6 @@
-# freelanc
+# don't readme 
 
-A new Flutter project.
+## just flutter projecte  
 
 ## Getting Started
 
