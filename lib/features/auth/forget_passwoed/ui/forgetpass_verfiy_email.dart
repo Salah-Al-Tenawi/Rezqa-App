@@ -41,7 +41,9 @@ class ForgetVerfiyEmail extends StatelessWidget {
                     width: 50.h,
                   ),
                   MyButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.restcode();
+                    },
                     color: MyColors.blueColor,
                     child: Icon(
                       Icons.restart_alt_rounded,
@@ -55,7 +57,7 @@ class ForgetVerfiyEmail extends StatelessWidget {
               ),
               MyButton(
                 onPressed: () {
-                  if (controller.otp != null) {
+                  if (controller.otp != null ) {
                     controller.verfiyemail();
                   } else {
                     Get.snackbar("خطأ", "لا بمكن ترك الحقل فارغ");

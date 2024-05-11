@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freelanc/core/constant/imageurl.dart';
 import 'package:get/get.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
@@ -23,10 +24,9 @@ class ColumnMyButtonSingin extends StatelessWidget {
           builder: (_) {
             return Container(
               child: controller.circle == true
-                  ?  CircularProgressIndicator( 
-                    backgroundColor: MyColors.blueColor,
-                    
-                  )
+                  ? CircularProgressIndicator(
+                      backgroundColor: MyColors.blueColor,
+                    )
                   : MyButton(
                       onPressed: () {
                         controller.sigin();
@@ -43,20 +43,39 @@ class ColumnMyButtonSingin extends StatelessWidget {
           color: MyColors.blueColor,
           indent: 100,
           endIndent: 100,
-          height: 10.h,
-        ),
-        MyButton(
-          onPressed: () {},
-          color: MyColors.blueColor,
-          width: 100.w,
-          child: Text(
-            "تسجيل الدخول بحساب غوغل",
-            style: font15greyebold.copyWith(fontWeight: FontWeight.normal),
-          ),
+          height: 40.h,
         ),
         MyButton(
           onPressed: () {
-            Get.back();
+            controller.siginwithGoogle();
+          },
+          borderRadius: true,
+          color: MyColors.blueColor,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "   المتابعة بواسسطة            ",
+                style: font15greyebold,
+              ),
+              CircleAvatar(
+                radius: 25,
+                child: Image(image: AssetImage(ImagesUrl.imageOnboardingOne)),
+              )
+            ],
+          ),
+        )
+        // MyButton(
+        //   onPressed: () {},
+        //   color: MyColors.blueColor,
+        //   width: 100.w,
+        //   child:
+        // ),
+        ,
+        MyButton(
+          onPressed: () {
+            controller.gotologin();
           },
           child: Text(
             "لدي حساب",

@@ -5,6 +5,8 @@ import 'package:freelanc/features/auth/models/user_model.dart';
 import 'package:dartz/dartz.dart';
 
 class UserRepositry {
+  static UserModel? user;
+  static String? token;
   DioConSumer dio = DioConSumer();
 
   Future<Either<String, UserModel>> sigin(String firstname, String lastname,
@@ -23,8 +25,7 @@ class UserRepositry {
     }
   }
 
-  Future<Either<String, dynamic>> verfiyemail(
-      String email, String otp) async {
+  Future<Either<String, dynamic>> verfiyemail(String email, String otp) async {
     try {
       final response = await dio.post(ApiEndPoint.emailverify, data: {
         ApiKey.email: email,
@@ -68,4 +69,20 @@ class UserRepositry {
       return left(e.errormodel.errormassagr.toString());
     }
   }
+
+  Future<Either<String, dynamic>> resetpassword(
+      String email, String password, String repassword, String otp) async {
+    try {
+      final response = await dio.post(ApiEndPoint.restpassword, data: {
+        ApiKey.email: email,
+        ApiKey.password: password,
+        ApiKey.configpassword: repassword,
+        ApiKey.otpcode: otp
+      });
+      return Right(response);
+    } on ServerExpcptions catch (e) {
+      return left(e.errormodel.errormassagr);
+    }
+  }
+  
 }

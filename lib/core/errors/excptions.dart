@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:freelanc/core/errors/error_model.dart';
-import 'package:get/get.dart';
 
 class ServerExpcptions implements Exception {
   final ErrorModel errormodel;
@@ -11,27 +8,31 @@ class ServerExpcptions implements Exception {
 }
 
 void handelDioExcptions(DioException e) {
+  Map<String, String> errorconect = {"message": "مشكلة في الإتصال بالإنترنـت"};
+  Map<String, String> errorservir = {
+    "message": "مشكلة في الخادم حاول في وقت آخر"
+  };
   switch (e.type) {
     case DioExceptionType.connectionTimeout:
-      throw ServerExpcptions(errormodel: ErrorModel.fromJson(e.response!.data));
+      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
 
     case DioExceptionType.sendTimeout:
-      throw ServerExpcptions(errormodel: ErrorModel.fromJson(e.response!.data));
+      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
 
     case DioExceptionType.receiveTimeout:
-      throw ServerExpcptions(errormodel: ErrorModel.fromJson(e.response!.data));
+      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
 
     case DioExceptionType.badCertificate:
-      throw ServerExpcptions(errormodel: ErrorModel.fromJson(e.response!.data));
+      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
 
     case DioExceptionType.cancel:
-      throw ServerExpcptions(errormodel: ErrorModel.fromJson(e.response!.data));
+      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
 
     case DioExceptionType.connectionError:
-      throw ServerExpcptions(errormodel: ErrorModel.fromJson(e.response!.data));
+      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
 
     case DioExceptionType.unknown:
-      throw ServerExpcptions(errormodel: ErrorModel.fromJson(e.response!.data));
+      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
 
     case DioExceptionType.badResponse:
       switch (e.response?.statusCode) {
@@ -48,28 +49,7 @@ void handelDioExcptions(DioException e) {
               errormodel: ErrorModel.fromJson(e.response!.data));
 
         case 502:
-          throw ServerExpcptions(
-              errormodel: ErrorModel.fromJson(
-                  {"message": "مشكلة في الخادم حاول في وقت آخر"}));
+          throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorservir));
       }
   }
 }
-    //عامل ايميل
-//         {
-//     "message": "The email has already been taken.",
-//     "errors": {
-//         "email": [
-//             "The email has already been taken."
-//         ]
-//     }
-// }
-// password غلط تأكسد
-//{
-//     "message": "The password field confirmation does not match. (and 1 more error)",
-//     "errors": {
-//         "password": [
-//             "The password field confirmation does not match.",
-//             "The password field must be at least 8 characters."
-//         ]
-//     }
-// }

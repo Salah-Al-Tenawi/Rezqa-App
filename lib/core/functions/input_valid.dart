@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-inputvaild(String val, String type, int max, int min) {
+inputvaild(String val, String ?type, int max, int min) {
   if (val.isEmpty) {
     return "لا يمكن ترك الحقل فارغ";
   }
@@ -17,7 +17,12 @@ inputvaild(String val, String type, int max, int min) {
   }
   if (type == "nubmerphone") {
     if (!GetUtils.isPhoneNumber(val)) {
-      return "كلمة المرور غير صالحة";
+      return "رقم هاتف غير صالح";
+    }
+  }
+  if (type == "url") {
+    if (!GetUtils.isURL(val)) {
+      return "رابط إلكتروني غير صالح";
     }
   }
 

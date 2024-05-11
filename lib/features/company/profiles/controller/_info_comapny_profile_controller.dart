@@ -1,34 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:freelanc/core/route/routes.dart';
 import 'package:get/get.dart';
 
 abstract class InfoCompanyProfileController extends GetxController {
-  next();
+  gototowinfopage();
+  gotoVerfiymyprofile();
+  saveprofile();
+  editprofile();
+  addgallary();
   onchangetypecompany(dynamic type);
   onchangesizecompany(dynamic size);
-  addListnumberphone(List<int> listNumber);
-  gotoHome();
+  addnumberphone(String number);
+  showlastnumber();
 }
 
 class CompanyProfileControllerIm extends InfoCompanyProfileController {
   late GlobalKey<FormState> keyforone;
   late GlobalKey<FormState> keyfortow;
+  
   late TextEditingController namecompany;
   late TextEditingController addresCity;
   late TextEditingController addresCountry;
   late TextEditingController descreptioncompany;
   late TextEditingController emailcompany;
-  late List<int> numerphoecompany;
+  late TextEditingController numberphone;
+  late List<String> numerphoecompany;
   late List<DropdownMenuItem<dynamic>> typecompany;
   late List<DropdownMenuItem<dynamic>> sizecompany;
-   List<String> ?linksfacebook;
-  var selectTypecompany;
-  var selectsizecompany;
+  List<String>? linksfacebook;
+  String? selectTypecompany;
+  String? selectsizecompany;
 
   @override
-  gotoHome() {}
+  gototowinfopage() {
+    // if (keyforone.currentState!.validate()) {
+    Get.toNamed(
+      MyRoute.infoprofilecompanytow,
+    );
+    // }
+  }
 
   @override
-  next() {}
+  gotoVerfiymyprofile() {
+    // if (keyfortow.currentState!.validate()) {
+    Get.toNamed(MyRoute.verfiymyprofilecompany);
+    // }
+  }
+
+  @override
+  onchangetypecompany(var type) {
+    selectTypecompany = type;
+  }
+
+  @override
+  onchangesizecompany(var size) {
+    selectsizecompany = size;
+  }
+
+  @override
+  addnumberphone(String number) {
+    numerphoecompany.add(number);
+    update();
+  }
+
+  @override
+  addgallary() {
+    // TODO: implement addgallary
+    throw UnimplementedError();
+  }
+
+  @override
+  editprofile() {
+    Get.back();
+  }
+
+  @override
+  saveprofile() {
+    // TODO: implement saveprofile
+    throw UnimplementedError();
+  }
+
   @override
   void onInit() {
     addresCity = TextEditingController();
@@ -38,16 +89,12 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
     emailcompany = TextEditingController();
     addresCountry = TextEditingController();
     descreptioncompany = TextEditingController();
+    numberphone = TextEditingController();
     numerphoecompany = [];
     typecompany = _itemstypecompany();
     sizecompany = _sizecompany();
-    
-    super.onInit();
-  }
 
-  @override
-  onchangetypecompany(dynamic type) {
-    selectTypecompany = type;
+    super.onInit();
   }
 
   List<DropdownMenuItem<dynamic>> _itemstypecompany() {
@@ -58,6 +105,7 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
                   child: Text(e),
                 ))
             .toList();
+
     return item;
   }
 
@@ -73,12 +121,9 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
   }
 
   @override
-  onchangesizecompany(dynamic size) {
-    selectsizecompany = size;
-  }
-
-  @override
-  addListnumberphone(List<int> listNumber) {
-    numerphoecompany = listNumber;
+  showlastnumber() {
+    numberphone.text = numerphoecompany.last;
+    numerphoecompany.removeLast();
+    print(numerphoecompany);
   }
 }

@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freelanc/core/constant/imageurl.dart';
 
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
@@ -12,9 +14,9 @@ import 'package:freelanc/features/auth/login/controller/login_controller.dart';
 class ColumnMyButtonlogin extends StatelessWidget {
   LoginController controller;
   ColumnMyButtonlogin({
-    Key? key,
+    super.key,
     required this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +52,34 @@ class ColumnMyButtonlogin extends StatelessWidget {
                 },
                 child: Text(
                   "إنشاء حساب",
-                  style: fontBluesize22bold,
+                  style: font17normalblue,
                 ))
           ],
         ),
+        SizedBox(
+          height: 30.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              ".  .  .  .  .  .        ",
+              style: TextStyle(color: MyColors.blueColor),
+            ),
+            InkWell(
+              onTap: () {
+                controller.loginwithgoogle();
+              },
+              child: const CircleAvatar(
+                child: Image(image: AssetImage(ImagesUrl.imageOnboardingOne)),
+              ),
+            ),
+            Text(
+              "       .  .  .  .  .  .  .",
+              style: TextStyle(color: MyColors.blueColor),
+            ),
+          ],
+        )
       ],
     );
   }

@@ -8,18 +8,21 @@ class CustomTextformfild extends StatelessWidget {
   String? Function(String?)? validator;
   String title;
   Icon? icon;
+  Widget? suffix;
   bool? scureText;
   TextInputType? keyboardType;
+  String? hint;
 
-  CustomTextformfild({
-    super.key,
-    required this.title,
-    required this.controller,
-    this.icon,
-    required this.validator,
-    this.keyboardType,
-    this.scureText,
-  });
+  CustomTextformfild(
+      {super.key,
+      required this.title,
+      required this.controller,
+      this.icon,
+      this.suffix,
+      required this.validator,
+      this.keyboardType,
+      this.scureText,
+      this.hint});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +34,8 @@ class CustomTextformfild extends StatelessWidget {
         validator: validator,
         controller: controller,
         decoration: InputDecoration(
+            hintText: hint,
+            suffix: suffix,
             fillColor: MyColors.greyTextfildColor,
             labelText: title,
             labelStyle: TextStyle(

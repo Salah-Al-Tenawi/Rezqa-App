@@ -1,4 +1,4 @@
-import 'package:freelanc/app_routes.dart';
+import 'package:freelanc/core/route/app_routes.dart';
 import 'package:freelanc/core/api/dio_consumer.dart';
 import 'package:freelanc/core/repository/user_repository.dart';
 import 'package:get/get.dart';

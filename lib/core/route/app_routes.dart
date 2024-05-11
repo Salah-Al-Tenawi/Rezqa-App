@@ -11,11 +11,11 @@ import 'package:freelanc/features/auth/sing_in_user/ui/chose_type_user.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/singin.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/sucsses_verfiy_email.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/verfiy_email_sing.dart';
-import 'package:freelanc/features/company/ui/dashborad.dart';
+import 'package:freelanc/features/company/dashboard/ui/dashborad.dart';
 import 'package:freelanc/features/onboarding/ui/onboarding.dart';
-import 'package:freelanc/features/profiles/ui/myprofile.dart';
-import 'package:freelanc/features/profiles/ui/info_profile_compant_one.dart';
-import 'package:freelanc/features/profiles/ui/info_profile_company_tow.dart';
+import 'package:freelanc/features/company/profiles/ui/verfiy_myprofile.dart';
+import 'package:freelanc/features/company/profiles/ui/info_profile_compant_one.dart';
+import 'package:freelanc/features/company/profiles/ui/info_profile_company_tow.dart';
 import 'package:freelanc/testwidgets.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -47,10 +47,10 @@ class AppRoute {
         binding: SinginBinding()),
     GetPage(name: MyRoute.chosetypeuser, page: () => const choseTypeUser()),
     GetPage(
-        name: MyRoute.verfiyemilsing,
-        page: () => const VerfiyEmailSingin(),
-        ),
-        // pages company enter info profile
+      name: MyRoute.verfiyemilsing,
+      page: () => const VerfiyEmailSingin(),
+    ),
+    // pages company enter info profile
     GetPage(
         name: MyRoute.infoprofilecompanyone,
         page: () => const InfoProfileCompanyOne(),
@@ -60,14 +60,16 @@ class AppRoute {
         page: () => const InfoProfileComapnyTow(),
         binding: InfopProfilecompanyBinding()),
     GetPage(
-        name: MyRoute.sucsses,
-        page: () => const SucssesVerfiyEmail(),
-        ),
-    GetPage(
-        name: MyRoute.gallryImagesInfoComapny,
-        page: () => const MyPfofileCompany()),
-    GetPage(name: MyRoute.test, page: () => const TestWidgets()) ,
+        name: MyRoute.verfiymyprofilecompany,
+        page: () => const VerfiyMyPfofileCompany(),
+        binding: InfopProfilecompanyBinding()),
 
-    GetPage(name: MyRoute.dashbordcompany, page: ()=> const DashBoardCompany() )
+    GetPage(
+      name: MyRoute.sucsses,
+      page: () => const SucssesVerfiyEmail(),
+    ),
+    GetPage(name: MyRoute.test, page: () => const TestWidgets()),
+
+    GetPage(name: MyRoute.dashbordcompany, page: () => const DashBoardCompany())
   ];
 }

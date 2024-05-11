@@ -1,7 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:freelanc/core/api/api_end_points.dart';
-import 'package:freelanc/core/widgets/my_button.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 // ignore: must_be_immutable
 class TestWidgets extends StatelessWidget {
@@ -9,7 +7,6 @@ class TestWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Dio dio = Dio();
-    return Scaffold(body: Center());
+    return Scaffold();
   }
 }

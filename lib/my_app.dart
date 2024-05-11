@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:freelanc/app_routes.dart';
+import 'package:freelanc/core/route/app_routes.dart';
 import 'package:freelanc/core/route/routes.dart';
 import 'package:freelanc/core/themes/app_theme.dart';
 import 'package:get/get.dart';
@@ -12,17 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppRoute controller = Get.find();
+    AppRoute appRoute = Get.find();
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
       child: GetMaterialApp(
-          title: "freelancer projectes with get x ",
-          getPages: controller.list,
-          initialRoute: MyRoute.login,
+          title: "freelancer projectes with get x",
+          getPages: appRoute.list,
+          initialRoute: MyRoute.dashbordcompany,
           debugShowCheckedModeBanner: false,
           textDirection: TextDirection.rtl,
-          theme: AppTheme.them),
+          theme: AppTheme.theme),
     );
   }
 }
+// 2024/5/7 

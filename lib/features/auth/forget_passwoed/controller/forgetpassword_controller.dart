@@ -34,23 +34,15 @@ class ForgetpasswordControllerIm extends ForgetpasswordController {
 
   @override
   verfiyemail() async {
-    final response = await userRepositry.verfiyemail(email.text, otp!);
-    response.fold((error) => Get.snackbar("erroe", error), (token) {
-      token[ApiKey.token];
-      print(
-          "token=======================================${token[ApiKey.token]}");
-      if (token[ApiKey.token] != null) {
-        Get.offAllNamed(MyRoute.rePassword);
-        myServices.sharedpref
-            .setString(KeyShardpref.token, token[ApiKey.token]!);
-      } else {
-        Get.snackbar("خطأ", "حاول مجددا");
-      }
-    });
+    Get.toNamed(MyRoute.rePassword ,arguments: { "otp":otp ,"email": email.text,"userRepositry":userRepositry});
   }
 
   @override
-  restcode() {}
+  restcode() async {
+    final response = await userRepositry.resendotp(email.text);
+    response.fold((l) => Get.snackbar("فشل", "حاول مجددا"),
+        (r) => Get.snackbar("نجاح", "تم اعادة إرسال رمز التحقق مرة آخرى"));
+  }
 
   @override
   void onInit() {

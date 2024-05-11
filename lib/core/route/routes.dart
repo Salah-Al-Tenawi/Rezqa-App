@@ -11,9 +11,9 @@ class MyRoute {
   static const String chosetypeuser = "/Chosetypeuser";
 // profiles
 
-  static const String infoprofilecompanyone = "/profilecompany";
+  static const String infoprofilecompanyone = "/infoprofilecompanyone";
   static const String infoprofilecompanytow = "/infoprofilecompanytow";
-  static const String gallryImagesInfoComapny = "/GallryImagesInfoComapny";
+  static const String verfiymyprofilecompany = "/verfiymyprofilecompany";
 
   // user as company
   static String dashbordcompany = "/dashbordcompany";

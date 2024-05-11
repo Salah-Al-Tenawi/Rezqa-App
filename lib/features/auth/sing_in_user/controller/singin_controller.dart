@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:freelanc/core/repository/user_repository.dart';
 import 'package:freelanc/core/route/routes.dart';
 import 'package:freelanc/core/services/my_services.dart';
-import 'package:freelanc/features/auth/models/user_model.dart';
 import 'package:get/get.dart';
 
 abstract class SinginController extends GetxController {
@@ -17,7 +16,7 @@ abstract class SinginController extends GetxController {
   late UserRepositry userrepositry;
   bool circle = false;
 
-  UserModel? user;
+  // UserModel? user;
 
   sigin();
   siginwithGoogle();
@@ -27,7 +26,7 @@ abstract class SinginController extends GetxController {
 class SinginControllerIm extends SinginController {
   @override
   gotologin() {
-    Get.offNamed(MyRoute.login);
+    Get.back();
   }
 
   @override
@@ -42,7 +41,7 @@ class SinginControllerIm extends SinginController {
           (error) => Get.snackbar("errore", error),
           (response) => {
                 Get.offAllNamed(MyRoute.verfiyemilsing, arguments: email.text),
-                user = response
+                UserRepositry.user = response
               });
     }
   }
@@ -63,6 +62,4 @@ class SinginControllerIm extends SinginController {
 
     super.onInit();
   }
-
-
 }

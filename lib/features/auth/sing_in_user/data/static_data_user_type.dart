@@ -9,9 +9,9 @@ List<ChoseUserModel> listChosetypesuerModel = [
   ChoseUserModel(
       typeuser: "شركة أبحث عن موظفين",
       descrtypeuser: "لدي شواغر للعمل عن بعد مع الخبرات المطلوبة",
-      icon: const Icon(Icons.compass_calibration)),
+      icon: const Icon(Icons.home_work_outlined)),
   ChoseUserModel(
       typeuser: "عميل أبحث عن خدمة",
       descrtypeuser: "لدي عمل أريد إنجازه بمقابل و وقت يناسبني",
-      icon: const Icon(Icons.compass_calibration)),
+      icon: const Icon(Icons.work_history_outlined)),
 ];

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
- static ThemeData them = ThemeData(
+ static ThemeData theme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
+    
   );
 }

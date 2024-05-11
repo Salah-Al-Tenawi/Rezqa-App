@@ -12,11 +12,27 @@ TextStyle fontBluesize22bold = TextStyle(
 );
 TextStyle font15greyebold = TextStyle(
     color: MyColors.greyColor, fontSize: 15.sp, fontWeight: FontWeight.bold);
-TextStyle font16blacknormal = const TextStyle(fontSize: 16);
+TextStyle font16blacknormal = TextStyle(fontSize: 16.sp);
 
 TextStyle font22greyebold = TextStyle(
     color: MyColors.greyColor, fontSize: 22.sp, fontWeight: FontWeight.bold);
 TextStyle font14greynormal =
     TextStyle(fontSize: 14.sp, color: MyColors.greyColor);
+TextStyle font23boldblack =
+    TextStyle(fontSize: 23.sp, fontWeight: FontWeight.bold);
+TextStyle font17normalblue =
+    TextStyle(fontSize: 17.sp, color: MyColors.blueColor);
+TextStyle font14bluenormal =
+    TextStyle(fontSize: 14.sp, color: MyColors.blueColor);
+TextStyle font22grayw500 = TextStyle(
+    fontSize: 22.sp, fontWeight: FontWeight.w500, color: MyColors.greyColor);
 TextStyle font25boldblack =
-    const TextStyle(fontSize: 25, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold);
+TextStyle font22gbluew600 = TextStyle(
+    color: MyColors.blueColor, fontSize: 22.sp, fontWeight: FontWeight.w600);
+TextStyle font13greybold =
+    TextStyle(fontSize: 13.sp, color: Colors.grey, fontWeight: FontWeight.bold);
+TextStyle font18gbluew600 = TextStyle(
+    color: MyColors.greyTextColor,
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w600);
