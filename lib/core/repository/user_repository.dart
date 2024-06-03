@@ -3,11 +3,12 @@ import 'package:freelanc/core/api/dio_consumer.dart';
 import 'package:freelanc/core/errors/excptions.dart';
 import 'package:freelanc/features/auth/models/user_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:get/get.dart';
 
 class UserRepositry {
   static UserModel? user;
   static String? token;
-  DioConSumer dio = DioConSumer();
+  DioConSumer dio = Get.put(DioConSumer());
 
   Future<Either<String, UserModel>> sigin(String firstname, String lastname,
       String email, String password, String repassword) async {

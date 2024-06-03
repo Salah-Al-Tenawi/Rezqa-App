@@ -6,11 +6,12 @@ import 'package:freelanc/core/constant/imageurl.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/features/company/profiles/controller/_info_comapny_profile_controller.dart';
 import 'package:freelanc/features/company/profiles/ui/widget/imageback_front_profile.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class Customimageprofile extends StatelessWidget {
   CompanyProfileControllerIm controllerIm;
-   Customimageprofile({
+  Customimageprofile({
     super.key,
     required this.controllerIm,
   });
@@ -22,20 +23,26 @@ class Customimageprofile extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Imagebackground(),
-              ));
+              // controllerIm.imageback == null
+              //     ? controllerIm.addImageback()
+              //     : Get.to(Imagebackground,arguments: controllerIm.imageback);
             },
             child: Container(
               width: double.infinity,
               height: 250.h,
               child: Hero(
-                tag: 'profileImage',
-                child: Image.asset(
-                  ImagesUrl.imagetest,
-                  fit: BoxFit.cover,
-                ),
-              ),
+                  tag: 'profileImage',
+                  child: GetBuilder<CompanyProfileControllerIm>(builder: (_) {
+                    return controllerIm.imageback == null
+                        ? Image.asset(
+                            ImagesUrl.imagetest,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.file(
+                            controllerIm.imageback!,
+                            fit: BoxFit.cover,
+                          );
+                  })),
             ),
           ),
           Align(
@@ -44,6 +51,10 @@ class Customimageprofile extends StatelessWidget {
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
               child: GestureDetector(
                 onTap: () {
+
+                  controllerIm.imagefront==null?
+                   controllerIm.addImagefront():
+
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => ImageFront(),
                   ));

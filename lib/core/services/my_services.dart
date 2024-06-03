@@ -9,14 +9,12 @@ class MyServices extends GetxService {
 
   Future<MyServices> init() async {
     sharedpref = await SharedPreferences.getInstance();
-
     return this;
   }
 }
 
 initalservices() async {
   await Get.putAsync(() => MyServices().init());
-  Get.put(DioConSumer());
+
   Get.put(AppRoute());
-  Get.lazyPut(() => UserRepositry(),fenix: true);
 }

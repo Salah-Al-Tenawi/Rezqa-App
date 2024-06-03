@@ -1,6 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:freelanc/core/constant/imageurl.dart';
+
 class Imagebackground extends StatelessWidget {
+  const Imagebackground({super.key});
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,8 +14,8 @@ class Imagebackground extends StatelessWidget {
         child: Hero(
           tag: 'profileImage',
           child: Image.asset(
-            ImagesUrl.imagetest, // احلي صورة هنا
-            fit: BoxFit.cover, // تحجيم الصورة لتناسب الشاشة
+            ImagesUrl.imagetest,
+            fit: BoxFit.cover,
           ),
         ),
       ),
@@ -19,6 +24,8 @@ class Imagebackground extends StatelessWidget {
 }
 
 class ImageFront extends StatelessWidget {
+  const ImageFront({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

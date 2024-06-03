@@ -14,16 +14,8 @@ class Mymiddlware extends GetMiddleware {
     print(myServices.sharedpref.getString(KeyShardpref.token));
 
     if (myServices.sharedpref.getString(KeyShardpref.token) != null) {
-      if (myServices.sharedpref.getBool(KeyShardpref.iscompany) == true) {
-        return RouteSettings(name: MyRoute.dashbordcompany);
-      }
-      if (myServices.sharedpref.getBool(KeyShardpref.iscustomer) == true) {
-        // return RouteSettings(name: MyRoute.dashbordcustomer);
-      }
-      if (myServices.sharedpref.getBool(KeyShardpref.isfreelancer) == true) {
-        // return RouteSettings(name: MyRoute.dashbordfreelane);
-      }
-    }
+      // switch 
+          }
 
     if (myServices.sharedpref.getBool(KeyShardpref.onboardingisShowtrue) ==
         true) {

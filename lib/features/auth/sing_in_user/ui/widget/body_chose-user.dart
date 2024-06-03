@@ -27,6 +27,9 @@ class BodyChoseUser extends StatelessWidget {
             subtitle: listChosetypesuerModel[1].descrtypeuser,
             icon: listChosetypesuerModel[1].icon),
         CustomButtonChoseuser(
+            onTap: () {
+              Get.toNamed(MyRoute.infoprofileclient);
+            },
             title: listChosetypesuerModel[2].typeuser,
             subtitle: listChosetypesuerModel[2].descrtypeuser,
             icon: listChosetypesuerModel[2].icon),

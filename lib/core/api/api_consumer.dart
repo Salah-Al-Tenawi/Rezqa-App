@@ -10,4 +10,6 @@ abstract class ApiConSumer extends GetxController {
       {dynamic data, Map<String, dynamic>? queryParameters,});
   Future<dynamic> delete(String path,
       {dynamic data, Map<String, dynamic>? queryParameters,});
+      
+
 }

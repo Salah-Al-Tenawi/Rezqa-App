@@ -7,7 +7,6 @@ import 'package:freelanc/core/themes/text_styles_app.dart';
 import 'package:freelanc/core/widgets/custom_text_form.dart';
 import 'package:freelanc/core/widgets/my_button.dart';
 import 'package:freelanc/features/company/profiles/controller/_info_comapny_profile_controller.dart';
- 
 
 // ignore: must_be_immutable
 class CustomFormInfoProfileOne extends StatelessWidget {
@@ -20,77 +19,66 @@ class CustomFormInfoProfileOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: controller.keyforone,
+        key: controller.keyformone,
         child: Padding(
           padding: EdgeInsets.only(
             top: 70.h,
           ),
           child: Column(
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 20.w),
-                  child: Text(
-                    "معلومات الشركة  ",
-                    style: fontBlacksize22bold,
-                  ),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 170.w,
+                ),
+                child: Text(
+                  "معلومات الشركة  ",
+                  style: fontBlacksize22bold,
                 ),
               ),
               CustomTextformfild(
+                //To do vaild user in arabic
                 validator: (val) => inputvaild(val!, "username", 30, 2),
                 title: "اسم الشركة",
-                controller: controller.namecompany,
-                icon: const Icon(Icons.near_me),
+                controller: controller.name,
+                icon: const Icon(Icons.near_me_outlined),
                 keyboardType: TextInputType.name,
               ),
               CustomTextformfild(
+                // to do vaild City
                 validator: (val) => inputvaild(val!, "username", 30, 2),
                 title: "المدينة",
-                controller: controller.addresCity,
-                icon: const Icon(Icons.add_reaction),
+                controller: controller.state,
+                icon: const Icon(Icons.location_city_outlined),
               ),
               CustomTextformfild(
                 validator: (val) => inputvaild(val!, "username", 30, 2),
                 title: "المنطقة",
-                controller: controller.addresCountry,
+                controller: controller.location,
+                icon: const Icon(Icons.location_searching),
+              ),
+              CustomTextformfild(
+                validator: (val) => inputvaild(val!, "username", 200, 10),
+                title: "وصف الشركة",
+                controller: controller.descrption,
                 icon: const Icon(Icons.add_reaction),
+               
               ),
-              SizedBox(
-                child: CustomTextformfild(
-                  
-                  validator: (val) { 
-                    
-                    if (val!.length < 10) {
-                      return "لا يمكن للوصف أن يكون اقل من 10 حروف";
-                    }
-                    return null;
+              Padding(
+                padding: EdgeInsets.only(top: 70.h, left: 120.w),
+                child: MyButton(
+                  width: 110.w,
+                  height: 40.h,
+                  borderRadius: true,
+                  color: MyColors.blueColor,
+                  onPressed: () {
+                    controller.nextpage();
                   },
-                  title: "تفاصيل الشركة",
-                  controller: controller.descreptioncompany,
-                  icon: const Icon(Icons.add_reaction),
-                ),
-              ),
-              const Text(" . . ."),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 30.w, top: 50.h),
-                  child: MyButton(
-                    width: 110.w,
-                    height: 40.h,
-                    borderRadius: true,
-                    color: MyColors.blueColor,
-                    onPressed: () {
-                      controller.gototowinfopage();
-                    },
-                    child: Text(
-                      "التالي",
-                      style: font15greyebold,
-                    ),
+                  child: Text(
+                    "التالي",
+                    style: font15greyebold,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ));

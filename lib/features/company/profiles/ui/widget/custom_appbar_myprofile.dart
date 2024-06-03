@@ -52,6 +52,6 @@ class CustomAppBarMyprofile extends StatelessWidget {
         )
       ],
     );
-    ;
+    
   }
 }

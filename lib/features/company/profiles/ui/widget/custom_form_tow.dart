@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freelanc/core/functions/input_valid.dart';
-import 'package:freelanc/core/route/routes.dart';
 import 'package:freelanc/core/themes/color_app.dart';
+import 'package:freelanc/core/widgets/custom_dropdown.dart';
 import 'package:freelanc/core/widgets/custom_text_form.dart';
 import 'package:freelanc/core/widgets/my_button.dart';
 import 'package:freelanc/features/company/profiles/controller/_info_comapny_profile_controller.dart';
-import 'package:get/get.dart';
-
+import 'package:freelanc/features/company/profiles/ui/widget/custom_column_info_contact.dart';
+import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import '../../../../../core/themes/text_styles_app.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 
 // ignore: must_be_immutable
 class CustomFormInfoPrpfileCompanyTow extends StatelessWidget {
@@ -18,7 +20,7 @@ class CustomFormInfoPrpfileCompanyTow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-        key: controller.keyfortow,
+        key: controller.keyformtow,
         child: Padding(
           padding: EdgeInsets.symmetric(
             vertical: 10.h,
@@ -38,45 +40,12 @@ class CustomFormInfoPrpfileCompanyTow extends StatelessWidget {
               CustomTextformfild(
                 validator: (val) => inputvaild(val!, "emil", 30, 5),
                 title: "البريد الألكتروني  ",
-                controller: controller.emailcompany,
+                controller: controller.email,
                 icon: const Icon(Icons.email_outlined),
                 keyboardType: TextInputType.emailAddress,
               ),
-              CustomTextformfild(
-                validator: (val) => inputvaild(val!, "nubmerphone", 10, 10),
-                title: "أرقام الهاتف",
-                hint: " اضغط على + لإضافة المزيد",
-                controller: controller.numberphone,
-                icon: const Icon(Icons.phone),
-                keyboardType: TextInputType.phone,
-                suffix: Container(
-                  width: 60.w,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          child: const Icon(Icons.add),
-                          onTap: () {
-                            controller
-                                .addnumberphone(controller.numberphone.text);
-                            print(controller.numerphoecompany);
-                            controller.numberphone.clear();
-                          },
-                        ),
-                        InkWell(
-                          child: const Icon(Icons.edit),
-                          onTap: () {
-                            controller.showlastnumber();
-                          },
-                        ),
-                      ]),
-                ),
-              ),
-              CustomTextformfild(
-                validator: (val) => inputvaild(val!, "url", 100, 8),
-                title: "حسابات التواصل الإجتماعي",
-                controller: controller.addresCity,
-                icon: const Icon(Icons.facebook),
+              ColumnInfoContactCompany(
+                controller: controller,
               ),
               Align(
                 alignment: Alignment.topRight,
@@ -88,47 +57,28 @@ class CustomFormInfoPrpfileCompanyTow extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-                child: DropdownButtonFormField(
-                    borderRadius: BorderRadius.circular(20),
-                    decoration: InputDecoration(
-                      fillColor: MyColors.greyColor,
-                      filled: true,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                    ),
-                    hint: const Text("نوع الشركة"),
-                    items: controller.typecompany,
-                    value: controller.selectTypecompany,
-                    onChanged: (type) {
-                      print(type);
-                      controller.onchangetypecompany(type);
-                      print(controller.selectTypecompany);
-                    }),
+              CustomDropdown(
+                left: 20.w,
+                right: 20.w,
+                bottom: 20.h,
+                items: controller.type,
+                labelText: "نوع الشركة",
+                selectedItem: controller.selectType,
+                onChanged: (type) {
+                  controller.changType(type);
+                },
               ),
-              Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: 20.w,
-                ),
-                child: DropdownButtonFormField(
-                    borderRadius: BorderRadius.circular(20),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: MyColors.greyColor,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                    ),
-                    hint: const Text("حجم الشـركة"),
-                    items: controller.sizecompany,
-                    value: controller.selectsizecompany,
-                    onChanged: (type) {
-                      print(type);
-                      controller.onchangesizecompany(type);
-                      print(controller.selectsizecompany);
-                    }),
+              CustomDropdown(
+                left: 20.w,
+                right: 20.w,
+                bottom: 20.h,
+                items: controller.type,
+                labelText: "حجم الشركة",
+                selectedItem: controller.selectType,
+                onChanged: (size) {
+                  controller.changSize(size);
+                },
               ),
-              const Text(" . . ."),
               Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
@@ -139,7 +89,7 @@ class CustomFormInfoPrpfileCompanyTow extends StatelessWidget {
                     borderRadius: true,
                     color: MyColors.blueColor,
                     onPressed: () {
-                      controller.gotoVerfiymyprofile();
+                      controller.goprofile();
                     },
                     child: Text(
                       "التالي",

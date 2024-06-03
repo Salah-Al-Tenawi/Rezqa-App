@@ -9,6 +9,7 @@ import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
 import 'package:freelanc/core/widgets/my_button.dart';
 import 'package:freelanc/features/auth/login/controller/login_controller.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class ColumnMyButtonlogin extends StatelessWidget {
@@ -22,7 +23,7 @@ class ColumnMyButtonlogin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        MyButton(
+       MyButton(
           onPressed: () {
             controller.login();
           },
@@ -71,7 +72,7 @@ class ColumnMyButtonlogin extends StatelessWidget {
                 controller.loginwithgoogle();
               },
               child: const CircleAvatar(
-                child: Image(image: AssetImage(ImagesUrl.imageOnboardingOne)),
+                child: Image(image: AssetImage(ImagesUrl.imagegoogle)),
               ),
             ),
             Text(

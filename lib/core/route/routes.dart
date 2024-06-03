@@ -14,6 +14,10 @@ class MyRoute {
   static const String infoprofilecompanyone = "/infoprofilecompanyone";
   static const String infoprofilecompanytow = "/infoprofilecompanytow";
   static const String verfiymyprofilecompany = "/verfiymyprofilecompany";
+static const String infoprofileclient = "/infoprofileclient";
+static const String verfiymyprofileclient = "/verfiymyprofileclient";
+
+ 
 
   // user as company
   static String dashbordcompany = "/dashbordcompany";

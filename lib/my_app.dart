@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
           title: "freelancer projectes with get x",
           getPages: appRoute.list,
-          initialRoute: MyRoute.dashbordcompany,
+          initialRoute: MyRoute.test,
           debugShowCheckedModeBanner: false,
           textDirection: TextDirection.rtl,
           theme: AppTheme.theme),

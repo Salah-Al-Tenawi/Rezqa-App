@@ -20,14 +20,14 @@ class CustomNameprofile extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            controllerIm.namecompany.text,
+            controllerIm.name.text,
             style: font25boldblack,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
             child:  Text(
                 textAlign: TextAlign.center,
-                controllerIm.descreptioncompany.text),
+                controllerIm.descrption.text),
           ),
           Divider(
             color: MyColors.greyColor,
