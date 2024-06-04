@@ -33,7 +33,7 @@ class CustomimageprofileFree extends StatelessWidget {
               height: 250.h,
               child: Hero(
                   tag: 'profileImage',
-                  child: GetBuilder<CompanyProfileControllerIm>(builder: (_) {
+                  child: GetBuilder<FreeProfileControllerIm>(builder: (_) {
                     return controllerIm.imageback == null
                         ? Image.asset(
                             ImagesUrl.imagetest,
@@ -52,13 +52,11 @@ class CustomimageprofileFree extends StatelessWidget {
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
               child: GestureDetector(
                 onTap: () {
-
-                  controllerIm.imagefront==null?
-                   controllerIm.addImagefront():
-
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ImageFront(),
-                  ));
+                  controllerIm.imagefront == null
+                      ? controllerIm.addImagefront()
+                      : Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ImageFront(),
+                        ));
                 },
                 child: CircleAvatar(
                   backgroundColor: MyColors.blueColor,

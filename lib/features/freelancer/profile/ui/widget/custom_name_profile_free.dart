@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freelanc/core/repository/user_repository.dart';
 
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
@@ -21,7 +22,11 @@ class CustomNameprofileFree extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            controllerIm.headline.text,
+            "UserRepositry.user.firstname",
+            style: font25boldblack,
+          ),
+          Text(
+            "controllerIm.headline.text",
             style: font25boldblack,
           ),
           Padding(

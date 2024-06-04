@@ -29,24 +29,13 @@ class CustomFormProfileClient extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                  left: 170.w,
-                ),
+                padding: EdgeInsets.only(left: 170.w, bottom: 20.h),
                 child: Text(
                   "معلومات البروفايل",
                   style: fontBlacksize22bold,
                 ),
               ),
-              CustomTextformfild(
-                validator: (val) => inputvaild(val!, "username", 30, 2),
-                title: "اسم الحساب",
-                controller: controller.name,
-                icon: Icon(
-                  Icons.person_pin,
-                  color: MyColors.blackColor,
-                ),
-                keyboardType: TextInputType.name,
-              ),
+
               CustomTextformfild(
                 validator: (val) => inputvaild(val!, "username", 30, 2),
                 title: " المهنة أو العمل",
@@ -70,8 +59,9 @@ class CustomFormProfileClient extends StatelessWidget {
                 controller: controller,
               ),
               SizedBox(
-                height: 10.h,
+                height: 50.h,
               ),
+
               MyButton(
                 onPressed: () {
                   controller.gotoverfiyprofile();
@@ -84,7 +74,10 @@ class CustomFormProfileClient extends StatelessWidget {
                   "التالي",
                   style: font15greyebold,
                 ),
-              )
+              ),
+              SizedBox(
+                height: 12.h,
+              ),
 
               // Padding(
               //   padding: EdgeInsets.only(top: 70.h, left: 120.w),

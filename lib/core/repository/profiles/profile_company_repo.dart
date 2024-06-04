@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:freelanc/core/api/dio_consumer.dart';
 
 abstract class CompanyprofileRepo {
-  DioConSumer dio = DioConSumer();
+  DioConSumer api = DioConSumer();
+
   saveprofile(
       // need token
       String industry,
@@ -18,6 +20,8 @@ abstract class CompanyprofileRepo {
       File? imagefront,
       File? imageback,
       List? gallary);
+
+  getcompany(int id);
   // need token
   deletcompany(String password);
   // need token
@@ -34,7 +38,7 @@ abstract class CompanyprofileRepo {
   updateImgefront(File image);
   updateImgeback(File image);
   // delete request
-   deleteImgefront();
+  deleteImgefront();
   deleteImgeback();
   addImageIngallary(File image);
 }
@@ -54,45 +58,57 @@ class CompanyprofileRepoIm extends CompanyprofileRepo {
       File? imagefront,
       File? imageback,
       List? gallary) {}
+  @override
+   getcompany (int id) async {
+  
+  }
 
   @override
   deletcompany(String password) {
     // TODO: implement deletcompany
     throw UnimplementedError();
   }
-  
+
   @override
   addImageIngallary(File image) {
     // TODO: implement addImageIngallary
     throw UnimplementedError();
   }
-  
+
   @override
   deleteImgeback() {
     // TODO: implement deleteImgeback
     throw UnimplementedError();
   }
-  
+
   @override
   deleteImgefront() {
     // TODO: implement deleteImgefront
     throw UnimplementedError();
   }
-  
+
   @override
   updateImgeback(File image) {
     // TODO: implement updateImgeback
     throw UnimplementedError();
   }
-  
+
   @override
   updateImgefront(File image) {
     // TODO: implement updateImgefront
     throw UnimplementedError();
   }
-  
+
   @override
-  updatecompany(String name, String description, String size, String city, String region, String streetaddress, List companyLinks, List companyPhones) {
+  updatecompany(
+      String name,
+      String description,
+      String size,
+      String city,
+      String region,
+      String streetaddress,
+      List companyLinks,
+      List companyPhones) {
     // TODO: implement updatecompany
     throw UnimplementedError();
   }

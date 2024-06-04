@@ -16,7 +16,8 @@ class MyRoute {
   static const String verfiymyprofilecompany = "/verfiymyprofilecompany";
 static const String infoprofileclient = "/infoprofileclient";
 static const String verfiymyprofileclient = "/verfiymyprofileclient";
-
+static const String infoprofileFreelancer = "/infoprofileFreelancer";
+static const String verfiymyprofileFreelancer = "/verfiymyprofileFreelancer";
  
 
   // user as company

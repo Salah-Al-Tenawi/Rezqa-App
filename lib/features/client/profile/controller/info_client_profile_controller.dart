@@ -16,7 +16,6 @@ abstract class ClientProfileController extends GetxController {
 }
 
 class ClientProfileControllerIm extends ClientProfileController {
-  late TextEditingController name;
   late TextEditingController joptitle;
   late TextEditingController city;
   String birthday = "xxxx/xx/xx   ";
@@ -28,7 +27,6 @@ class ClientProfileControllerIm extends ClientProfileController {
 
   @override
   void onInit() {
-    name = TextEditingController();
     joptitle = TextEditingController();
     city = TextEditingController();
     imagePicker = ImagePicker();

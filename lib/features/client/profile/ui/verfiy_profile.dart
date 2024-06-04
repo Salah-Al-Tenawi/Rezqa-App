@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:freelanc/core/repository/user_repository.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
+import 'package:freelanc/features/auth/models/user_model.dart';
 import 'package:freelanc/features/client/profile/controller/info_client_profile_controller.dart';
 import 'package:freelanc/features/client/profile/ui/widget/custom_appbar_myprofile.dart';
 import 'package:freelanc/features/client/profile/ui/widget/custom_details_profile.dart';
@@ -25,7 +27,7 @@ class VerfiyMyPfofileClient extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              controllerIm.name.text,
+              "UserRepositry.user!.firstname!",
               style: font25boldblack,
             ),
             Divider(

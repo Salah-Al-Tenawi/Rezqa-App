@@ -23,13 +23,13 @@ class CustomdetailsprofileFree extends StatelessWidget {
           CustomListTile(
               paddingsub: true,
               title: "المسمى الوظيفي",
-              subtitle: Text(controllerIm.joptitle.text),
+              subtitle: Text("controllerIm.joptitle.text"),
               iconleading: const Icon(Icons.work)),
           CustomListTile(
             paddingsub: true,
             iconleading: const Icon(Icons.location_on_rounded),
-            title: "الموقع",
-            subtitle: Text(controllerIm.location.text),
+            title: "المدينة",
+            subtitle: Text("controllerIm.location.text"),
           ),
           CustomListTile(
               paddingsub: true,
@@ -39,14 +39,26 @@ class CustomdetailsprofileFree extends StatelessWidget {
           CustomListTile(
               paddingsub: true,
               title: "الجنس",
-              subtitle: Text(controllerIm.gender),
+              subtitle: Text("controllerIm.gender"),
               iconleading: const Icon(Icons.label_important)),
-          Container(
-            height: 400.h,
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-            
+          CustomListTile(
+            title: "نبذة عني",
+            subtitle: Container(
+              margin: EdgeInsets.symmetric(vertical: 10.sp),
+              padding: EdgeInsets.symmetric(vertical: 50.h, horizontal: 10.w),
+              child: Text("controllerIm.aboutme.text"),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    width: 1,
+                    color: MyColors.greyColor,
+                  )),
+              // height: 450.h,
+            ),
+            iconleading: const Icon(Icons.edit_document),
+            isThreeLine: true,
           ),
+          
           Divider(
             color: MyColors.greyColor,
             indent: 60,

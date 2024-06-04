@@ -11,6 +11,7 @@ class DioConSumer extends ApiConSumer {
     dio = Get.put(Dio());
 
     dio.options.baseUrl = ApiEndPoint.basrurl;
+    
     dio.interceptors.add(ApiInterCeptor());
     dio.interceptors.add(LogInterceptor(
         request: true,

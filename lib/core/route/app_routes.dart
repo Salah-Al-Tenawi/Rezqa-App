@@ -1,6 +1,7 @@
 import 'package:freelanc/core/binding/forgetpass_binding.dart';
 import 'package:freelanc/core/binding/info_profile_client_binding.dart';
 import 'package:freelanc/core/binding/info_profile_company.dart';
+import 'package:freelanc/core/binding/info_profile_freelancer.dart';
 import 'package:freelanc/core/binding/singin_binding.dart';
 import 'package:freelanc/core/middlware/mymiddlware.dart';
 import 'package:freelanc/core/route/routes.dart';
@@ -15,6 +16,8 @@ import 'package:freelanc/features/auth/sing_in_user/ui/verfiy_email_sing.dart';
 import 'package:freelanc/features/client/profile/ui/info_profile_client.dart';
 import 'package:freelanc/features/client/profile/ui/verfiy_profile.dart';
 import 'package:freelanc/features/company/dashboard/ui/dashborad.dart';
+import 'package:freelanc/features/freelancer/profile/ui/info_profile_freelancer.dart';
+import 'package:freelanc/features/freelancer/profile/ui/verfiy_profile_freelancer.dart';
 import 'package:freelanc/features/onboarding/ui/onboarding.dart';
 import 'package:freelanc/features/company/profiles/ui/verfiy_profile_company.dart';
 import 'package:freelanc/features/company/profiles/ui/info_profile_compant_one.dart';
@@ -82,6 +85,14 @@ class AppRoute {
     GetPage(
         name: MyRoute.verfiymyprofileclient,
         page: () => const VerfiyMyPfofileClient(),
-        binding: InfopProfileclientBinding())
+        binding: InfopProfileclientBinding()),
+    GetPage(
+        name: MyRoute.infoprofileFreelancer,
+        page: () => const InfoPfofileFreelancer(),
+        binding: InfopProfileFreelancerBinding()),
+    GetPage(
+        name: MyRoute.verfiymyprofileFreelancer,
+        page: () => const VerfiyprofileFreelancer(),
+        binding: InfopProfileFreelancerBinding())
   ];
 }
