@@ -40,7 +40,7 @@ class CustomFormInfoProfileFree extends StatelessWidget {
               CustomTextformfild(
                 validator: (val) => inputvaild(val!, "username", 30, 2),
                 title: "المسمى الوظيفي",
-                controller: controller.joptitle,
+                controller: controller.joprole,
                 icon: const Icon(Icons.location_city_outlined),
               ),
               CustomTextformfild(
@@ -53,14 +53,14 @@ class CustomFormInfoProfileFree extends StatelessWidget {
               CustomTextformfild(
                 validator: (val) => inputvaild(val!, "username", 30, 2),
                 title: "المدينة",
-                controller: controller.location,
+                controller: controller.city,
                 icon: const Icon(Icons.location_searching),
               ),
               CustomTextformfild(
                 height: 300.h,
                 validator: (val) => inputvaild(val!, "username", 200, 10),
                 title: "نبذة عني ",
-                controller: controller.aboutme,
+                controller: controller.description,
                 icon: const Icon(Icons.add_reaction),
               ),
             Text(
@@ -71,7 +71,7 @@ class CustomFormInfoProfileFree extends StatelessWidget {
                   top: 30.h,
                   left: 20.w,
                   right: 20.w,
-                  items: controller.skilles,
+                  items: controller.skillesId,
                   labelText: "اختر مهاراتك"),
               MoreInfoProfileFree(
                 controller: controller,

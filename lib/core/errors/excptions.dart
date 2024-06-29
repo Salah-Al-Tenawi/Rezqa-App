@@ -47,7 +47,18 @@ void handelDioExcptions(DioException e) {
         case 401:
           throw ServerExpcptions(
               errormodel: ErrorModel.fromJson(e.response!.data));
-
+        case 400:
+          throw ServerExpcptions(
+              errormodel: ErrorModel.fromJson(e.response!.data));
+        case 403:
+          throw ServerExpcptions(
+              errormodel: ErrorModel.fromJson(e.response!.data));
+        case 404:
+          throw ServerExpcptions(
+              errormodel: ErrorModel.fromJson(e.response!.data));
+        case 405:
+          throw ServerExpcptions(
+              errormodel: ErrorModel.fromJson(e.response!.data));
         case 502:
           throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorservir));
       }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:freelanc/core/constant/key_shared.dart';
 import 'package:freelanc/core/repository/user_repository.dart';
 import 'package:freelanc/core/route/routes.dart';
 import 'package:freelanc/core/services/my_services.dart';
+import 'package:freelanc/features/auth/models/user_model.dart';
 import 'package:get/get.dart';
 
 abstract class SinginController extends GetxController {
@@ -14,9 +16,9 @@ abstract class SinginController extends GetxController {
   late TextEditingController configpassword;
   late MyServices myServices;
   late UserRepositry userrepositry;
-  bool circle = false;
+  RxBool circle = false.obs;
 
-  // UserModel? user;
+  UserModel? user;
 
   sigin();
   siginwithGoogle();
@@ -34,15 +36,20 @@ class SinginControllerIm extends SinginController {
     var fomrstate = formkeysing.currentState;
 
     if (fomrstate!.validate()) {
+      circle.value = true;
       final response = await userrepositry.sigin(fistname.text, lastname.text,
           email.text, password.text, configpassword.text);
 
-      response.fold(
-          (error) => Get.snackbar("errore", error),
-          (response) => {
-                Get.offAllNamed(MyRoute.verfiyemilsing, arguments: email.text),
-                UserRepositry.user = response
-              });
+      response.fold((error) {
+        circle.value = false;
+        Get.snackbar("errore", error);
+      }, (usermodel) {
+        circle.value = false;
+        String username = usermodel.firstname! + usermodel.lastname!;
+        
+        myServices.sharedpref.setString(KeyShardpref.username, username);
+        Get.offAllNamed(MyRoute.verfiyemilsing, arguments: email.text);
+      });
     }
   }
 

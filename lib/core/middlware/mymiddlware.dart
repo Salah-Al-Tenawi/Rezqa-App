@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:freelanc/core/constant/key_shared.dart';
 import 'package:freelanc/core/route/routes.dart';
@@ -11,11 +12,18 @@ class Mymiddlware extends GetMiddleware {
 
   @override
   RouteSettings? redirect(String? route) {
-    print(myServices.sharedpref.getString(KeyShardpref.token));
-
-    if (myServices.sharedpref.getString(KeyShardpref.token) != null) {
-      // switch 
-          }
+    if (myServices.sharedpref.getString(KeyShardpref.token) != null &&
+        myServices.sharedpref.getString(KeyShardpref.roleuser) != null) {
+      String roleuser = myServices.sharedpref.getString(KeyShardpref.roleuser)!;
+      switch (roleuser) {
+        case "company":
+          return RouteSettings(name: MyRoute.dashbordcompany);
+        case "freelancer":
+          return const RouteSettings(name: MyRoute.dashBoardFreelancer);
+        case "client":
+          return const RouteSettings(name: MyRoute.dashBoardClint);
+      }
+    }
 
     if (myServices.sharedpref.getBool(KeyShardpref.onboardingisShowtrue) ==
         true) {

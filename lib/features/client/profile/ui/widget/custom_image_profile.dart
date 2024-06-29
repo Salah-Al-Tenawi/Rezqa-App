@@ -4,15 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:freelanc/core/constant/imageurl.dart';
 import 'package:freelanc/core/themes/color_app.dart';
+import 'package:freelanc/core/themes/text_styles_app.dart';
+import 'package:freelanc/core/widgets/my_button.dart';
 import 'package:freelanc/features/client/profile/controller/info_client_profile_controller.dart';
-import 'package:freelanc/features/company/profiles/controller/_info_comapny_profile_controller.dart';
-import 'package:freelanc/features/company/profiles/ui/widget/imageback_front_profile.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
-class CustomimageprofileClient extends StatelessWidget {
+class CustomImageprofileClient extends StatelessWidget {
   ClientProfileControllerIm controllerIm;
-  CustomimageprofileClient({
+  CustomImageprofileClient({
     super.key,
     required this.controllerIm,
   });
@@ -23,42 +23,75 @@ class CustomimageprofileClient extends StatelessWidget {
       child: Stack(
         children: [
           GestureDetector(
-            onTap: () {
-              controllerIm.picedImage("back");
-              print(controllerIm.imageback.toString());
+            onTap: () {},
+            onLongPress: () {
+              Get.bottomSheet(
+                Container(
+                width: double.infinity,
+                height: 200.h,
+                color: MyColors.greyColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "المعرض",
+                      style: font23boldblack,
+                    ),
+                    MyButton(
+                        onPressed: () {
+                          controllerIm.addImageback();
+                        },
+                        width: 100,
+                        height: 100,
+                        borderRadius: true,
+                        color: MyColors.blueColor,
+                        child: Icon(
+                          Icons.image,
+                          color: MyColors.greyColor,
+                          size: 50.sp,
+                        )),
+                  ],
+                ),
+              ));
+
+            
             },
             child: SizedBox(
-              width: double.infinity,
-              height: 250.h,
-              child: Hero(
-                  tag: 'profileImage',
-                  child: GetBuilder<ClientProfileControllerIm>(builder: (_) {
-                    return controllerIm.imageback == null
-                        ? Image.asset(
-                            ImagesUrl.imagetest,
-                            fit: BoxFit.cover,
-                          )
-                        : Image.file(
-                            controllerIm.imageback!,
-                            fit: BoxFit.cover,
-                          );
-                  })),
-            ),
+                width: double.infinity,
+                height: 250.h,
+                child: GetBuilder<ClientProfileControllerIm>(
+                  builder: (_) {
+                    return SizedBox(
+                        width: double.infinity,
+                        child: controllerIm.backgroundImageUrl == null
+                            ? Image.asset(
+                                ImagesUrl.imagetest,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                              
+                                controllerIm.backgroundImageUrl!,
+                                fit: BoxFit.cover,
+                              ));
+                  },
+                )),
           ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
-              child: GestureDetector(
-                onTap: () {
-                  controllerIm.picedImage("front");
-                },
-                child: CircleAvatar(
+              child: GestureDetector(onTap: () {
+                controllerIm.addImagefront();
+              }, child: GetBuilder<ClientProfileControllerIm>(builder: (_) {
+                return CircleAvatar(
                   backgroundColor: MyColors.blueColor,
                   radius: 90,
-                  backgroundImage: const AssetImage(ImagesUrl.imagetest),
-                ),
-              ),
+                  backgroundImage: controllerIm.profileImgeUrl == null
+                      ? const AssetImage(ImagesUrl.imagetest) as ImageProvider
+                      : NetworkImage(controllerIm.profileImgeUrl!)
+                          as ImageProvider,
+                );
+              })),
             ),
           ),
         ],

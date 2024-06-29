@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:freelanc/core/api/api_end_points.dart';
-import 'package:freelanc/core/api/dio_consumer.dart';
 import 'package:freelanc/core/constant/key_shared.dart';
+import 'package:freelanc/core/functions/go_to_dashboard.dart';
 import 'package:freelanc/core/repository/user_repository.dart';
 import 'package:freelanc/core/route/routes.dart';
 import 'package:freelanc/core/services/my_services.dart';
 import 'package:freelanc/features/auth/sing_in_witg_google.dart/google_singin_controller.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 
 abstract class LoginController extends GetxController {
   // ignore: prefer_final_fields
@@ -47,19 +45,26 @@ class LoginControllerIm extends LoginController {
     var formstate = formkey.currentState;
 
     if (formstate!.validate()) {
-      // isloading = true.obs;
+      isloading.value = true;
       final response = await userRepositry.login(email.text, password.text);
       response.fold((error) {
-        // isloading = false.obs;
+        if (error == "you need to verify your email") {
+          Get.toNamed(MyRoute.verfiyemilsing, arguments: email.text);
+        }
+        isloading.value = false;
         Get.snackbar("error", error);
-      }, (response) {
-        UserRepositry.token = response[ApiKey.token];
-
-        if (UserRepositry.token != null) {
+      }, (usermoder) {
+        if (usermoder.token != null) {
+          myServices.sharedpref.setString(KeyShardpref.token, usermoder.token!);
           myServices.sharedpref
-              .setString(KeyShardpref.token, UserRepositry.token!);
+              .setString(KeyShardpref.roleuser, usermoder.role!);
+          myServices.sharedpref.setInt(KeyShardpref.roleID, usermoder.roleId!);
+          gotoDashbord(usermoder.role!);
           Get.snackbar("أهلا بالعودة                 ", "");
-          Get.offAllNamed(MyRoute.dashbordcompany);
+          print(
+              myServices.sharedpref.getBool(KeyShardpref.onboardingisShowtrue));
+        } else {
+          print(" you don't have token");
         }
       });
     }
@@ -71,12 +76,11 @@ class LoginControllerIm extends LoginController {
     password = TextEditingController();
 
     myServices = Get.find();
-    myServices.sharedpref.clear();
+    // myServices.sharedpref.clear();
     // api = Get.find();
+    print(myServices.sharedpref.getString(KeyShardpref.roleuser));
     userRepositry = Get.put(UserRepositry());
-    print(
-        "UserRepositry.token===============================${UserRepositry.token}");
-    print("user==================================${UserRepositry.user}");
+
     super.onInit();
   }
 

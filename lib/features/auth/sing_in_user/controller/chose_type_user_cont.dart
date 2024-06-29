@@ -10,7 +10,7 @@ abstract class ChoseTypeUserController extends GetxController {
 class ChoseTypeUserControllerIm extends ChoseTypeUserController {
   @override
   gotocomapnyinfo() {
-    Get.toNamed(MyRoute.infoprofilecompanyone);
+    Get.toNamed(MyRoute.infoprofilecompany);
   }
 
   @override

@@ -1,9 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:freelanc/core/functions/check_size_image.dart';
+import 'package:freelanc/core/functions/show_size_warning.dart';
+import 'package:freelanc/core/helper/shared_api_functions.dart';
+import 'package:freelanc/core/repository/profiles/profile_freelancer_repo.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 abstract class FreeProfileController extends GetxController {
+  removeItemForList(int index, List list);
   editprofile();
   addImagefront();
   selectbirthday(BuildContext context);
@@ -12,26 +18,37 @@ abstract class FreeProfileController extends GetxController {
 
 class FreeProfileControllerIm extends FreeProfileController {
   late GlobalKey<FormState> formkey;
+  late ImagePicker imagePicker;
   late TextEditingController headline;
-  late TextEditingController aboutme;
-  late TextEditingController namejop;
-  late TextEditingController joptitle;
-  late TextEditingController location;
-  List<String> skilles = ["java ", "c++ ", "Css "," Html ","Prolog" ,"Flutter" , "php "];
+  late TextEditingController description;
+  late TextEditingController joprole;
+  late TextEditingController city;
   String birthday = "xxxx/xx/xx   ";
   String gender = "male";
-  File? imageback;
-  File? imagefront;
+  String? profileImageId;
+  String? backgroundImageId;
+  String? profileImageUrl;
+  String? backgroundImageUrl;
+  late SharedApiFunctionIm sharedApiFunctionIm;
+  List<String> skillesId = [
+    "java ",
+    "c++ ",
+    "Css ",
+    " Html ",
+    "Prolog",
+    "Flutter",
+    "php ",
+  ];
 
   @override
   void onInit() {
     formkey = GlobalKey<FormState>();
     headline = TextEditingController();
-    aboutme = TextEditingController();
-    namejop = TextEditingController();
-    joptitle = TextEditingController();
-    location = TextEditingController();
-
+    description = TextEditingController();
+    joprole = TextEditingController();
+    city = TextEditingController();
+    imagePicker = ImagePicker();
+    sharedApiFunctionIm = Get.put(SharedApiFunctionIm());
     super.onInit();
   }
 
@@ -57,13 +74,49 @@ class FreeProfileControllerIm extends FreeProfileController {
 
   @override
   editprofile() {
-    // TODO: implement editprofile
-    throw UnimplementedError();
+    Get.back();
   }
 
   @override
-  addImagefront() {
-    // TODO: implement addImagefront
-    throw UnimplementedError();
+  addImagefront() async {
+    var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (imagePicked != null) {
+      File imagefile = File(imagePicked.path);
+      if (await checkSizeImage(imagefile)) {
+        var response = await sharedApiFunctionIm.uploadImage(imagefile);
+        response.fold((error) => Get.snackbar("error", error), (imagemodel) {
+          profileImageUrl = imagemodel.url;
+          profileImageId = imagemodel.id.toString();
+        });
+
+        update();
+      } else {
+        showSizeWarning();
+      }
+    }
+  }
+
+  addImageback() async {
+    var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (imagePicked != null) {
+      File imagefile = File(imagePicked.path);
+      if (await checkSizeImage(imagefile)) {
+        var response = await sharedApiFunctionIm.uploadImage(imagefile);
+        response.fold((error) => Get.snackbar("error", error), (imagemodel) {
+          backgroundImageUrl = imagemodel.url;
+          backgroundImageId = imagemodel.id.toString();
+        });
+
+        update();
+      } else {
+        showSizeWarning();
+      }
+    }
+  }
+
+  @override
+  removeItemForList(int index, List list) {
+    list.removeAt(index);
+    update();
   }
 }

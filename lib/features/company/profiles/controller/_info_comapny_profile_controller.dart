@@ -1,62 +1,72 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:freelanc/core/constant/key_shared.dart';
+import 'package:freelanc/core/functions/check_size_image.dart';
+import 'package:freelanc/core/functions/show_size_warning.dart';
+import 'package:freelanc/core/repository/profiles/profile_company_repo.dart';
 import 'package:freelanc/core/route/routes.dart';
-import 'package:freelanc/core/widgets/custom_listtile.dart';
+import 'package:freelanc/core/services/my_services.dart';
+import 'package:freelanc/features/company/profiles/data/company_model.dart';
 import 'package:get/get.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 abstract class InfoCompanyProfileController extends GetxController {
-  nextpage();
+  getcompany();
   goprofile();
   saveprofile();
-  editprofile();
+  updateProfile();
+  goToeditprofile();
   addgallary();
   changType(String type);
   changSize(String size);
-  addnumberphone(String number);
-  addlinkcontact(String url);
-  showlistdialog(List list);
-  addlink(String url);
   addImagefront();
   addImageback();
+  removeImageFromGallary(int index);
+  getallIndutry(String? name);
+  getCompanyfromCashAndShowIT();
 }
 
 class CompanyProfileControllerIm extends InfoCompanyProfileController {
-  late GlobalKey<FormState> keyformone;
-  late GlobalKey<FormState> keyformtow;
+  int? id;
+  late GlobalKey<FormState> keyform;
   late TextEditingController name;
-  late TextEditingController state;
-  late TextEditingController location;
+  late TextEditingController city;
+  late TextEditingController streetaddress;
+  late TextEditingController region;
   late TextEditingController descrption;
-  late TextEditingController email;
-  late TextEditingController cruntephone;
-  late TextEditingController cruntelinks;
-  late List<String> numbersphone;
-  late List<String> linkescontact;
-  late List type;
+  RxList allindustry = [].obs;
   late List size;
-  List<String>? linkscontact;
-  String? selectType;
+  String? selectindustry;
   String? selectsize;
   late ImagePicker imagePicker;
-  File? imagefront;
-  File? imageback;
+  String? imagefrontUrl;
+  String? imagebackUrl;
+  String? imagefrontId;
+  String? imagebackId;
+  List<int> gallaryids = [];
+  List<String> gallaryUrl = [];
+  late MyServices myServices;
+  late CompanyprofileRepoIm companyprofileRepoIm;
+  CompanyModel? companyMapFromCash;
+  RxBool isloading = false.obs;
 // the logic
+
   @override
-  void onInit() {
-    keyformone = GlobalKey<FormState>();
-    keyformtow = GlobalKey<FormState>();
-    state = TextEditingController();
+  void onInit() async {
+    companyprofileRepoIm = Get.put(CompanyprofileRepoIm());
+    myServices = Get.find();
+
+    keyform = GlobalKey<FormState>();
+    streetaddress = TextEditingController();
+    city = TextEditingController();
     name = TextEditingController();
-    email = TextEditingController();
-    location = TextEditingController();
+    region = TextEditingController();
     descrption = TextEditingController();
-    cruntephone = TextEditingController();
-    cruntelinks = TextEditingController();
     imagePicker = ImagePicker();
-    numbersphone = [];
-    linkescontact = [];
-    type = ["sljfdk", "sdjfkdf", "dsjkdf"];
+    getCompanyfromCashAndShowIT();
     size = [
       "أقل من 10 موظفين",
       "10 - 50 موظف",
@@ -64,29 +74,22 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
       "أكثر من 100 موظف"
     ];
     selectsize = "أقل من 10 موظفين";
-    selectType = "";
+    selectindustry = "";
+    await getallIndutry("");
+
     super.onInit();
   }
 
   @override
-  nextpage() {
-    if (keyformone.currentState!.validate()) {
-      Get.toNamed(
-        MyRoute.infoprofilecompanytow,
-      );
-    }
-  }
-
-  @override
   goprofile() {
-    if (keyformtow.currentState!.validate()) {
+    if (keyform.currentState!.validate()) {
       Get.toNamed(MyRoute.verfiymyprofilecompany);
     }
   }
 
   @override
   changType(String type) {
-    selectType = type;
+    selectindustry = type;
   }
 
   @override
@@ -95,126 +98,171 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
   }
 
   @override
-  addnumberphone(String number) {
-    if (!numbersphone.contains(number) && number.length == 10) {
-      numbersphone.add(number);
-    } else if (number.length != 10) {
-      Get.snackbar("حطأ", "يجب ان يكون الرقم 10 أرقام");
-    } else {
-      Get.snackbar("موجود بالفعل", 'لا يمكن اضافة نفس الرقم اكثر من مرة');
+  addgallary() async {
+    var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
+    if (imagePicked != null) {
+      final File imagefile = File(imagePicked.path);
+      if (await checkSizeImage(imagefile)) {
+        final response = await companyprofileRepoIm.uploadImage(imagefile);
+        response.fold((error) => Get.snackbar("error", error), (imagemodel) {
+          gallaryUrl.add(imagemodel.url!);
+          gallaryids.add(imagemodel.id!);
+          // print(gallaryids);
+          // print(
+          //     "===========================$gallaryids=================================");
+          // print(gallaryids);
+        });
+
+        update();
+      } else {
+        showSizeWarning();
+      }
     }
-    update();
   }
 
   @override
-  addlink(String url) {
-    if (!linkescontact.contains(url)) {
-      linkescontact.add(url);
+  goToeditprofile() {
+    Get.toNamed(MyRoute.infoprofilecompany);
+  }
+
+  @override
+  saveprofile() async {
+    if (myServices.sharedpref.getString(KeyShardpref.companyJson) == null) {
+      isloading.value = true;
+      final response = await companyprofileRepoIm.saveprofile(
+          imagefrontId,
+          imagebackId,
+          name.text,
+          descrption.text,
+          selectindustry!,
+          streetaddress.text,
+          city.text,
+          region.text,
+          selectsize!,
+          gallaryids);
+      response.fold(
+          (error) => {Get.snackbar("error", error), isloading.value = false},
+          (companyModel) {
+        String json = jsonEncode(companyModel.toJson());
+        myServices.sharedpref.setString(KeyShardpref.companyJson, json);
+        isloading.value = false;
+        Get.offAllNamed(MyRoute.dashbordcompany);
+      });
     } else {
-      Get.snackbar("موجود بالفعل", 'لا يمكن اضافة نفس الرابط اكثر من مرة');
+      updateProfile();
     }
-    update();
   }
 
   @override
-  addlinkcontact(String url) {
-    linkscontact?.add(url);
-    update();
-  }
+  updateProfile() async {
+    isloading.value = true;
+    final response = await companyprofileRepoIm.updatecompany(
+        imagefrontId,
+        imagebackId,
+        name.text,
+        descrption.text,
+        streetaddress.text,
+        city.text,
+        region.text,
+        selectsize!,
+        gallaryids);
 
-  @override
-  addgallary() {
-    throw UnimplementedError();
-  }
-
-  @override
-  editprofile() {
-    Get.back();
-  }
-
-  @override
-  saveprofile() {
-    throw UnimplementedError();
-  }
-
-  @override
-  showlistdialog(List list) {
-    Get.dialog(Material(
-      child: GetBuilder<CompanyProfileControllerIm>(builder: (_) {
-        return SizedBox(
-          width: double.infinity,
-          child: ListView.builder(
-              itemCount: list.length,
-              itemBuilder: (context, index) {
-                return CustomListTile(
-                  width: 50,
-                  height: 50,
-                  title: list[index],
-                  trailing: SizedBox(
-                    width: 100,
-                    child: Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              deletitem(index, list);
-                            },
-                            icon: const Icon(Icons.delete)),
-                      ],
-                    ),
-                  ),
-                );
-              }),
-        );
-      }),
-    ));
-  }
-
-  deletitem(int index, List list) {
-    list.removeAt(index);
-    update();
+    response.fold((error) {
+      Get.snackbar("error", error);
+      isloading.value = false;
+    }, (companyModel) {
+      String json = jsonEncode(companyModel.toJson());
+      myServices.sharedpref.setString(KeyShardpref.companyJson, json);
+      isloading.value = false;
+    });
   }
 
   @override
   addImageback() async {
     var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
     if (imagePicked != null) {
-      imageback = File(imagePicked.path);
-      update();
+      File imagefile = File(imagePicked.path);
+      if (await checkSizeImage(imagefile)) {
+        var response = await companyprofileRepoIm.uploadImage(imagefile);
+        response.fold((error) => Get.snackbar("error", error), (imagemodel) {
+          imagebackUrl = imagemodel.url;
+          imagebackId = imagemodel.id.toString();
+        });
+
+        update();
+      } else {
+        showSizeWarning();
+      }
     }
   }
 
   @override
   addImagefront() async {
-    var imagePicked = await imagePicker.pickImage(source: ImageSource.camera);
+    var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
     if (imagePicked != null) {
-      imagefront = File(imagePicked.path);
-      update();
+      File imagefile = File(imagePicked.path);
+      if (await checkSizeImage(imagefile)) {
+        var response = await companyprofileRepoIm.uploadImage(imagefile);
+        response.fold((error) => Get.snackbar("error", error), (imagemodel) {
+          imagefrontUrl = imagemodel.url!;
+          imagefrontId = imagemodel.id.toString();
+        });
+        // print(imagefront);
+        update();
+      } else {
+        showSizeWarning();
+      }
     }
   }
 
-  
-  // }
+  @override
+  removeImageFromGallary(int index) {
+    gallaryUrl.removeAt(index);
+    gallaryids.removeAt(index);
 
-  // Future  _launchUrl(String link) async {
-  //   final _url = Uri.parse(link);
-  //   if (!await launchUrl(_url)) {
-  //     throw Exception('Could not launch $_url');
-  //   }
-  // }
+    update();
+  }
+
+  @override
+  getallIndutry(String? name) async {
+    final response = await companyprofileRepoIm.getallindustry(name);
+    response.fold((error) => Get.snackbar("خطأ", error),
+        (allindutry) => allindustry.value = allindutry);
+  }
+
+  @override
+  getCompanyfromCashAndShowIT() async {
+    String? json = myServices.sharedpref.getString(KeyShardpref.companyJson);
+    if (json != null) {
+      var mapjson = await jsonDecode(json);
+      companyMapFromCash = CompanyModel.fromCash(mapjson);
+      if (companyMapFromCash != null) {
+        id = companyMapFromCash!.id!;
+        name.text = companyMapFromCash!.namecompany!;
+        imagebackUrl = companyMapFromCash!.backgroundImageUrl!;
+        imagefrontUrl = companyMapFromCash!.profileImageUrl!;
+        descrption.text = companyMapFromCash!.descreption!;
+        city.text = companyMapFromCash!.city!;
+        streetaddress.text = companyMapFromCash!.streetaddress!;
+        region.text = companyMapFromCash!.region!;
+        selectindustry = companyMapFromCash!.industryname!;
+
+        selectsize = companyMapFromCash!.size!;
+        update();
+      }
+    }
+  }
+
+  @override
+  getcompany() async {
+    int? id = myServices.sharedpref.getInt(KeyShardpref.roleID);
+    if (id != null) {
+      final response = await companyprofileRepoIm.showcompany(id);
+      response.fold((error) => Get.snackbar("error", error), (companyModel) {
+        String json = jsonEncode(companyModel.toJson());
+        myServices.sharedpref.setString(KeyShardpref.companyJson, json);
+        update();
+      });
+    }
+  }
 }
-
-
-// final Uri _url = Uri.parse('https://flutter.dev');
-
-// void main() => runApp(
-//       const MaterialApp(
-//         home: Material(
-//           child: Center(
-//             child: ElevatedButton(
-//               onPressed: _launchUrl,
-//               child: Text('Show Flutter homepage'),
-//             ),
-//           ),
-//         ),
-//       ),
-//     );

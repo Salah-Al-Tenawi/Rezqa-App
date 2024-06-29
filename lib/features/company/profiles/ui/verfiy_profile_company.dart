@@ -14,25 +14,29 @@ class VerfiyMyPfofileCompany extends StatelessWidget {
   Widget build(BuildContext context) {
     CompanyProfileControllerIm controllerIm = Get.find();
     return Scaffold(
-      
-        body: CustomScrollView(
-      slivers: [
-        CustomAppBarMyprofile(
-          controllerIm: controllerIm,
-        ),
-        Customimageprofile(
-          controllerIm: controllerIm,
-        ),
-        CustomNameprofile(
-          controllerIm: controllerIm,
-        ),
-        Customdetailsprofile(
-          controllerIm: controllerIm,
-        ),
-        CustomGallaryprofile(
-          controllerIm: controllerIm,
-        ),
-      ],
+        body: RefreshIndicator(
+      onRefresh: () async {
+        await controllerIm.getcompany();
+      },
+      child: CustomScrollView(
+        slivers: [
+          CustomAppBarMyprofile(
+            controllerIm: controllerIm,
+          ),
+          Customimageprofile(
+            controllerIm: controllerIm,
+          ),
+          CustomNameprofile(
+            controllerIm: controllerIm,
+          ),
+          Customdetailsprofile(
+            controllerIm: controllerIm,
+          ),
+          CustomGallaryprofile(
+            controllerIm: controllerIm,
+          ),
+        ],
+      ),
     ));
   }
 }

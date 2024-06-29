@@ -7,6 +7,7 @@ import 'package:freelanc/features/freelancer/profile/ui/widget/custom_details_pr
 import 'package:freelanc/features/freelancer/profile/ui/widget/custom_image_profile_free.dart';
 import 'package:freelanc/features/freelancer/profile/ui/widget/custom_name_profile_free.dart';
 import 'package:freelanc/features/freelancer/profile/ui/widget/custom_skilles_free.dart';
+import 'package:freelanc/features/freelancer/profile/ui/widget/portfolio_freelancer.dart';
 import 'package:get/get.dart';
 
 class VerfiyprofileFreelancer extends StatelessWidget {
@@ -31,10 +32,10 @@ class VerfiyprofileFreelancer extends StatelessWidget {
           controllerIm: controllerIm,
         ),
         CustomSkillesFree(controllerIm: controllerIm,),
+        PortFolioFreeLnacer(controllerIm: controllerIm,),
+        
 
-        // CustomGallaryprofile(
-        //   controllerIm: controllerIm,
-        // ),
+        
       ],
     ));
   }

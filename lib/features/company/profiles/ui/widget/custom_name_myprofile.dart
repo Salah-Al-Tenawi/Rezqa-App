@@ -5,11 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
 import 'package:freelanc/features/company/profiles/controller/_info_comapny_profile_controller.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class CustomNameprofile extends StatelessWidget {
   CompanyProfileControllerIm controllerIm;
-   CustomNameprofile({
+  CustomNameprofile({
     Key? key,
     required this.controllerIm,
   }) : super(key: key);
@@ -17,7 +18,8 @@ class CustomNameprofile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Column(
+        child: GetBuilder<CompanyProfileControllerIm>(builder: (_) {
+      return Column(
         children: [
           Text(
             controllerIm.name.text,
@@ -25,9 +27,8 @@ class CustomNameprofile extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
-            child:  Text(
-                textAlign: TextAlign.center,
-                controllerIm.descrption.text),
+            child:
+                Text(textAlign: TextAlign.center, controllerIm.descrption.text),
           ),
           Divider(
             color: MyColors.greyColor,
@@ -35,7 +36,7 @@ class CustomNameprofile extends StatelessWidget {
             endIndent: 60,
           ),
         ],
-      ),
-    );
+      );
+    }));
   }
 }

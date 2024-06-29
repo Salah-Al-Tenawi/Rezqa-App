@@ -1,6 +1,6 @@
 import 'package:freelanc/core/binding/forgetpass_binding.dart';
 import 'package:freelanc/core/binding/info_profile_client_binding.dart';
-import 'package:freelanc/core/binding/info_profile_company.dart';
+import 'package:freelanc/core/binding/info_profile_company_binding.dart';
 import 'package:freelanc/core/binding/info_profile_freelancer.dart';
 import 'package:freelanc/core/binding/singin_binding.dart';
 import 'package:freelanc/core/middlware/mymiddlware.dart';
@@ -13,15 +13,16 @@ import 'package:freelanc/features/auth/sing_in_user/ui/chose_type_user.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/singin.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/sucsses_verfiy_email.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/verfiy_email_sing.dart';
+import 'package:freelanc/features/client/dashboard/ui/dash_board_client.dart';
 import 'package:freelanc/features/client/profile/ui/info_profile_client.dart';
-import 'package:freelanc/features/client/profile/ui/verfiy_profile.dart';
+import 'package:freelanc/features/client/profile/ui/my_profile_client.dart';
 import 'package:freelanc/features/company/dashboard/ui/dashborad.dart';
+import 'package:freelanc/features/freelancer/dashbord/ui/dash_board_freelancer.dart';
 import 'package:freelanc/features/freelancer/profile/ui/info_profile_freelancer.dart';
 import 'package:freelanc/features/freelancer/profile/ui/verfiy_profile_freelancer.dart';
 import 'package:freelanc/features/onboarding/ui/onboarding.dart';
 import 'package:freelanc/features/company/profiles/ui/verfiy_profile_company.dart';
-import 'package:freelanc/features/company/profiles/ui/info_profile_compant_one.dart';
-import 'package:freelanc/features/company/profiles/ui/info_profile_company_tow.dart';
+import 'package:freelanc/features/company/profiles/ui/info_profile_company.dart';
 import 'package:freelanc/testwidgets.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -56,14 +57,14 @@ class AppRoute {
       name: MyRoute.verfiyemilsing,
       page: () => const VerfiyEmailSingin(),
     ),
-    // pages company enter info profile
     GetPage(
-        name: MyRoute.infoprofilecompanyone,
-        page: () => const InfoProfileCompanyOne(),
-        binding: InfopProfilecompanyBinding()),
+      name: MyRoute.sucsses,
+      page: () => const SucssesVerfiyEmail(),
+    ),
+    // profiles company
     GetPage(
-        name: MyRoute.infoprofilecompanytow,
-        page: () => const InfoProfileComapnyTow(),
+        name: MyRoute.infoprofilecompany,
+        page: () => const InfoProfileCompany(),
         binding: InfopProfilecompanyBinding()),
     GetPage(
         name: MyRoute.verfiymyprofilecompany,
@@ -71,21 +72,21 @@ class AppRoute {
         binding: InfopProfilecompanyBinding()),
 
     GetPage(
-      name: MyRoute.sucsses,
-      page: () => const SucssesVerfiyEmail(),
-    ),
-    GetPage(name: MyRoute.test, page: () => TestWidgets()),
-
-    GetPage(
         name: MyRoute.dashbordcompany, page: () => const DashBoardCompany()),
+
+    // client profile
     GetPage(
         name: MyRoute.infoprofileclient,
         page: () => const InfoProfileClient(),
         binding: InfopProfileclientBinding()),
     GetPage(
-        name: MyRoute.verfiymyprofileclient,
-        page: () => const VerfiyMyPfofileClient(),
+        name: MyRoute.myprofileclient,
+        page: () => const MyPfofileClient(),
         binding: InfopProfileclientBinding()),
+
+    GetPage(name: MyRoute.dashBoardClint, page: () => const DashBoardClint()),
+
+    // freelnacer profile
     GetPage(
         name: MyRoute.infoprofileFreelancer,
         page: () => const InfoPfofileFreelancer(),
@@ -93,6 +94,12 @@ class AppRoute {
     GetPage(
         name: MyRoute.verfiymyprofileFreelancer,
         page: () => const VerfiyprofileFreelancer(),
-        binding: InfopProfileFreelancerBinding())
+        binding: InfopProfileFreelancerBinding()),
+    GetPage(
+        name: MyRoute.dashBoardFreelancer,
+        page: () => const DashBoardFreelancer()),
+
+    // test page
+    GetPage(name: MyRoute.test, page: () => TestWidgets()),
   ];
 }

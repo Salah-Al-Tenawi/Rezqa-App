@@ -32,7 +32,28 @@ TextStyle font22gbluew600 = TextStyle(
     color: MyColors.blueColor, fontSize: 22.sp, fontWeight: FontWeight.w600);
 TextStyle font13greybold =
     TextStyle(fontSize: 13.sp, color: Colors.grey, fontWeight: FontWeight.bold);
+
+TextStyle font13whitebold = TextStyle(
+    fontSize: 13.sp, color: Colors.white, fontWeight: FontWeight.bold);
+
+TextStyle font15whitebold = TextStyle(
+    fontSize: 15.sp, color: Colors.white, fontWeight: FontWeight.bold);
 TextStyle font18gbluew600 = TextStyle(
     color: MyColors.greyTextColor,
     fontSize: 18.sp,
     fontWeight: FontWeight.w600);
+TextStyle font15ggreyw600 = TextStyle(
+    color: MyColors.greyTextColor,
+    fontSize: 15.sp,
+    fontWeight: FontWeight.w600);
+
+
+
+    TextStyle font17greyw600 = TextStyle(
+    color: MyColors.greyColor,
+    fontSize: 17.sp,
+    fontWeight: FontWeight.w600);
+
+TextStyle font10blacknormal =
+    TextStyle(fontSize: 10.sp, color: MyColors.blackColor);
+TextStyle fontforLinkes = const TextStyle(color: Colors.blueAccent);

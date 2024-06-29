@@ -7,6 +7,7 @@ import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
 import 'package:freelanc/core/widgets/my_button.dart';
 import 'package:freelanc/features/auth/sing_in_user/controller/singin_controller.dart';
+import 'package:lottie/lottie.dart';
 
 // ignore: must_be_immutable
 class ColumnMyButtonSingin extends StatelessWidget {
@@ -20,14 +21,11 @@ class ColumnMyButtonSingin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GetBuilder<SinginControllerIm>(
-          builder: (_) {
-            return Container(
-              child: controller.circle == true
-                  ? CircularProgressIndicator(
-                      backgroundColor: MyColors.blueColor,
-                    )
-                  : MyButton(
+        Container(
+            margin: EdgeInsets.symmetric(vertical: 20.h),
+            child: Obx(
+              () => controller.circle.value == false
+                  ? MyButton(
                       onPressed: () {
                         controller.sigin();
                       },
@@ -35,44 +33,18 @@ class ColumnMyButtonSingin extends StatelessWidget {
                       width: 120.w,
                       borderRadius: true,
                       child: Text("التالي", style: font15greyebold),
+                    )
+                  : LottieBuilder.asset(
+                      ImagesUrl.loadingLottie2,
+                      height: 80,
                     ),
-            );
-          },
-        ),
+            )),
         Divider(
           color: MyColors.blueColor,
           indent: 100,
           endIndent: 100,
           height: 40.h,
         ),
-        MyButton(
-          onPressed: () {
-            controller.siginwithGoogle();
-          },
-          borderRadius: true,
-          color: MyColors.blueColor,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "   المتابعة بواسسطة            ",
-                style: font15greyebold,
-              ),
-              CircleAvatar(
-                radius: 25,
-                child: Image(image: AssetImage(ImagesUrl.imageOnboardingOne)),
-              )
-            ],
-          ),
-        )
-        // MyButton(
-        //   onPressed: () {},
-        //   color: MyColors.blueColor,
-        //   width: 100.w,
-        //   child:
-        // ),
-        ,
         MyButton(
           onPressed: () {
             controller.gotologin();

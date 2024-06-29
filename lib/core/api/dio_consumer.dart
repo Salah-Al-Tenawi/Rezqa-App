@@ -3,15 +3,16 @@ import 'package:freelanc/core/api/api_consumer.dart';
 import 'package:freelanc/core/api/api_end_points.dart';
 import 'package:freelanc/core/api/api_interceptor.dart';
 import 'package:freelanc/core/errors/excptions.dart';
-import 'package:get/get.dart';
 
 class DioConSumer extends ApiConSumer {
   late Dio dio;
+
+
   DioConSumer() {
-    dio = Get.put(Dio());
+    dio = Dio();
 
     dio.options.baseUrl = ApiEndPoint.basrurl;
-    
+
     dio.interceptors.add(ApiInterCeptor());
     dio.interceptors.add(LogInterceptor(
         request: true,
@@ -25,12 +26,19 @@ class DioConSumer extends ApiConSumer {
   @override
   Future post(
     String path, {
-    Object? data,
+    dynamic data,
+    Map<String ,dynamic>? header,
     Map<String, dynamic>? queryParameters,
+    bool isFomrData = false,
   }) async {
     try {
-      final response =
-          await dio.post(path, data: data, queryParameters: queryParameters);
+      final response = await dio.post(
+        path,
+        data: isFomrData == true ? FormData.fromMap(data) : data,
+        queryParameters: queryParameters,
+        options: Options(headers: header),
+      );
+     
       return response.data;
     } on DioException catch (e) {
       handelDioExcptions(e);
@@ -41,13 +49,16 @@ class DioConSumer extends ApiConSumer {
   Future delete(
     String path, {
     dynamic data,
+    Map<String,dynamic> ?header,
     Map<String, dynamic>? queryParameters,
+    bool isFomrData = false,
   }) async {
     try {
       final response = await dio.delete(
         path,
-        data: data,
+        data: isFomrData == true ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
+        options: Options(headers: header)
       );
       return response.data;
     } on DioException catch (e) {
@@ -59,11 +70,15 @@ class DioConSumer extends ApiConSumer {
   Future get(
     String path, {
     dynamic data,
+    Map<String ,dynamic>? header,
     Map<String, dynamic>? queryParameters,
+    bool isFomrData = false,
   }) async {
     try {
-      final response =
-          await dio.get(path, data: data, queryParameters: queryParameters);
+      final response = await dio.get(path,
+          data: isFomrData == true ? FormData.fromMap(data) : data,
+          queryParameters: queryParameters    ,
+          options:  Options(headers: header));
       return response.data;
     } on DioException catch (e) {
       handelDioExcptions(e);
@@ -75,10 +90,35 @@ class DioConSumer extends ApiConSumer {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
+    Map<String ,dynamic> ?header,
+    bool isFormData = false,
   }) async {
     try {
-      final response =
-          await dio.patch(path, data: data, queryParameters: queryParameters);
+      final response = await dio.patch(path,
+          data: isFormData == true ? FormData.fromMap(data) : data,
+          queryParameters: queryParameters,
+          options: Options(headers: header));
+      return response.data;
+    } on DioException catch (e) {
+      handelDioExcptions(e);
+    }
+  }
+
+
+  @override
+  Future put(
+    String path, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Map<String ,dynamic> ?header,
+    bool isFormData = false,
+  }) async {
+    try {
+      final response = await dio.put(path,
+          data: isFormData == true ? FormData.fromMap(data) : data,
+          queryParameters: queryParameters ,
+          options: Options(headers: header)
+          );
       return response.data;
     } on DioException catch (e) {
       handelDioExcptions(e);

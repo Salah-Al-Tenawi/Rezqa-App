@@ -9,15 +9,24 @@ class MyRoute {
   static const String singin = "/Singin";
   static const String verfiyemilsing = "/verfiyemilsing";
   static const String chosetypeuser = "/Chosetypeuser";
-// profiles
-
-  static const String infoprofilecompanyone = "/infoprofilecompanyone";
-  static const String infoprofilecompanytow = "/infoprofilecompanytow";
+//  company
+//      profile
+  static const String infoprofilecompany = "/infoprofilecompany";
+  
   static const String verfiymyprofilecompany = "/verfiymyprofilecompany";
-static const String infoprofileclient = "/infoprofileclient";
-static const String verfiymyprofileclient = "/verfiymyprofileclient";
+
+// freelancer 
+//    profile  
 static const String infoprofileFreelancer = "/infoprofileFreelancer";
 static const String verfiymyprofileFreelancer = "/verfiymyprofileFreelancer";
+static const String dashBoardFreelancer = "/dashBoardFreelancer";
+
+
+// client  
+// profile DashBoardClint
+static const String infoprofileclient = "/infoprofileclient";
+static const String myprofileclient = "/ymyprofileclient";
+static const String dashBoardClint = "/dashBoardClint";
  
 
   // user as company

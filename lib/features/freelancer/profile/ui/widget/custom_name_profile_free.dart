@@ -11,7 +11,7 @@ import 'package:freelanc/features/freelancer/profile/controller/freelancer_profi
 // ignore: must_be_immutable
 class CustomNameprofileFree extends StatelessWidget {
   FreeProfileControllerIm controllerIm;
-   CustomNameprofileFree({
+  CustomNameprofileFree({
     super.key,
     required this.controllerIm,
   });
@@ -25,16 +25,12 @@ class CustomNameprofileFree extends StatelessWidget {
             "UserRepositry.user.firstname",
             style: font25boldblack,
           ),
-          Text(
-            "controllerIm.headline.text",
-            style: font25boldblack,
-          ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 5.h),
-            child:  Text(
-                textAlign: TextAlign.center,
-                controllerIm.aboutme.text),
+            child:
+                const Text(textAlign: TextAlign.center, "controllerIm.headline.text"),
           ),
+          
           Divider(
             color: MyColors.greyColor,
             indent: 60,

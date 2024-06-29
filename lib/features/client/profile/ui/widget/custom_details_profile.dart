@@ -17,12 +17,12 @@ class CustomdetailsprofileClient extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Column(
         children: [
-          CustomListTile(
-            paddingsub: true,
-            iconleading: const Icon(Icons.work),
-            title: "المهنة ",
-            subtitle: Text(controllerIm.joptitle.text),
-          ),
+          // CustomListTile(
+          //   paddingsub: true,
+          //   iconleading: const Icon(Icons.work),
+          //   title: "المهنة ",
+          //   subtitle: Text(controllerIm.joptitle.text),
+          // ),
           CustomListTile(
               paddingsub: true,
               title: "العنوان",

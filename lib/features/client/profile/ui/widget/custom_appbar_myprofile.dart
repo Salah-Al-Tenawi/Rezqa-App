@@ -37,7 +37,7 @@ class CustomAppBarMyprofileClient extends StatelessWidget {
         ),
         MyButton(
           onPressed: () {
-            controllerIm.editprofile();
+            controllerIm.goToeditprofile();
           },
           splashcolor: MyColors.blueColor,
           borderRadius: true,

@@ -1,11 +1,16 @@
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:freelanc/core/constant/imageurl.dart';
 
-class Imagebackground extends StatelessWidget {
-  
-  const Imagebackground({super.key});
+// ignore: must_be_immutable
+class ImageCover extends StatelessWidget {
+  String urlImage;
 
+   ImageCover({
+    super.key,
+    required this.urlImage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +19,8 @@ class Imagebackground extends StatelessWidget {
       body: Center(
         child: Hero(
           tag: 'profileImage',
-          child: Image.asset(
-            ImagesUrl.imagetest,
+          child: Image.network(
+           urlImage,
             fit: BoxFit.cover,
           ),
         ),

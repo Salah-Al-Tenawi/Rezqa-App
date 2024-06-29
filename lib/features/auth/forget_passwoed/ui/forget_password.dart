@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:freelanc/core/constant/imageurl.dart';
 import 'package:freelanc/core/functions/input_valid.dart';
 import 'package:freelanc/core/themes/color_app.dart';
@@ -22,18 +22,25 @@ class Forgetpassword extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-                padding: EdgeInsets.only(top: 20.h),
-                child:
-                    const Image(image: AssetImage(ImagesUrl.imageforgetpass))),
+              padding: EdgeInsets.only(
+                  top: 60.h, left: 14.w, right: 14.w, bottom: 10.h),
+              child: SvgPicture.asset(
+                ImagesUrl.forgetpasswordSvg,
+                height: 230.sp,
+              ),
+            ),
             Padding(
               padding: EdgeInsets.only(
                   top: 50.h, left: 10.w, right: 10.w, bottom: 50.h),
               child: Column(
                 children: [
-                  Text(
-                    "نشعر بالأسف لأنك فقدت كلمة المرور الخاصة بك لكن لا تقلق نحن هنا لمساعدتك في استرجاع حسابك ادخل بريدك الخاص ",
-                    style: font16blacknormal,
-                    textAlign: TextAlign.center,
+                  Padding(
+                    padding: EdgeInsets.only(left: 10.w, right: 10.w),
+                    child: Text(
+                      "نشعر بالأسف لأنك فقدت كلمة المرور الخاصة بك لكن لا تقلق نحن هنا لمساعدتك في استرجاع حسابك ادخل بريدك الخاص ",
+                      style: font16blacknormal,
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   SizedBox(
                     height: 30.h,

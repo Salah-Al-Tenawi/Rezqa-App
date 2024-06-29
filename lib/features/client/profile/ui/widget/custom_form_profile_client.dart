@@ -64,7 +64,7 @@ class CustomFormProfileClient extends StatelessWidget {
 
               MyButton(
                 onPressed: () {
-                  controller.gotoverfiyprofile();
+                  controller.gotoMyprofile();
                 },
                 color: MyColors.blueColor,
                 borderRadius: true,
