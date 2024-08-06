@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +10,7 @@ import 'package:freelanc/core/themes/color_app.dart';
 class CustomListTile extends StatelessWidget {
   String? title;
   Widget? subtitle;
-  Icon? iconleading;
+  Widget? iconleading;
   Widget? trailing;
   bool? isThreeLine;
   bool? paddingsub = true;
@@ -20,6 +18,8 @@ class CustomListTile extends StatelessWidget {
   double? height;
   TextStyle? titleTextStyle;
   EdgeInsetsGeometry? padding;
+  EdgeInsetsGeometry? margin;
+  Color? color;
   void Function()? onTap;
 
   CustomListTile(
@@ -34,6 +34,8 @@ class CustomListTile extends StatelessWidget {
       this.width,
       this.paddingsub,
       this.iconleading,
+      this.color,
+      this.margin,
       this.trailing});
 
   @override
@@ -42,6 +44,8 @@ class CustomListTile extends StatelessWidget {
       width: width,
       height: height,
       padding: padding,
+      color: color,
+      margin: margin,
       child: ListTile(
         iconColor: MyColors.blueColor,
         isThreeLine: isThreeLine ?? false,

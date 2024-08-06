@@ -59,7 +59,7 @@ class LoginControllerIm extends LoginController {
           myServices.sharedpref
               .setString(KeyShardpref.roleuser, usermoder.role!);
           myServices.sharedpref.setInt(KeyShardpref.roleID, usermoder.roleId!);
-          gotoDashbord(usermoder.role!);
+          gotoDashbord();
           Get.snackbar("أهلا بالعودة                 ", "");
           print(
               myServices.sharedpref.getBool(KeyShardpref.onboardingisShowtrue));

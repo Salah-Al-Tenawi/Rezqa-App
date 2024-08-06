@@ -12,25 +12,31 @@ class MyRoute {
 //  company
 //      profile
   static const String infoprofilecompany = "/infoprofilecompany";
-  
+
   static const String verfiymyprofilecompany = "/verfiymyprofilecompany";
 
-// freelancer 
-//    profile  
-static const String infoprofileFreelancer = "/infoprofileFreelancer";
-static const String verfiymyprofileFreelancer = "/verfiymyprofileFreelancer";
-static const String dashBoardFreelancer = "/dashBoardFreelancer";
+// freelancer
+//    profile
+  static const String infoprofileFreelancer = "/infoprofileFreelancer";
+  static const String verfiymyprofileFreelancer = "/verfiymyprofileFreelancer";
+  static const String dashBoardFreelancer = "/dashBoardFreelancer";
+  static const String addportfolio = "/addportfolio";
+static const String showMyportfolio = "/showMyportfolio";
 
 
-// client  
+  
+
+// client
 // profile DashBoardClint
-static const String infoprofileclient = "/infoprofileclient";
-static const String myprofileclient = "/ymyprofileclient";
-static const String dashBoardClint = "/dashBoardClint";
- 
+  static const String infoprofileclient = "/infoprofileclient";
+  static const String myprofileclient = "/ymyprofileclient";
+  static const String dashBoardClint = "/dashBoardClint";
 
   // user as company
-  static String dashbordcompany = "/dashbordcompany";
+  static String dashbord = "/dashbord";
+  // chat
+  static String chat = "/chat";
+  static String allCaht = "/AllCaht";
 
   //test
   static const String test = "/test";

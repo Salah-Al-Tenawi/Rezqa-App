@@ -13,6 +13,7 @@ class UserModel {
   UserModel({this.email, this.firstname, this.id, this.lastname, this.role});
 
   UserModel.fromJson(Map<String, dynamic> json) {
+    json[ApiKey.user] ?? (json[ApiKey.user] = json[ApiKey.data]);
     id = json[ApiKey.user][ApiKey.id] ?? 0;
     username = json[ApiKey.user][ApiKey.username] ?? "";
     firstname = json[ApiKey.user][ApiKey.firstname] ?? "";

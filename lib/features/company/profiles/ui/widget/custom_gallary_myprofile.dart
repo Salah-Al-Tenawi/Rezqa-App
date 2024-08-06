@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freelanc/core/functions/show_full_image.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
 import 'package:freelanc/core/widgets/my_button.dart';
@@ -25,11 +26,7 @@ class CustomGallaryprofile extends StatelessWidget {
           style: font23boldblack,
           textAlign: TextAlign.start,
         ),
-        Text(
-          " يمكنك إضافة صور لشركتـك لجذب انتباه الآخرين",
-          style: TextStyle(fontSize: 15, color: MyColors.blackColor),
-          textAlign: TextAlign.start,
-        ),
+        
 
 // GallaryCompany()
         GetBuilder<CompanyProfileControllerIm>(builder: (_) {
@@ -37,24 +34,42 @@ class CustomGallaryprofile extends StatelessWidget {
             children: List.generate(controllerIm.gallaryUrl.length, (index) {
               return Column(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(border: Border.all(width: 0.5)),
-                    margin:
-                        EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
-                    width: double.infinity,
-                    child: Image.network(
-                      controllerIm.gallaryUrl[index] ,
-                      fit: BoxFit.cover,
+                  InkWell(
+                    onTap: () {
+                      showFullImage(controllerIm.gallaryUrl[index]);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(border: Border.all(width: 0.5)),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 30.w, vertical: 10.h),
+                      width: double.infinity,
+                      child: Image.network(
+                        controllerIm.gallaryUrl[index],
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   MyButton(
                       onPressed: () {
-                        controllerIm.removeImageFromGallary(index);
+                        Get.defaultDialog(
+                            title: "تحقق",
+                            content: const Text("هل تود حذف الصورة"),
+                            actions: [
+                              MyButton(
+                                  color: MyColors.blueColor,
+                                  onPressed: () {
+                                    controllerIm.removeImageFromGallary(index);
+                                    Get.back();
+                                  },
+                                  child: Text(
+                                    "تأكيد",
+                                    style: font13whitebold,
+                                  ))
+                            ]);
                       },
-                      // color: MyColors.greyColor,
                       child: Icon(
                         Icons.cancel_sharp,
-                        color: MyColors.blueColor,
+                        color: Colors.red,
                         size: 40.sp,
                       ))
                 ],
@@ -65,7 +80,6 @@ class CustomGallaryprofile extends StatelessWidget {
         InkWell(
             onTap: () {
               controllerIm.addgallary();
-             
             },
             child: Container(
               height: 50.h,
@@ -95,21 +109,7 @@ class CustomGallaryprofile extends StatelessWidget {
                   ),
                 ],
               ),
-            )
-            //  Container(
-            //     height: 200.h,
-            //     width: double.infinity,
-            //     margin:
-            //         EdgeInsets.symmetric(horizontal: 30.w, vertical: 20.h),
-            //     decoration: BoxDecoration(
-            //         color: MyColors.greyColor,
-            //         border: Border.all(color: MyColors.blueColor)),
-            //     child: Icon(
-            //       Icons.add_a_photo,
-            //       size: 40.sp,
-            //     ),
-            //   )
-            )
+            ))
       ]),
     );
   }

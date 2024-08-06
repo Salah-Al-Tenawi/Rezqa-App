@@ -25,7 +25,7 @@ class CustomSkillesFree extends StatelessWidget {
             iconleading: const Icon(Icons.select_all),
             isThreeLine: true,
             subtitle: GetBuilder<FreeProfileControllerIm>(builder: (_) {
-              return controllerIm.skillesId.isEmpty
+              return controllerIm.skilles.isEmpty
                   ? Container(
                       margin: EdgeInsets.all(20.sp),
                       width: double.infinity,
@@ -58,11 +58,11 @@ class CustomSkillesFree extends StatelessWidget {
                         spacing: 10.sp,
                         runSpacing: 20,
                         children:
-                            List.generate(controllerIm.skillesId.length, (index) {
+                            List.generate(controllerIm.skilles.length, (index) {
                           return CustomBadge(
                             onTap: () {
                               controllerIm.removeItemForList(
-                                  index, controllerIm.skillesId);
+                                  index, controllerIm.skilles);
                             },
                             icon: Icon(
                               Icons.cancel,
@@ -85,7 +85,7 @@ class CustomSkillesFree extends StatelessWidget {
                                       ]),
                                   child: Center(
                                     child: Text(
-                                      controllerIm.skillesId[index],
+                                      controllerIm.skilles[index].name!,
                                       style: TextStyle(
                                           color: MyColors.greyTextfildColor),
                                     ),

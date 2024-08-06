@@ -5,6 +5,7 @@ import 'package:freelanc/core/api/api_end_points.dart';
 import 'package:freelanc/core/api/dio_consumer.dart';
 import 'package:freelanc/core/constant/key_shared.dart';
 import 'package:freelanc/core/errors/excptions.dart';
+import 'package:freelanc/core/functions/get_token.dart';
 import 'package:freelanc/core/functions/uploadimagetoApi.dart';
 import 'package:freelanc/core/services/my_services.dart';
 import 'package:freelanc/core/model/image_model.dart';
@@ -42,12 +43,12 @@ abstract class CompanyprofileRepo {
   Future<Either<String, CompanyModel>> updatecompany(
       String? profileImageID,
       String? backgroundImageID,
-      String ?name,
-      String ?description,
-      String ?size,
-      String ?city,
-      String ?region,
-      String ?streetaddress,
+      String? name,
+      String? description,
+      String? size,
+      String? city,
+      String? region,
+      String? streetaddress,
       List<int>? gallaryIDs);
   uploadImage(File image);
 }
@@ -80,13 +81,14 @@ class CompanyprofileRepoIm extends CompanyprofileRepo {
       String region,
       String size,
       List? gallaryIDs) async {
+    String? token = await getToken();
     try {
-     List<Map<String, dynamic>> gallaryMap= formatGalleryIds(gallaryIDs!);
+      // List<Map<String, dynamic>> gallaryMap = formatGalleryIds(gallaryIDs!);
+
       final response = await api.post(
         ApiEndPoint.savecompany,
         header: {
-          "Authorization":
-              "Bearer ${myServices.sharedpref.getString(KeyShardpref.token)}"
+        ApiKey.authorization :token
         },
         data: {
           ApiKey.profileImageID: profileImageID,
@@ -98,7 +100,7 @@ class CompanyprofileRepoIm extends CompanyprofileRepo {
           ApiKey.city: city,
           ApiKey.regione: region,
           ApiKey.streetaddress: streetaddress,
-          ApiKey.galleryimagesIds: gallaryMap
+          ApiKey.galleryimagesIds: gallaryIDs
         },
       );
       // print(response);
@@ -172,7 +174,7 @@ class CompanyprofileRepoIm extends CompanyprofileRepo {
   Future<Either<String, ImageModle>> uploadImage(File image) async {
     try {
       final response = await api.post(ApiEndPoint.storageimage,
-          isFomrData: true, data: {'image': await uploadImgetoApi(image)});
+          isFomrData: true, data: {ApiKey.image: await uploadFiletoApi(image)});
       print(response);
       return right(ImageModle.fromJson(response));
     } on ServerExpcptions catch (e) {

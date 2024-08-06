@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:freelanc/core/constant/imageurl.dart';
+import 'package:freelanc/core/functions/show_full_image.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/features/company/profiles/controller/_info_comapny_profile_controller.dart';
 import 'package:freelanc/features/freelancer/profile/controller/freelancer_profile_controller.dart';
@@ -23,6 +24,11 @@ class CustomimageprofileFree extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
+              if (controllerIm.backgroundImageUrl != null) {
+                showFullImage(controllerIm.backgroundImageUrl!);
+              }
+            },
+            onLongPress: () {
               controllerIm.addImageback();
             },
             child: SizedBox(
@@ -49,19 +55,25 @@ class CustomimageprofileFree extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
               child: GestureDetector(onTap: () {
+                if (controllerIm.profileImageUrl != null) {
+                  showFullImage(controllerIm.profileImageUrl!);
+                }
+              }, onLongPress: () {
                 controllerIm.addImagefront();
               }, child: GetBuilder<FreeProfileControllerIm>(builder: (_) {
                 return CircleAvatar(
                   backgroundColor: MyColors.blueColor,
                   radius: 90,
-                 backgroundImage: controllerIm.profileImageUrl == null
-                ? const AssetImage(ImagesUrl.imagetest) as ImageProvider
-                : NetworkImage(controllerIm.profileImageUrl!) as ImageProvider,
+                  backgroundImage: controllerIm.profileImageUrl == null
+                      ? const AssetImage(ImagesUrl.imagetest) as ImageProvider
+                      : NetworkImage(controllerIm.profileImageUrl!)
+                          as ImageProvider,
                 );
               })),
             ),
           ),
         ],
       ),
-    );  }
+    );
+  }
 }

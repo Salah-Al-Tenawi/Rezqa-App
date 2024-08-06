@@ -9,7 +9,9 @@ class KeyShardpref {
   static String singintrue = "singintrue";
   static String roleuser = "roleuser";
   static String companyJson = "companyJson";
-  static String clientJson = "companyJson";
+  static String clientJson = "clientJson";
+  static String freelancerJson = "freelancerJson";
+  
   static String username = "username";
 
   

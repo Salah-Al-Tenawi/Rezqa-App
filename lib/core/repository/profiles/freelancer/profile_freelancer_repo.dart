@@ -3,6 +3,8 @@ import 'package:freelanc/core/api/api_end_points.dart';
 import 'package:freelanc/core/api/dio_consumer.dart';
 import 'package:freelanc/core/constant/key_shared.dart';
 import 'package:freelanc/core/errors/excptions.dart';
+import 'package:freelanc/core/model/joprole_model.dart';
+import 'package:freelanc/core/model/skilles_model.dart';
 import 'package:freelanc/core/services/my_services.dart';
 import 'package:freelanc/features/freelancer/profile/data/freelancer_model.dart';
 import 'package:get/get.dart';
@@ -16,30 +18,32 @@ abstract class ProfileFreeLancerRepo {
       String? profileImageID,
       String? backImageProfileID,
       String description,
-      String jopRoleId,
+      int jopRoleId,
       String dateOfbirth,
       String city,
       String gender,
       String headline,
-      List<String>? skillsIds);
+      List<int>? skillsIds);
 
   updateFreelancer(
       String? profileImageID,
       String? backImageProfileID,
       String description,
-      String jopRoleId,
+      int jopRoleId,
       String dateOfbirth,
       String city,
       String gender,
       String headline,
-      List<String>? skillsIds);
+      List<int>? skillsIds);
+  searchJoprole(String name);
+  searchSkilles(String name);
 }
 
 class ProfileFreelancerRepoImp extends ProfileFreeLancerRepo {
   @override
   Future<Either<String, FreelancerModel>> getFreelancer(int id) async {
     try {
-      final response = await api.get(ApiEndPoint.freelnacer + id.toString());
+      final response = await api.get("${ApiEndPoint.freelnacer}/$id");
       return right(FreelancerModel.fromJson(response));
     } on ServerExpcptions catch (e) {
       return left(e.errormodel.errormassagr.toString());
@@ -47,16 +51,16 @@ class ProfileFreelancerRepoImp extends ProfileFreeLancerRepo {
   }
 
   @override
-  saveFreelancer(
+  Future<Either<String, FreelancerModel>> saveFreelancer(
       String? profileImageID,
       String? backImageProfileID,
       String description,
-      String jopRoleId,
+      int jopRoleId,
       String dateOfbirth,
       String city,
       String gender,
       String headline,
-      List<String>? skillsIds) async {
+      List<int>? skillsIds) async {
     try {
       final response = await api.post(ApiEndPoint.savefreelnacer, header: {
         "Authorization":
@@ -83,12 +87,12 @@ class ProfileFreelancerRepoImp extends ProfileFreeLancerRepo {
       String? profileImageID,
       String? backImageProfileID,
       String description,
-      String jopRoleId,
+      int jopRoleId,
       String dateOfbirth,
       String city,
       String gender,
       String headline,
-      List<String>? skillsIds) async {
+      List<int>? skillsIds) async {
     try {
       final response = await api.put(ApiEndPoint.freelnacer, header: {
         "Authorization":
@@ -108,5 +112,43 @@ class ProfileFreelancerRepoImp extends ProfileFreeLancerRepo {
     } on ServerExpcptions catch (e) {
       return left(e.errormodel.errormassagr.toString());
     }
+  }
+
+  @override
+  Future<List<JoproleModel>> searchJoprole(String name) async {
+    try {
+      final response =
+          await api.post(ApiEndPoint.getjoprloe, data: {ApiKey.name: name});
+
+      return JoproleModelList.fromJson(response).data ?? [];
+    } on ServerExpcptions catch (e) {
+      Get.snackbar("error", e.errormodel.errormassagr.toString());
+    }
+    return [];
+  }
+
+  // @override
+  // Future<Either<String, SkilleModelList>> searchSkilles(String? name) async {
+  //   try {
+  //     final response =
+  //         await api.post(ApiEndPoint.getskilles, data: {ApiKey.name: name});
+
+  //     return right(SkilleModelList.fromJson(response));
+  //   } on ServerExpcptions catch (e) {
+  //     return left(e.errormodel.errormassagr.toString());
+  //   }
+  // }
+
+  @override
+  Future<List<SkilleModel>> searchSkilles(String? name) async {
+    try {
+      final response =
+          await api.post(ApiEndPoint.getskilles, data: {ApiKey.name: name});
+
+      return SkilleModelList.fromJson(response).data ?? [];
+    } on ServerExpcptions catch (e) {
+      Get.snackbar("error", e.errormodel.errormassagr.toString());
+    }
+    return [];
   }
 }

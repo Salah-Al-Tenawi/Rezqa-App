@@ -55,7 +55,7 @@ class ClientProfileControllerIm extends ClientProfileController {
     var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
     if (imagePicked != null) {
       File imagefile = File(imagePicked.path);
-      if (await checkSizeImage(imagefile)) {
+      if (await checkSizeFile(imagefile,"image")) {
         var response = await profileClientRepoIm.uploadImage(imagefile);
         response.fold((error) => Get.snackbar("error", error), (imagemodel) {
           profileImgeUrl = imagemodel.url!;
@@ -74,7 +74,7 @@ class ClientProfileControllerIm extends ClientProfileController {
     var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
     if (imagePicked != null) {
       File imagefile = File(imagePicked.path);
-      if (await checkSizeImage(imagefile)) {
+      if (await checkSizeFile(imagefile,"image")) {
         var response = await profileClientRepoIm.uploadImage(imagefile);
         response.fold((error) => Get.snackbar("error", error), (imagemodel) {
           backgroundImageUrl = imagemodel.url;

@@ -13,12 +13,15 @@ import 'package:freelanc/features/auth/sing_in_user/ui/chose_type_user.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/singin.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/sucsses_verfiy_email.dart';
 import 'package:freelanc/features/auth/sing_in_user/ui/verfiy_email_sing.dart';
+import 'package:freelanc/features/chat/ui/all_chat.dart';
+import 'package:freelanc/features/chat/ui/chat.dart';
 import 'package:freelanc/features/client/dashboard/ui/dash_board_client.dart';
 import 'package:freelanc/features/client/profile/ui/info_profile_client.dart';
 import 'package:freelanc/features/client/profile/ui/my_profile_client.dart';
-import 'package:freelanc/features/company/dashboard/ui/dashborad.dart';
-import 'package:freelanc/features/freelancer/dashbord/ui/dash_board_freelancer.dart';
+import 'package:freelanc/features/dashboard/ui/dashborad.dart';
+import 'package:freelanc/features/freelancer/profile/ui/add_portfolio.dart';
 import 'package:freelanc/features/freelancer/profile/ui/info_profile_freelancer.dart';
+import 'package:freelanc/features/freelancer/profile/ui/show_my_portfolio.dart';
 import 'package:freelanc/features/freelancer/profile/ui/verfiy_profile_freelancer.dart';
 import 'package:freelanc/features/onboarding/ui/onboarding.dart';
 import 'package:freelanc/features/company/profiles/ui/verfiy_profile_company.dart';
@@ -72,7 +75,7 @@ class AppRoute {
         binding: InfopProfilecompanyBinding()),
 
     GetPage(
-        name: MyRoute.dashbordcompany, page: () => const DashBoardCompany()),
+        name: MyRoute.dashbord, page: () =>  DashBoard()),
 
     // client profile
     GetPage(
@@ -95,11 +98,19 @@ class AppRoute {
         name: MyRoute.verfiymyprofileFreelancer,
         page: () => const VerfiyprofileFreelancer(),
         binding: InfopProfileFreelancerBinding()),
-    GetPage(
-        name: MyRoute.dashBoardFreelancer,
-        page: () => const DashBoardFreelancer()),
+    
+ GetPage(
+        name: MyRoute.addportfolio,
+        page: () =>  AddPortfolio(),),
+GetPage(
+        name: MyRoute.showMyportfolio,
+        page: () =>  ShowMYPortfolio(),),
+
+        //chat  
+        GetPage(name: MyRoute.chat, page: ()=> const Chat()),
 
     // test page
-    GetPage(name: MyRoute.test, page: () => TestWidgets()),
+    GetPage(name: MyRoute.test, page: () => const TestWidgets()),
+    GetPage(name: MyRoute.allCaht, page:()=> const AllCaht())
   ];
 }

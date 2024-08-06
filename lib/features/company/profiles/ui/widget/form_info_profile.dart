@@ -91,7 +91,7 @@ class CustomFormInfoProfile extends StatelessWidget {
                           controller.changType(type);
                         },
                       )
-                    : CircularProgressIndicator();
+                    : const CircularProgressIndicator();
                 
               }),
               CustomDropdown(

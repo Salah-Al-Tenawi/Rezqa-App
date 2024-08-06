@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/features/onboarding/controller/onboarding_controller.dart';
 import 'package:freelanc/features/onboarding/ui/widgets/body.dart';

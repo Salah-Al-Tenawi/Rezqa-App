@@ -14,7 +14,7 @@ void handelDioExcptions(DioException e) {
   };
   switch (e.type) {
     case DioExceptionType.connectionTimeout:
-      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
+      throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect),);
 
     case DioExceptionType.sendTimeout:
       throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorconect));
@@ -43,13 +43,16 @@ void handelDioExcptions(DioException e) {
         case 422:
           throw ServerExpcptions(
               errormodel: ErrorModel.fromJson(e.response!.data));
-
-        case 401:
-          throw ServerExpcptions(
-              errormodel: ErrorModel.fromJson(e.response!.data));
         case 400:
           throw ServerExpcptions(
               errormodel: ErrorModel.fromJson(e.response!.data));
+        case 401:
+          throw ServerExpcptions(
+              errormodel: ErrorModel.fromJson(e.response!.data));
+        case 402:
+          throw ServerExpcptions(
+              errormodel: ErrorModel.fromJson(e.response!.data));
+
         case 403:
           throw ServerExpcptions(
               errormodel: ErrorModel.fromJson(e.response!.data));
@@ -59,7 +62,11 @@ void handelDioExcptions(DioException e) {
         case 405:
           throw ServerExpcptions(
               errormodel: ErrorModel.fromJson(e.response!.data));
+        case 500:
+          throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorservir));
         case 502:
+          throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorservir));
+        case 520:
           throw ServerExpcptions(errormodel: ErrorModel.fromJson(errorservir));
       }
   }

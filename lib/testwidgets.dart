@@ -1,9 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
-import 'package:freelanc/core/services/my_services.dart';
+import 'package:freelanc/core/widgets/custom_dropdown.dart';
+import 'package:freelanc/features/freelancer/profile/controller/freelancer_profile_controller.dart';
 import 'package:get/get.dart';
+import 'package:file_picker/file_picker.dart';
 
 class TestWidgets extends StatelessWidget {
   const TestWidgets({super.key});
@@ -12,25 +16,85 @@ class TestWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     TestController controller = TestController();
     return Scaffold(
-        body: Center(
-      child: IconButton(
-          onPressed: () {
-            MyServices myServices = Get.find();
-            myServices.sharedpref.clear();
-          },
-          icon: Icon(Icons.abc)),
-    ));
-    // );
+      appBar: AppBar(
+        title: Text('Multi-Select Dropdown with GetX'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            IconButton(
+                onPressed: () async {
+                  controller.pickFiles();
+                  // FilePickerResult? result =
+                  //     await FilePicker.platform.pickFiles(allowMultiple: true);
+
+                  // if (result != null) {
+                  //   List<File> files =
+                  //       result.paths.map((path) => File(path!)).toList();
+                  //   print(files);
+                  // } else {
+                  //   // User canceled the picker
+                  // }
+                  Obx(() {
+                    return controller.files.isEmpty
+                        ? Expanded(
+                            child: ListView.builder(
+                              itemCount: controller.files.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  subtitle: Container(
+                                    color: Colors.deepOrange,
+                                    width: 100,
+                                    height: 200,
+                                  ),
+                                  title: Text(controller.files[index].path
+                                      .split('/')
+                                      .last),
+                                );
+                              },
+                            ),
+                          )
+                        : Container(
+                            width: 100,
+                            height: 200,
+                            color: Colors.red,
+                          );
+                  });
+                },
+                icon: Icon(Icons.abc))
+          ],
+        ),
+      ),
+    );
   }
 }
 
 class TestController extends GetxController {
-  List<dynamic> gallaryid = [2, 3, 4];
-  tomap(List<dynamic> list) {
-    List done = list.map((item) => {"id": item}).toList();
-    print(done);
+  FreeProfileControllerIm freeProfileControllerIm =
+      Get.put(FreeProfileControllerIm());
+  String? selectedItems;
+  List<String> items = ["ali", "allll", "omer", "fesal"];
+  var files = <File>[].obs;
+
+  void pickFiles() async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
+
+    if (result != null) {
+      List<File> selectedFiles =
+          result.paths.map((path) => File(path!)).toList();
+      files.addAll(selectedFiles);
+    }
   }
+
+  // void addItem(String item) {
+  //   if (!selectedItems.contains(item)) {
+  //     selectedItems.add(item);
+  //   }
 }
+
+  
 
 
 

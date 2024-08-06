@@ -16,11 +16,11 @@ class CompanyModel {
   String? city;
   String? region;
   String? streetaddress;
-  List<dynamic>? gallary;
+  List<ImageModle>? gallary;
   String? verified;
 
   CompanyModel({
-    // this.name,
+  
     this.id,
     this.profileImageUrl,
     this.backgroundImageUrl,
@@ -100,24 +100,3 @@ class CompanyModel {
     );
   }
 }
-
-
-// {
-//     "data": {
-//         "street_address": "ddddddddddd",
-//         "city": "دمشق",
-//         "region": "المزة",
-//         "id": 1,
-//         "profile_image_url": null,
-//         "background_image_url": null,
-//         "profile_image_id": null,
-//         "background_image_id": null,
-//         "verified_at": null,
-//         "username": "slah-altynaoy-5",
-//         "name": "dddddddddd",
-//         "description": "ggggggggggg",
-//         "size": "أكثر من 100 موظف",
-//         "industry_name": "خدمي",
-//         "gallery_images": []
-//     }
-// }

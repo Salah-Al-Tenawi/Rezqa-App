@@ -11,9 +11,9 @@ import 'package:get/get.dart';
 class CustomNameprofile extends StatelessWidget {
   CompanyProfileControllerIm controllerIm;
   CustomNameprofile({
-    Key? key,
+    super.key,
     required this.controllerIm,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +21,29 @@ class CustomNameprofile extends StatelessWidget {
         child: GetBuilder<CompanyProfileControllerIm>(builder: (_) {
       return Column(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // SizedBox(
+              //   width: 30.w,
+              // ),
+              Icon(
+                Icons.warning_rounded,
+                color: Colors.red,
+                size: 20.sp,
+              ),
+              SizedBox(
+                width: 10.w,
+              ),
+              Text(
+                "غير موثق",
+                style: TextStyle(
+                    color: MyColors.greyTextColor,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
           Text(
             controllerIm.name.text,
             style: font25boldblack,

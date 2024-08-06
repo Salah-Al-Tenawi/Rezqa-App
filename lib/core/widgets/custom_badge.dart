@@ -3,10 +3,10 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 
 import 'package:freelanc/core/themes/color_app.dart';
-import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class CustomBadge extends StatelessWidget {
-  Widget icon;
+  Widget ?icon;
   Color? badgeColor;
   Color? bordercolor;
   bool? border = true;
@@ -15,7 +15,7 @@ class CustomBadge extends StatelessWidget {
   CustomBadge(
       {super.key,
       this.child,
-      required this.icon,
+       this.icon,
       this.badgeColor,
       this.bordercolor,
       this.border,

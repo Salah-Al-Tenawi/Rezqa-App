@@ -79,7 +79,7 @@ class ProfileClientRepoIm extends ProfileClientReop {
   Future<Either<String, ImageModle>> uploadImage(File image) async {
     try {
       final response = await api.post(ApiEndPoint.storageimage,
-          isFomrData: true, data: {'image': await uploadImgetoApi(image)});
+          isFomrData: true, data: {'image': await uploadFiletoApi(image)});
      
       return right(ImageModle.fromJson(response));
     } on ServerExpcptions catch (e) {

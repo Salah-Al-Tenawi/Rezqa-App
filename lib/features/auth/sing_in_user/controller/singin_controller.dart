@@ -42,13 +42,14 @@ class SinginControllerIm extends SinginController {
 
       response.fold((error) {
         circle.value = false;
+        if (error.contains("The email has already been taken")) {
+          Get.toNamed(MyRoute.verfiyemilsing, arguments: email.text);
+        }
         Get.snackbar("errore", error);
       }, (usermodel) {
         circle.value = false;
-        String username = usermodel.firstname! + usermodel.lastname!;
-        
-        myServices.sharedpref.setString(KeyShardpref.username, username);
-        Get.offAllNamed(MyRoute.verfiyemilsing, arguments: email.text);
+
+        Get.toNamed(MyRoute.verfiyemilsing, arguments: email.text);
       });
     }
   }

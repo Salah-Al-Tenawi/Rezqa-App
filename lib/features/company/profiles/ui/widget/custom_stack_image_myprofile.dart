@@ -8,7 +8,6 @@ import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
 import 'package:freelanc/core/widgets/my_button.dart';
 import 'package:freelanc/features/company/profiles/controller/_info_comapny_profile_controller.dart';
-import 'package:freelanc/features/company/profiles/ui/widget/imageback_front_profile.dart';
 
 import 'package:get/get.dart';
 
@@ -25,11 +24,15 @@ class Customimageprofile extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Stack(
         children: [
-          GestureDetector(
-            onTap: () {},
+          GestureDetector( 
+            
+            onTap: () {
+              if (controllerIm.imagebackUrl != null) {
+                controllerIm.showFullImage(controllerIm.imagebackUrl!);
+              }
+            },
             onLongPress: () {
-              Get.bottomSheet(
-                Container(
+              Get.bottomSheet(Container(
                 width: double.infinity,
                 height: 200.h,
                 color: MyColors.greyColor,
@@ -43,6 +46,7 @@ class Customimageprofile extends StatelessWidget {
                     MyButton(
                         onPressed: () {
                           controllerIm.addImageback();
+                          Get.back();
                         },
                         width: 100,
                         height: 100,
@@ -56,8 +60,6 @@ class Customimageprofile extends StatelessWidget {
                   ],
                 ),
               ));
-
-            
             },
             child: SizedBox(
                 width: double.infinity,
@@ -72,7 +74,6 @@ class Customimageprofile extends StatelessWidget {
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                              
                                 controllerIm.imagebackUrl!,
                                 fit: BoxFit.cover,
                               ));
@@ -84,7 +85,38 @@ class Customimageprofile extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
               child: GestureDetector(onTap: () {
-                controllerIm.addImagefront();
+                if (controllerIm.imagefrontUrl != null) {
+                  controllerIm.showFullImage(controllerIm.imagefrontUrl!);
+                }
+              }, onLongPress: () {
+                Get.bottomSheet(Container(
+                  width: double.infinity,
+                  height: 200.h,
+                  color: MyColors.greyColor,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "المعرض",
+                        style: font23boldblack,
+                      ),
+                      MyButton(
+                          onPressed: () {
+                            controllerIm.addImagefront();
+                            Get.back();
+                          },
+                          width: 100,
+                          height: 100,
+                          borderRadius: true,
+                          color: MyColors.blueColor,
+                          child: Icon(
+                            Icons.image,
+                            color: MyColors.greyColor,
+                            size: 50.sp,
+                          )),
+                    ],
+                  ),
+                ));
               }, child: GetBuilder<CompanyProfileControllerIm>(builder: (_) {
                 return CircleAvatar(
                   backgroundColor: MyColors.blueColor,

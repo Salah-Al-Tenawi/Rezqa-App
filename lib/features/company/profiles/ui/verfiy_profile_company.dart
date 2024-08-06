@@ -16,7 +16,7 @@ class VerfiyMyPfofileCompany extends StatelessWidget {
     return Scaffold(
         body: RefreshIndicator(
       onRefresh: () async {
-        await controllerIm.getcompany();
+        await controllerIm.getCompanyfromCashAndShowIT();
       },
       child: CustomScrollView(
         slivers: [

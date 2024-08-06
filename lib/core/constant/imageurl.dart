@@ -25,4 +25,8 @@ class ImagesUrl {
   static String imageRootSvgs = "assets/svgs";
   static String loginSvg = "$imageRootSvgs/undraw_login_re_4vu2.svg";
    static String forgetpasswordSvg = "$imageRootSvgs/undraw_forgot_password_re_hxwm.svg";
+static String portfolio = "$imageRootSvgs/portfolio.svg";
+
+
+   
 }

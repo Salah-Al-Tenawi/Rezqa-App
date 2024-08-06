@@ -18,8 +18,16 @@ TextStyle font22greyebold = TextStyle(
     color: MyColors.greyColor, fontSize: 22.sp, fontWeight: FontWeight.bold);
 TextStyle font14greynormal =
     TextStyle(fontSize: 14.sp, color: MyColors.greyColor);
+TextStyle font17greynormal =
+    TextStyle(fontSize: 17.sp, color: MyColors.greyColor);
+
+
+
 TextStyle font23boldblack =
     TextStyle(fontSize: 23.sp, fontWeight: FontWeight.bold);
+    TextStyle font20boldblack =
+    TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold);
+
 TextStyle font17normalblue =
     TextStyle(fontSize: 17.sp, color: MyColors.blueColor);
 TextStyle font14bluenormal =

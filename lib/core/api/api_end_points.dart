@@ -1,5 +1,10 @@
 class ApiEndPoint {
   static String basrurl = "https://freelancer-l1w8.onrender.com/api/";
+
+  // storage
+
+  static String uploadFile = "storage/file/store";
+  static String storageimage = "storage/image/store";
   // auth
   static String resendOtp = "otp/resend";
   static String register = "otp/register";
@@ -10,23 +15,41 @@ class ApiEndPoint {
   static String login = "login";
   static String logout = "logout";
   static String singingoogle = "provider/google/sign-in/redirect";
+  static String whoIam = "request.me";
+
   // company
   static String getallinustry = "category/industry/search";
   static String savecompany = "company/store";
-  static String storageimage = "storage/image/store";
+
   static String company = "company";
   // client
   static String client = "client";
   static String saveclient = "client/store";
 
   // freelancer
-  static String freelnacer = "api/freelancer";
-  static String savefreelnacer = "api/freelancer/store";
+  static String freelnacer = "freelancer";
+  static String savefreelnacer = "freelancer/store";
+// freelnacerPortfolio
+  static String getPortfolio = "freelancer/portfolio";
+  static String storePortfolio = "freelancer/portfolio/store";
+  static String updatePortfolio = "freelancer/portfolio";
+  static String deletePortfolio = "freelancer/portfolio";
+
+  // search skilles
+  static String getskilles = "category/skill/search";
+  // search joprole
+  static String getjoprloe = "category/job_role/search";
 }
 
 class ApiKey {
   // Authorization
   static String authorization = "Authorization";
+  static String error = "error";
+
+// storage
+  static String file = "file";
+  static String extention = "extention";
+
   //register
   static String id = "id";
   static String user = "user";
@@ -55,6 +78,8 @@ class ApiKey {
   static String backgroundimageUrl = "background_image_url";
   static String galleryimagesIds = "gallery_images_ids";
   static String galleryimages = "gallery_images";
+  static String jobRole = "job_role";
+  
 
   static String data = "data";
   static String verified = "verified_at";
@@ -66,7 +91,30 @@ class ApiKey {
   static String headline = "headline";
 
   static String gender = "gender";
+
+  // freelancer protfolio
+  static String portfolioId = "portfolio_id";
+  static String title = "title";
+  static String url = "url";
+  static String date = "date";
+  static String fileIds = "file_ids";
+  static String imageIds = "image_ids";
+  static String section = "section";
+  static String portfolios = "portfolios";
+  static String skills = "skills";
+  static String createdAt = "created_at";
+  static String updatedAt = "updated_at";
+  
+  static String likesCount = "likes_count";
+static String   viewsCount = "  views_count";
+
+
+  
+  
+
   // conacted
 
   static String massage = "message";
+  static String image = "image";
+  static String images = "images";
 }

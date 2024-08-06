@@ -1,13 +1,13 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:freelanc/core/constant/key_shared.dart';
 import 'package:freelanc/core/functions/check_size_image.dart';
 import 'package:freelanc/core/functions/show_size_warning.dart';
+import 'package:freelanc/core/helper/shared_api_functions.dart';
 import 'package:freelanc/core/repository/profiles/profile_company_repo.dart';
 import 'package:freelanc/core/route/routes.dart';
 import 'package:freelanc/core/services/my_services.dart';
+import 'package:freelanc/features/auth/models/user_model.dart';
 import 'package:freelanc/features/company/profiles/data/company_model.dart';
 import 'package:get/get.dart';
 import 'dart:io';
@@ -27,11 +27,12 @@ abstract class InfoCompanyProfileController extends GetxController {
   removeImageFromGallary(int index);
   getallIndutry(String? name);
   getCompanyfromCashAndShowIT();
+  showFullImage(String imageUrl);
 }
 
 class CompanyProfileControllerIm extends InfoCompanyProfileController {
   int? id;
-  late GlobalKey<FormState> keyform;
+  late GlobalKey<FormState> keyform = GlobalKey<FormState>();
   late TextEditingController name;
   late TextEditingController city;
   late TextEditingController streetaddress;
@@ -51,6 +52,7 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
   late MyServices myServices;
   late CompanyprofileRepoIm companyprofileRepoIm;
   CompanyModel? companyMapFromCash;
+  SharedApiFunctionIm sharedApiFunctionIm = Get.put(SharedApiFunctionIm());
   RxBool isloading = false.obs;
 // the logic
 
@@ -58,8 +60,8 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
   void onInit() async {
     companyprofileRepoIm = Get.put(CompanyprofileRepoIm());
     myServices = Get.find();
+    // myServices.sharedpref.clear();
 
-    keyform = GlobalKey<FormState>();
     streetaddress = TextEditingController();
     city = TextEditingController();
     name = TextEditingController();
@@ -102,15 +104,11 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
     var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
     if (imagePicked != null) {
       final File imagefile = File(imagePicked.path);
-      if (await checkSizeImage(imagefile)) {
+      if (await checkSizeFile(imagefile, "image")) {
         final response = await companyprofileRepoIm.uploadImage(imagefile);
         response.fold((error) => Get.snackbar("error", error), (imagemodel) {
           gallaryUrl.add(imagemodel.url!);
           gallaryids.add(imagemodel.id!);
-          // print(gallaryids);
-          // print(
-          //     "===========================$gallaryids=================================");
-          // print(gallaryids);
         });
 
         update();
@@ -142,11 +140,14 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
           gallaryids);
       response.fold(
           (error) => {Get.snackbar("error", error), isloading.value = false},
-          (companyModel) {
+          (companyModel) async {
         String json = jsonEncode(companyModel.toJson());
         myServices.sharedpref.setString(KeyShardpref.companyJson, json);
+        UserModel? user = await sharedApiFunctionIm.whoIam();
+        myServices.sharedpref.setString(KeyShardpref.roleuser, user!.role!);
+        myServices.sharedpref.setString(KeyShardpref.id, user.id! as String);
         isloading.value = false;
-        Get.offAllNamed(MyRoute.dashbordcompany);
+        Get.offAllNamed(MyRoute.dashbord);
       });
     } else {
       updateProfile();
@@ -182,7 +183,7 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
     var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
     if (imagePicked != null) {
       File imagefile = File(imagePicked.path);
-      if (await checkSizeImage(imagefile)) {
+      if (await checkSizeFile(imagefile, "file")) {
         var response = await companyprofileRepoIm.uploadImage(imagefile);
         response.fold((error) => Get.snackbar("error", error), (imagemodel) {
           imagebackUrl = imagemodel.url;
@@ -201,7 +202,7 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
     var imagePicked = await imagePicker.pickImage(source: ImageSource.gallery);
     if (imagePicked != null) {
       File imagefile = File(imagePicked.path);
-      if (await checkSizeImage(imagefile)) {
+      if (await checkSizeFile(imagefile, "image")) {
         var response = await companyprofileRepoIm.uploadImage(imagefile);
         response.fold((error) => Get.snackbar("error", error), (imagemodel) {
           imagefrontUrl = imagemodel.url!;
@@ -236,6 +237,11 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
     if (json != null) {
       var mapjson = await jsonDecode(json);
       companyMapFromCash = CompanyModel.fromCash(mapjson);
+      if (companyMapFromCash == null) {
+        await getcompany();
+        companyMapFromCash = CompanyModel.fromCash(mapjson);
+      }
+
       if (companyMapFromCash != null) {
         id = companyMapFromCash!.id!;
         name.text = companyMapFromCash!.namecompany!;
@@ -256,6 +262,11 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
   @override
   getcompany() async {
     int? id = myServices.sharedpref.getInt(KeyShardpref.roleID);
+    if (id == null) {
+      UserModel? user;
+      user = await sharedApiFunctionIm.whoIam();
+      id = user!.roleId;
+    }
     if (id != null) {
       final response = await companyprofileRepoIm.showcompany(id);
       response.fold((error) => Get.snackbar("error", error), (companyModel) {
@@ -264,5 +275,22 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
         update();
       });
     }
+  }
+
+  @override
+  void showFullImage(String imageUrl) {
+    Get.dialog(
+      Dialog(
+        backgroundColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(10),
+        child: SizedBox(
+          width: double.infinity,
+          child: Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -1,3 +1,5 @@
+import 'package:freelanc/core/model/joprole_model.dart';
+import 'package:freelanc/core/model/skilles_model.dart';
 import 'package:get/get.dart';
 
 inputvaild(String val, String? type, int? max, int? min) {
@@ -8,6 +10,11 @@ inputvaild(String val, String? type, int? max, int? min) {
   if (type == "username") {
     if (!isValidUsername(val)) {
       return "اسم المستخدم غير صالح";
+    }
+  }
+  if(type=="section"){ 
+     if (!isValidUsername(val)) {
+      return "اسم مجال العمل غير صالح";
     }
   }
 
@@ -60,6 +67,22 @@ inputvaild(String val, String? type, int? max, int? min) {
     }
   }
 }
+String? validateSkills(List<SkilleModel?>? selectedItems) {
+  if (selectedItems == null) {
+    return "يجب اختيار خمسة مهارات على الأقل ";
+  }
+  if (selectedItems.length < 5) {
+    return 'يجب اختيار خمسة مهارات على الأقل';
+  }
+  return null;
+ 
+}
+String?validatJoprole (JoproleModel? joprole) {
+              if (joprole == null) {
+                return "يجب اختبار مجال العمل ";
+              }
+                           return null;
+            }
 
 bool isValidUsername(String username) {
   // تعبير منتظم للتحقق من أن الاسم يحتوي فقط على الأحرف العربية أو الإنجليزية
