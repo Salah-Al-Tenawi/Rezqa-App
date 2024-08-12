@@ -14,32 +14,38 @@ class MyPfofileClient extends StatelessWidget {
   Widget build(BuildContext context) {
     ClientProfileControllerIm controllerIm = Get.find();
     return Scaffold(
-        body: CustomScrollView( 
-          slivers: [
-      CustomAppBarMyprofileClient(
-        controllerIm: controllerIm,
-      ),
-      CustomImageprofileClient(
-        controllerIm: controllerIm,
-      ),
-      SliverToBoxAdapter(
-        child: Column(
-          children: [
-            Text(
-              controllerIm.username,
-              style: font25boldblack,
-            ),
-            Divider(
-              color: MyColors.greyColor,
-              indent: 60,
-              endIndent: 60,
-            ),
-          ],
+        body: RefreshIndicator(
+      onRefresh: () async {
+        await controllerIm.getClientFromCash();
+      },
+      child: CustomScrollView(slivers: [
+        CustomAppBarMyprofileClient(
+          controllerIm: controllerIm,
         ),
-      ),
-      CustomdetailsprofileClient(
-        controllerIm: controllerIm,
-      )
-    ]));
+        CustomImageprofileClient(
+          controllerIm: controllerIm,
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              GetBuilder<ClientProfileControllerIm>(builder: (_) {
+                return Text(
+                  controllerIm.username,
+                  style: font25boldblack,
+                );
+              }),
+              Divider(
+                color: MyColors.greyColor,
+                indent: 60,
+                endIndent: 60,
+              ),
+            ],
+          ),
+        ),
+        CustomdetailsprofileClient(
+          controllerIm: controllerIm,
+        )
+      ]),
+    ));
   }
 }

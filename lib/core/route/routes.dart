@@ -21,10 +21,7 @@ class MyRoute {
   static const String verfiymyprofileFreelancer = "/verfiymyprofileFreelancer";
   static const String dashBoardFreelancer = "/dashBoardFreelancer";
   static const String addportfolio = "/addportfolio";
-static const String showMyportfolio = "/showMyportfolio";
-
-
-  
+  static const String showMyportfolio = "/showMyportfolio";
 
 // client
 // profile DashBoardClint
@@ -37,6 +34,11 @@ static const String showMyportfolio = "/showMyportfolio";
   // chat
   static String chat = "/chat";
   static String allCaht = "/AllCaht";
+  // any profile
+  static String anyProfileClient = "/AnyProfileClient";
+  static String anyProfileCompany = '/AnyProfileControllerIm';
+  static String anyProfileFreelancer = '/anyProfileFreelancer';
+  static const String showAnyportfolio = "/showAnyportfolio";
 
   //test
   static const String test = "/test";

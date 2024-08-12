@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ApiEndPoint {
   static String basrurl = "https://freelancer-l1w8.onrender.com/api/";
 
@@ -39,6 +41,9 @@ class ApiEndPoint {
   static String getskilles = "category/skill/search";
   // search joprole
   static String getjoprloe = "category/job_role/search";
+// chat
+  static String conversations = "conversations";
+  static String messages = "messages";
 }
 
 class ApiKey {
@@ -48,6 +53,7 @@ class ApiKey {
 
 // storage
   static String file = "file";
+  static String files = "files";
   static String extention = "extention";
 
   //register
@@ -79,7 +85,6 @@ class ApiKey {
   static String galleryimagesIds = "gallery_images_ids";
   static String galleryimages = "gallery_images";
   static String jobRole = "job_role";
-  
 
   static String data = "data";
   static String verified = "verified_at";
@@ -104,14 +109,14 @@ class ApiKey {
   static String skills = "skills";
   static String createdAt = "created_at";
   static String updatedAt = "updated_at";
-  
+
   static String likesCount = "likes_count";
-static String   viewsCount = "  views_count";
+  static String viewsCount = "  views_count";
 
+// chat
 
-  
-  
-
+  static String userId = "user_id";
+  static String message = "message";
   // conacted
 
   static String massage = "message";

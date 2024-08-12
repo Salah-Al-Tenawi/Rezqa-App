@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freelanc/core/binding/chat_binding.dart';
 import 'package:freelanc/core/route/app_routes.dart';
 import 'package:freelanc/core/route/routes.dart';
 import 'package:freelanc/core/themes/app_theme.dart';
@@ -8,7 +9,7 @@ import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- 
+
   await initalservices();
   runApp(const MyApp());
 }
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
           title: "freelancer projectes with get x",
           getPages: appRoute.list,
           initialRoute: MyRoute.chat,
+          initialBinding: ChatBindings(),
           debugShowCheckedModeBanner: false,
           textDirection: TextDirection.rtl,
           theme: AppTheme.lighttheme),

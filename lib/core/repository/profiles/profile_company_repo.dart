@@ -49,6 +49,7 @@ abstract class CompanyprofileRepo {
       String? city,
       String? region,
       String? streetaddress,
+      String ?selectindustry,
       List<int>? gallaryIDs);
   uploadImage(File image);
 }
@@ -83,13 +84,9 @@ class CompanyprofileRepoIm extends CompanyprofileRepo {
       List? gallaryIDs) async {
     String? token = await getToken();
     try {
-      // List<Map<String, dynamic>> gallaryMap = formatGalleryIds(gallaryIDs!);
-
       final response = await api.post(
         ApiEndPoint.savecompany,
-        header: {
-        ApiKey.authorization :token
-        },
+        header: {ApiKey.authorization: token},
         data: {
           ApiKey.profileImageID: profileImageID,
           ApiKey.backgroundImageID: backImageProfileID,
@@ -147,6 +144,7 @@ class CompanyprofileRepoIm extends CompanyprofileRepo {
       String? city,
       String? region,
       String? streetaddress,
+      String? selectindustry,
       List<int>? gallaryIDs) async {
     try {
       final response = await api.put(ApiEndPoint.company, header: {
@@ -161,6 +159,7 @@ class CompanyprofileRepoIm extends CompanyprofileRepo {
         ApiKey.city: city,
         ApiKey.regione: region,
         ApiKey.streetaddress: streetaddress,
+        ApiKey.industryname: selectindustry,
         ApiKey.galleryimages: gallaryIDs
       });
 

@@ -162,7 +162,7 @@ class FreeProfileControllerIm extends FreeProfileController {
       Get.toNamed(MyRoute.verfiymyprofileFreelancer);
       UserModel? userModel = await sharedApiFunctionIm.whoIam();
       if (userModel != null) {
-        username = userModel.username!;
+        username = userModel.firstname!+userModel.lastname!;
         update();
       } else {
         Get.snackbar("error", "مشكلة في الاتصال بالانترنت");
@@ -228,15 +228,16 @@ class FreeProfileControllerIm extends FreeProfileController {
         Get.snackbar("error", error);
         isloading.value = false;
       }, (freelancerModel) async {
-        myServices.sharedpref.setInt(KeyShardpref.roleID, freelancerModel.id);
+        myServices.sharedpref.setInt(KeyShardpref.id, freelancerModel.id);
 
         String json = jsonEncode(freelancerModel.toJson());
         myServices.sharedpref.setString(KeyShardpref.freelancerJson, json);
         isloading.value = false;
-        final user = await sharedApiFunctionIm.whoIam();
-        myServices.sharedpref.setString(KeyShardpref.roleuser, user!.role!);
+
+        myServices.sharedpref.setString(KeyShardpref.roleuser, "freelancer");
         Get.snackbar("نجاح", 'تم حفظ بروفايلك');
         isloading.value = false;
+        update();
       });
     }
   }
@@ -299,6 +300,7 @@ class FreeProfileControllerIm extends FreeProfileController {
       myServices.sharedpref.setInt(KeyShardpref.id, freelancerModel.id);
       String json = jsonEncode(freelancerModel.toJson());
       myServices.sharedpref.setString(KeyShardpref.freelancerJson, json);
+      getMyProfileFromCach();
       return free;
     });
     return null;
@@ -307,7 +309,7 @@ class FreeProfileControllerIm extends FreeProfileController {
   @override
   getMyProfileFromCach() async {
     String? json = myServices.sharedpref.getString(KeyShardpref.freelancerJson);
-    json ?? getMYFreelancer();
+    // json ?? getMYFreelancer();
     if (json != null) {
       var mapjson = await jsonDecode(json);
       freelnacerModel = FreelancerModel.fromJson(mapjson);

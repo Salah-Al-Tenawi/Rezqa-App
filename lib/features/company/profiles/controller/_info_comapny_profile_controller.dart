@@ -42,7 +42,7 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
   late List size;
   String? selectindustry;
   String? selectsize;
-  late ImagePicker imagePicker;
+  ImagePicker imagePicker = ImagePicker();
   String? imagefrontUrl;
   String? imagebackUrl;
   String? imagefrontId;
@@ -50,7 +50,7 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
   List<int> gallaryids = [];
   List<String> gallaryUrl = [];
   late MyServices myServices;
-  late CompanyprofileRepoIm companyprofileRepoIm;
+  CompanyprofileRepoIm companyprofileRepoIm = Get.put(CompanyprofileRepoIm());
   CompanyModel? companyMapFromCash;
   SharedApiFunctionIm sharedApiFunctionIm = Get.put(SharedApiFunctionIm());
   RxBool isloading = false.obs;
@@ -58,7 +58,7 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
 
   @override
   void onInit() async {
-    companyprofileRepoIm = Get.put(CompanyprofileRepoIm());
+    // companyprofileRepoIm = Get.put(CompanyprofileRepoIm());
     myServices = Get.find();
     // myServices.sharedpref.clear();
 
@@ -143,9 +143,9 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
           (companyModel) async {
         String json = jsonEncode(companyModel.toJson());
         myServices.sharedpref.setString(KeyShardpref.companyJson, json);
-        UserModel? user = await sharedApiFunctionIm.whoIam();
-        myServices.sharedpref.setString(KeyShardpref.roleuser, user!.role!);
-        myServices.sharedpref.setString(KeyShardpref.id, user.id! as String);
+        // UserModel? user = await sharedApiFunctionIm.whoIam();
+        myServices.sharedpref.setString(KeyShardpref.roleuser, "company");
+        myServices.sharedpref.setInt(KeyShardpref.id, companyModel.id!);
         isloading.value = false;
         Get.offAllNamed(MyRoute.dashbord);
       });
@@ -166,6 +166,7 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
         city.text,
         region.text,
         selectsize!,
+        selectindustry,
         gallaryids);
 
     response.fold((error) {
@@ -254,6 +255,8 @@ class CompanyProfileControllerIm extends InfoCompanyProfileController {
         selectindustry = companyMapFromCash!.industryname!;
 
         selectsize = companyMapFromCash!.size!;
+        // gallaryUrl = companyMapFromCash!.gallary?.map((e) => e.url).toList
+
         update();
       }
     }

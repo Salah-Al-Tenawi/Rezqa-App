@@ -20,7 +20,6 @@ class CompanyModel {
   String? verified;
 
   CompanyModel({
-  
     this.id,
     this.profileImageUrl,
     this.backgroundImageUrl,
@@ -55,7 +54,13 @@ class CompanyModel {
     size = json[ApiKey.data][ApiKey.size] ?? "";
     industryname = json[ApiKey.data][ApiKey.industryname] ?? "";
     username = json[ApiKey.data][ApiKey.username] ?? "";
-    gallary = json[ApiKey.data][ApiKey.galleryimages] ?? [];
+    gallary = listgallary(json[ApiKey.data][ApiKey.galleryimages]) ?? [];
+  }
+
+  List<ImageModle>? listgallary(List list) {
+    List<ImageModle>? imagaes =
+        list.map((item) => ImageModle.fromJson(item)).toList();
+    return imagaes;
   }
 
   Map<String, dynamic> toJson() {

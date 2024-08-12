@@ -13,16 +13,19 @@ class Mymiddlware extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     if (myServices.sharedpref.getString(KeyShardpref.token) != null &&
         myServices.sharedpref.getString(KeyShardpref.roleuser) != null) {
-      String roleuser = myServices.sharedpref.getString(KeyShardpref.roleuser)!;
-      switch (roleuser) {
-        case "company":
-          return RouteSettings(name: MyRoute.dashbord);
-        case "freelancer":
-          return const RouteSettings(name: MyRoute.dashBoardFreelancer);
-        case "client":
-          return const RouteSettings(name: MyRoute.dashBoardClint);
-        
+      String? roleuser = myServices.sharedpref.getString(KeyShardpref.roleuser);
+      if (roleuser != null) {
+        return RouteSettings(name: MyRoute.dashbord);
       }
+      // switch (roleuser) {
+      //   case "company":
+      //     return RouteSettings(name: MyRoute.dashbord);
+      //   case "freelancer":
+      //     return const RouteSettings(name: MyRoute.dashBoardFreelancer);
+      //   case "client":
+      //     return const RouteSettings(name: MyRoute.dashBoardClint);
+
+      // }
     }
 
     if (myServices.sharedpref.getBool(KeyShardpref.onboardingisShowtrue) ==

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:freelanc/core/widgets/custom_listtile.dart';
 import 'package:freelanc/features/client/profile/controller/info_client_profile_controller.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class CustomdetailsprofileClient extends StatelessWidget {
@@ -14,32 +15,34 @@ class CustomdetailsprofileClient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Column(
-        children: [
-          // CustomListTile(
-          //   paddingsub: true,
-          //   iconleading: const Icon(Icons.work),
-          //   title: "المهنة ",
-          //   subtitle: Text(controllerIm.joptitle.text),
-          // ),
-          CustomListTile(
-              paddingsub: true,
-              title: "العنوان",
-              subtitle: Text(controllerIm.city.text),
-              iconleading: const Icon(Icons.location_city)),
-          CustomListTile(
-              paddingsub: true,
-              title: " الميلاد",
-              subtitle: Text(controllerIm.birthday),
-              iconleading: const Icon(Icons.cake)),
-          CustomListTile(
-              paddingsub: true,
-              title: "الجنس",
-              subtitle: Text(controllerIm.gender=="male"?"ذكر":"أنثى"),
-              iconleading: const Icon(Icons.person_pin_sharp)),
-        ],
-      ),
-    );
+    return SliverToBoxAdapter(child: GetBuilder<ClientProfileControllerIm>(
+      builder: (_) {
+        return Column(
+          children: [
+            // CustomListTile(
+            //   paddingsub: true,
+            //   iconleading: const Icon(Icons.work),
+            //   title: "المهنة ",
+            //   subtitle: Text(controllerIm.joptitle.text),
+            // ),
+            CustomListTile(
+                paddingsub: true,
+                title: "العنوان",
+                subtitle: Text(controllerIm.city.text),
+                iconleading: const Icon(Icons.location_city)),
+            CustomListTile(
+                paddingsub: true,
+                title: " الميلاد",
+                subtitle: Text(controllerIm.birthday),
+                iconleading: const Icon(Icons.cake)),
+            CustomListTile(
+                paddingsub: true,
+                title: "الجنس",
+                subtitle: Text(controllerIm.gender == "male" ? "ذكر" : "أنثى"),
+                iconleading: const Icon(Icons.person_pin_sharp)),
+          ],
+        );
+      },
+    ));
   }
 }

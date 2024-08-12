@@ -14,16 +14,17 @@ class FileModel {
   });
 
   factory FileModel.formJson(Map<String, dynamic> json) {
+    final data = json[ApiKey.data] ?? json;
     return FileModel(
-        id: json[ApiKey.data][ApiKey.id] ?? 0,
-        url: json[ApiKey.data][ApiKey.url] ?? "",
-        size: json[ApiKey.data][ApiKey.size] ?? 0,
-        extention: json[ApiKey.data][ApiKey.extention] ?? "");
+        id: data[ApiKey.id] ?? 0,
+        url: data[ApiKey.url] ?? "",
+        size: data[ApiKey.size] ?? 0,
+        extention: data[ApiKey.extention] ?? "");
   }
 
- static List<FileModel>? listFilesFromJson(List list) {
-    List<FileModel> ?listfiles;
+ static List<FileModel> listFilesFromJson(List list) {
+    List<FileModel> listfiles=[];
     listfiles = list.map((e) => FileModel.formJson(e)).toList();
-    return listfiles ;
+    return listfiles;
   }
 }

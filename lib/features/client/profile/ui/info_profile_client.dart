@@ -4,12 +4,15 @@ import 'package:freelanc/features/client/profile/ui/widget/custom_form_profile_c
 import 'package:freelanc/features/company/profiles/ui/widget/style_profile.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class InfoProfileClient extends StatelessWidget {
-  const InfoProfileClient({super.key});
+ 
+   const InfoProfileClient({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ClientProfileControllerIm controller = Get.find();
+      ClientProfileControllerIm controller = Get.find();
+   
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

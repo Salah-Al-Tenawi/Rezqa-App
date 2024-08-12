@@ -56,10 +56,10 @@ class ProfileClientRepoIm extends ProfileClientReop {
   }
 
   @override
- Future<Either<String ,ClientModel>> updateProfile(String? birthdat, String? gender, String? city,
-      int? imagefrontId, int? imagebackId) async {
+  Future<Either<String, ClientModel>> updateProfile(String? birthdat,
+      String? gender, String? city, int? imagefrontId, int? imagebackId) async {
     try {
-      final response = await api.put(ApiEndPoint.saveclient, header: {
+      final response = await api.put(ApiEndPoint.client, header: {
         ApiKey.authorization:
             "Bearer ${myServices.sharedpref.getString(KeyShardpref.token)}"
       }, data: {
@@ -74,17 +74,16 @@ class ProfileClientRepoIm extends ProfileClientReop {
       return left(e.errormodel.errormassagr.toString());
     }
   }
-  
+
   @override
   Future<Either<String, ImageModle>> uploadImage(File image) async {
     try {
       final response = await api.post(ApiEndPoint.storageimage,
           isFomrData: true, data: {'image': await uploadFiletoApi(image)});
-     
+
       return right(ImageModle.fromJson(response));
     } on ServerExpcptions catch (e) {
       return left(e.errormodel.errormassagr.toString());
     }
   }
-
 }

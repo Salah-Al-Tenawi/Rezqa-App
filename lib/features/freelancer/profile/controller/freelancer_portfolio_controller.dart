@@ -77,11 +77,11 @@ class FreelancerPortfolioControllerIm extends FreelancerPortfolioController {
   @override
   Future<List<PortfolioModel>> getAllPortfolio() async {
     int? id = myServices.sharedpref.getInt(KeyShardpref.id);
-    UserModel? user;
-    if (id == null) {
-      user = await sharedApiFunctionIm.whoIam();
-      user != null ? id = user.id : id;
-    }
+    // UserModel? user;
+    // if (id == null) {
+    //   user = await sharedApiFunctionIm.whoIam();
+    //   id = user!.roleId;
+    // }
     final response = await profileFreelancerRepoImp.getFreelancer(id!);
     response.fold((l) => Get.snackbar("error", l), (freelancerMoel) {
       portfolios = freelancerMoel.potrfolio;
@@ -115,6 +115,7 @@ class FreelancerPortfolioControllerIm extends FreelancerPortfolioController {
         Get.snackbar("error", error);
         isloading.value = false;
       }, (portfolioModel) {
+        isloading.value == false;
         showdialog();
 
         // showMyDialog();
@@ -127,12 +128,13 @@ class FreelancerPortfolioControllerIm extends FreelancerPortfolioController {
         actions: [
           MyButton(
             onPressed: () {
-              isloading.value = false;
               title.clear();
               url.clear();
               description.clear();
               date = "xxxx/xx/xx  ";
 
+              images = [];
+              filemodel = [];
               fileIds = [];
               Get.back();
             },

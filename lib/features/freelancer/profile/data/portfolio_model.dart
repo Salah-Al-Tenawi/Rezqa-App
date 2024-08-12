@@ -15,7 +15,7 @@ class PortfolioModel {
   List<FileModel> files;
   List<ImageModle> images=[];
   List<SkilleModel> skills=[];
-  String likesCount;
+  int likesCount;
   String section;
   String viewsCount;
   String createdAt;
@@ -46,12 +46,12 @@ class PortfolioModel {
         url: data[ApiKey.url] ?? "",
         date: data[ApiKey.data] ?? "",
         description:data[ApiKey.description] ?? "",
-        files:FileModel.listFilesFromJson(data[ApiKey.fileIds])??[],
-        images: ImageModle.listImageModel(data[ApiKey.imageIds])??[],
-        skills: SkilleModel.listSkillesModel(data[ApiKey.skillsId])??[],
+        files:FileModel.listFilesFromJson(data[ApiKey.files]),
+        images: ImageModle.listImageModel(data[ApiKey.images]),
+        skills: SkilleModel.listSkillesModel(data[ApiKey.skills]),
         section: data[ApiKey.section] ?? "",
         createdAt: data[ApiKey.createdAt] ?? "",
-        likesCount: data[ApiKey.likesCount] ?? "",
+        likesCount: data[ApiKey.likesCount] ?? 0,
         updatedAt: data[ApiKey.updatedAt] ?? "",
         viewsCount:data[ApiKey.viewsCount] ?? "");
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:freelanc/features/freelancer/profile/controller/freelancer_profile_controller.dart';
 import 'package:freelanc/features/freelancer/profile/ui/widget/custom_appbar_profile_freelancer.dart';
 import 'package:freelanc/features/freelancer/profile/ui/widget/custom_details_profile_free.dart';
@@ -43,8 +42,6 @@ class VerfiyprofileFreelancer extends StatelessWidget {
           GoShowMyProtfolio(
             controllerIm: controllerIm,
           ),
-          
-         
         ],
       ),
     ));

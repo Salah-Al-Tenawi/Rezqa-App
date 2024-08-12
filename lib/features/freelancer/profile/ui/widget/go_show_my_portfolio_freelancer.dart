@@ -9,6 +9,7 @@ import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/widgets/my_button.dart';
 import 'package:freelanc/features/freelancer/profile/controller/freelancer_profile_controller.dart';
 import 'package:freelanc/features/freelancer/profile/ui/widget/name_with_icon_portfolio.dart';
+import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class GoShowMyProtfolio extends StatelessWidget {
@@ -21,43 +22,45 @@ class GoShowMyProtfolio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-        child: controllerIm.myServices.sharedpref
-                    .getString(KeyShardpref.roleuser) ==
-                "freelancer"
-            ? Column(
-                children: [
-                  NameWithIconPortfolio(
-                      name: "معرض الأعمال", icon: Icons.browse_gallery_sharp),
-                  MyButton(
-                    onPressed: () {
-                      controllerIm.gotoShowMyPortfolio();
-                    },
-                    child: Container(
-                      height: 300.h,
-                      width: 300.w,
-                      margin: EdgeInsets.symmetric(vertical: 40.h),
-                      decoration: BoxDecoration(
-                        color: MyColors.greyColor,
-                        boxShadow: [
-                          BoxShadow(
-                              blurRadius: 3,
-                              color: MyColors.blueColor,
-                              offset: const Offset(-10, 10)),
-                          BoxShadow(
-                              blurRadius: 3,
-                              color: MyColors.blueColor,
-                              offset: const Offset(10, -10))
-                        ],
-                      ),
-                      child: SvgPicture.asset(
-                        ImagesUrl.portfolio,
-                        fit: BoxFit.cover,
-                      ),
+        child: GetBuilder<FreeProfileControllerIm>(builder: (_) {
+      return controllerIm.myServices.sharedpref
+                  .getString(KeyShardpref.roleuser) ==
+              "freelancer"
+          ? Column(
+              children: [
+                NameWithIconPortfolio(
+                    name: "معرض الأعمال", icon: Icons.browse_gallery_sharp),
+                MyButton(
+                  onPressed: () {
+                    controllerIm.gotoShowMyPortfolio();
+                  },
+                  child: Container(
+                    height: 300.h,
+                    width: 300.w,
+                    margin: EdgeInsets.symmetric(vertical: 40.h),
+                    decoration: BoxDecoration(
+                      color: MyColors.greyColor,
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 3,
+                            color: MyColors.blueColor,
+                            offset: const Offset(-10, 10)),
+                        BoxShadow(
+                            blurRadius: 3,
+                            color: MyColors.blueColor,
+                            offset: const Offset(10, -10))
+                      ],
                     ),
-                    // Image.asset(ImagesUrl.imageSucssesVerfiy)
+                    child: SvgPicture.asset(
+                      ImagesUrl.portfolio,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ],
-              )
-            : const SizedBox());
+                  // Image.asset(ImagesUrl.imageSucssesVerfiy)
+                ),
+              ],
+            )
+          : const SizedBox();
+    }));
   }
 }

@@ -8,7 +8,7 @@ import 'package:freelanc/features/dashboard/controller/drawer_and_appbar_board_c
 // ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
   MyDrawerAndAppbarControllerIm controller;
-  MyDrawer({super.key , required this.controller});
+  MyDrawer({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class MyDrawer extends StatelessWidget {
                   title: "حذف حسابي",
                   padding: EdgeInsets.symmetric(horizontal: 15.w),
                   titleTextStyle: font15ggreyw600,
-                  // onTap: () => {controller.showDialogToDeletMyCompany()},
+                  onTap: () => {controller.showDialogToDeletMyCompany()},
                   trailing: Icon(
                     Icons.delete_outline,
                     color: MyColors.blueColor,
@@ -73,7 +73,7 @@ class MyDrawer extends StatelessWidget {
             title: "تسجيل الخروج",
             padding: EdgeInsets.symmetric(horizontal: 15.w),
             titleTextStyle: font15ggreyw600,
-            onTap: () => {controller.logOut()},
+            onTap: () => {controller.verFiyLogout()},
             trailing: Icon(
               Icons.login_outlined,
               color: MyColors.blueColor,

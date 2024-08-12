@@ -6,22 +6,26 @@ import 'package:freelanc/features/profiles/ui/widget/image_any_profile_company.d
 import 'package:freelanc/features/profiles/ui/widget/name_any_profile_company.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class AnyProfileCompany extends StatelessWidget {
-  const AnyProfileCompany({super.key});
+   AnyProfileControllerIm controllerIm = Get.put(AnyProfileControllerIm());
+   AnyProfileCompany({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AnyProfileControllerIm controllerIm = Get.put(AnyProfileControllerIm());
+   
     return Scaffold(
         body: RefreshIndicator(
-      onRefresh: () async {
-        await controllerIm.getcompany();
-      },
+      onRefresh: () async {},
       child: CustomScrollView(
         slivers: [
-          ImagesAnyProfileCompany(controllerIm:controllerIm ,),
-         NameAnyprofileCompany(controllerIm: controllerIm,),
-         DetailsAnyprofileCompany(controllerIm :controllerIm),
+          ImagesAnyProfileCompany(
+            controllerIm: controllerIm,
+          ),
+          NameAnyprofileCompany(
+            controllerIm: controllerIm,
+          ),
+          DetailsAnyprofileCompany(controllerIm: controllerIm),
           GallaryAnyprofileCompany(
             controllerIm: controllerIm,
           ),

@@ -24,28 +24,28 @@ abstract class MyDrawerAndAppbarController extends GetxController {
   jumpToPage(int index);
   myprofile();
   myOffers();
-  deletCompany();
+
   logOut();
   gotoMynotifications();
   verFiyLogout();
   gotoMYchat();
   showDialogToDeletMyCompany();
   deletMyCompany(String password);
-  
 }
 
 class MyDrawerAndAppbarControllerIm extends MyDrawerAndAppbarController {
   @override
   void onInit() {
     roleUser = myServices.sharedpref.getString(KeyShardpref.roleuser);
+    // MyServices myser = Get.find();
+    // myser.sharedpref.clear();
 
     super.onInit();
   }
 
   @override
   gotoMYchat() {
-    // TODO: implement gotoMYchat
-    throw UnimplementedError();
+    Get.toNamed(MyRoute.allCaht);
   }
 
   @override
@@ -82,9 +82,6 @@ class MyDrawerAndAppbarControllerIm extends MyDrawerAndAppbarController {
       // Get.toNamed(MyRoute.myprofileclient);
     }
   }
-
-  @override
-  deletCompany() async {}
 
   @override
   logOut() async {
@@ -179,5 +176,4 @@ class MyDrawerAndAppbarControllerIm extends MyDrawerAndAppbarController {
       Get.offAllNamed(MyRoute.login);
     });
   }
-  
 }

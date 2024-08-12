@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:freelanc/core/widgets/custom_dropdown.dart';
 import 'package:freelanc/features/freelancer/profile/controller/freelancer_profile_controller.dart';
+import 'package:freelanc/features/profiles/controller/any_profile_controlelr.dart';
 import 'package:get/get.dart';
 import 'package:file_picker/file_picker.dart';
 
@@ -25,42 +26,7 @@ class TestWidgets extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () async {
-                  controller.pickFiles();
-                  // FilePickerResult? result =
-                  //     await FilePicker.platform.pickFiles(allowMultiple: true);
-
-                  // if (result != null) {
-                  //   List<File> files =
-                  //       result.paths.map((path) => File(path!)).toList();
-                  //   print(files);
-                  // } else {
-                  //   // User canceled the picker
-                  // }
-                  Obx(() {
-                    return controller.files.isEmpty
-                        ? Expanded(
-                            child: ListView.builder(
-                              itemCount: controller.files.length,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  subtitle: Container(
-                                    color: Colors.deepOrange,
-                                    width: 100,
-                                    height: 200,
-                                  ),
-                                  title: Text(controller.files[index].path
-                                      .split('/')
-                                      .last),
-                                );
-                              },
-                            ),
-                          )
-                        : Container(
-                            width: 100,
-                            height: 200,
-                            color: Colors.red,
-                          );
-                  });
+                  controller.controller.getfreelancer(3);
                 },
                 icon: Icon(Icons.abc))
           ],
@@ -71,22 +37,7 @@ class TestWidgets extends StatelessWidget {
 }
 
 class TestController extends GetxController {
-  FreeProfileControllerIm freeProfileControllerIm =
-      Get.put(FreeProfileControllerIm());
-  String? selectedItems;
-  List<String> items = ["ali", "allll", "omer", "fesal"];
-  var files = <File>[].obs;
-
-  void pickFiles() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: true);
-
-    if (result != null) {
-      List<File> selectedFiles =
-          result.paths.map((path) => File(path!)).toList();
-      files.addAll(selectedFiles);
-    }
-  }
+  AnyProfileControllerIm controller = Get.put(AnyProfileControllerIm());
 
   // void addItem(String item) {
   //   if (!selectedItems.contains(item)) {

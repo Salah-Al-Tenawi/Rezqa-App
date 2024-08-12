@@ -7,9 +7,7 @@ class ImageModle {
   ImageModle({this.id, this.url});
   factory ImageModle.fromJson(Map<String, dynamic> json) {
     final data = json[ApiKey.data] ?? json;
-    return ImageModle(
-      
-        id: data['id'] ?? 0, url: data['url'] ?? "");
+    return ImageModle(id: data['id'] ?? 0, url: data['url'] ?? "");
   }
 
   Map<String, dynamic> toJson() => {
@@ -17,8 +15,10 @@ class ImageModle {
         'id': id,
       };
 
-  static List<ImageModle> ?listImageModel(List json) {
-    List<ImageModle> images = json.map((e) => ImageModle.fromJson(e)).toList();
+  static List<ImageModle> listImageModel(List json) {
+    List<ImageModle> images = [];
+
+    images = json.map((e) => ImageModle.fromJson(e)).toList();
     return images;
   }
 }

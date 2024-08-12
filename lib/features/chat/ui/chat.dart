@@ -37,6 +37,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freelanc/features/chat/controller/chat_controller.dart';
+import 'package:freelanc/features/chat/ui/widget/text_form_wiht_button_chat.dart';
 import 'package:get/get.dart';
 import 'package:freelanc/core/constant/imageurl.dart';
 import 'package:freelanc/core/themes/color_app.dart';
@@ -47,7 +48,7 @@ class Chat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ChatController controller = Get.put(ChatController());
+    final ChatControllerIm controller = Get.put(ChatControllerIm());
 
     return Scaffold(
       appBar: AppBar(
@@ -80,9 +81,7 @@ class Chat extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 10.0, horizontal: 20.0),
                       child: Align(
-                        alignment: index % 2 == 0
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
+                        alignment: Alignment.centerRight,
                         child: Column(
                           // crossAxisAlignment: index % 2 == 0 ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                           children: [
@@ -121,54 +120,14 @@ class Chat extends StatelessWidget {
                   },
                 )),
           ),
-          Obx(() => controller.replyMessage.value != null
-              ? Container(
-                  color: Colors.grey[200],
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'الرد على: ${controller.replyMessage.value}',
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontStyle: FontStyle.italic),
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.close, color: Colors.red),
-                        onPressed: () => controller.replyMessage.value = null,
-                      ),
-                    ],
-                  ),
-                )
-              : SizedBox.shrink()),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: controller.messagecontroller,
-                    decoration: InputDecoration(
-                      hintText: "اكتب رسالة...",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.send, color: MyColors.blueColor),
-                  onPressed: (){ 
-                    
-                    // controller.sendMessage
-                    }
-                    ,
-                ),
-              ],
-            ),
-          ),
+          TextFromWithBottomCaht(
+            messagecontroller: controller.messagecontroller,
+            onPressed: () {
+              if (controller.messagecontroller.text.isNotEmpty) {
+                controller.messages.add(controller.messagecontroller.text);
+              }
+            },
+          )
         ],
       ),
     );

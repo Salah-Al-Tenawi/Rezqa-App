@@ -26,6 +26,10 @@ import 'package:freelanc/features/freelancer/profile/ui/verfiy_profile_freelance
 import 'package:freelanc/features/onboarding/ui/onboarding.dart';
 import 'package:freelanc/features/company/profiles/ui/verfiy_profile_company.dart';
 import 'package:freelanc/features/company/profiles/ui/info_profile_company.dart';
+import 'package:freelanc/features/profiles/ui/any_profile_client.dart';
+import 'package:freelanc/features/profiles/ui/any_profile_company.dart';
+import 'package:freelanc/features/profiles/ui/any_profile_freelancer.dart';
+import 'package:freelanc/features/profiles/ui/show_any_portfolio.dart';
 import 'package:freelanc/testwidgets.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
@@ -74,14 +78,14 @@ class AppRoute {
         page: () => const VerfiyMyPfofileCompany(),
         binding: InfopProfilecompanyBinding()),
 
-    GetPage(
-        name: MyRoute.dashbord, page: () =>  DashBoard()),
+    GetPage(name: MyRoute.dashbord, page: () => DashBoard()),
 
     // client profile
     GetPage(
-        name: MyRoute.infoprofileclient,
-        page: () => const InfoProfileClient(),
-        binding: InfopProfileclientBinding()),
+      name: MyRoute.infoprofileclient,
+      page: () => InfoProfileClient(),
+      binding: InfopProfileclientBinding(),
+    ),
     GetPage(
         name: MyRoute.myprofileclient,
         page: () => const MyPfofileClient(),
@@ -98,19 +102,27 @@ class AppRoute {
         name: MyRoute.verfiymyprofileFreelancer,
         page: () => const VerfiyprofileFreelancer(),
         binding: InfopProfileFreelancerBinding()),
-    
- GetPage(
-        name: MyRoute.addportfolio,
-        page: () =>  AddPortfolio(),),
-GetPage(
-        name: MyRoute.showMyportfolio,
-        page: () =>  ShowMYPortfolio(),),
 
-        //chat  
-        GetPage(name: MyRoute.chat, page: ()=> const Chat()),
+
+    GetPage(
+      name: MyRoute.addportfolio,
+      page: () => AddPortfolio(),
+    ),
+    GetPage(
+      name: MyRoute.showMyportfolio,
+      page: () => ShowMYPortfolio(),
+    ), 
+    // any profile 
+    GetPage(name: MyRoute.anyProfileClient, page: ()=>  AnyProfileClient()),
+    GetPage(name: MyRoute.anyProfileCompany, page: ()=>AnyProfileCompany()),
+    GetPage(name: MyRoute.anyProfileFreelancer, page: ()=> AnyProfileFreelnacer()),
+    GetPage(name: MyRoute.showAnyportfolio, page: ()=> ShowAnyPortfolio()),
+
+    //chat
+    GetPage(name: MyRoute.chat, page: () => const Chat()),
 
     // test page
     GetPage(name: MyRoute.test, page: () => const TestWidgets()),
-    GetPage(name: MyRoute.allCaht, page:()=> const AllCaht())
+    GetPage(name: MyRoute.allCaht, page: () => const AllCaht())
   ];
 }

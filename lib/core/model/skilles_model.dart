@@ -14,9 +14,9 @@ class SkilleModel {
     return SkilleModel(name: json[ApiKey.name] ?? "", id: json[ApiKey.id] ?? 0);
   }
 
-  static List<SkilleModel> ?listSkillesModel(List json) {
-    List<SkilleModel>? skilles =
-        json.map((e) => SkilleModel.fromJson(e)).toList();
+  static List<SkilleModel> listSkillesModel(List json) {
+    List<SkilleModel> skilles = [];
+    skilles = json.map((e) => SkilleModel.fromJson(e)).toList();
     return skilles;
   }
 
@@ -27,8 +27,7 @@ class SkilleModel {
     };
   }
 
-
-   static List<Map<String, dynamic>>? skillesToJson(List<SkilleModel>? list) {
+  static List<Map<String, dynamic>>? skillesToJson(List<SkilleModel>? list) {
     List<Map<String, dynamic>>? listskilles;
     if (list != null) {
       listskilles = list.map((e) => e.toJson()).toList();

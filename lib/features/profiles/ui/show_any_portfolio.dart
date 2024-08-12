@@ -13,17 +13,17 @@ import 'package:freelanc/features/freelancer/profile/data/portfolio_model.dart';
 import 'package:freelanc/features/freelancer/profile/ui/widget/descrptions_protfolio.dart';
 import 'package:freelanc/features/freelancer/profile/ui/widget/files_for_project_protfolio.dart';
 import 'package:freelanc/features/freelancer/profile/ui/widget/name_with_icon_portfolio.dart';
-import 'package:freelanc/features/freelancer/profile/ui/widget/show_skilles_for_project_portfolio.dart';
+import 'package:freelanc/features/profiles/controller/any_profile_controlelr.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 // ignore: must_be_immutable
-class ShowMYPortfolio extends StatelessWidget {
-  FreelancerPortfolioControllerIm controllerIm =
-      Get.put(FreelancerPortfolioControllerIm());
+class ShowAnyPortfolio extends StatelessWidget {
+  AnyProfileControllerIm controllerIm =
+      Get.put(AnyProfileControllerIm());
   FreeProfileControllerIm controllerPro = Get.put(FreeProfileControllerIm());
 
-  ShowMYPortfolio({
+  ShowAnyPortfolio({
     super.key,
     // required this.freelancerPortfolioControllerIm,
   });
@@ -37,41 +37,11 @@ class ShowMYPortfolio extends StatelessWidget {
           children: [
             NameWithIconPortfolio(
                 name: "معرض الأعمال", icon: Icons.browse_gallery_sharp),
-            MyButton(
-                onPressed: () {
-                  controllerPro.gotoAddPortfolio();
-                },
-                child: Container(
-                  height: 60.h,
-                  width: 100.w,
-                  margin: EdgeInsets.symmetric(vertical: 40.h),
-                  decoration:
-                      BoxDecoration(color: MyColors.greyColor, boxShadow: [
-                    BoxShadow(
-                        blurRadius: 1,
-                        color: MyColors.blueColor,
-                        offset: const Offset(-10, 10))
-                  ]),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "أضف بعض الأعمال",
-                          style: font10blacknormal,
-                        ),
-                        Icon(
-                          Icons.add,
-                          color: MyColors.blueColor,
-                        )
-                      ],
-                    ),
-                  ),
-                )),
+           
           ],
         ),
-        FutureBuilder<List<PortfolioModel>> (
-            future: controllerIm.getAllPortfolio(),
+        FutureBuilder<List<PortfolioModel>>(
+            future: controllerIm.getPortfolios(1),
             // initialData: ,
             builder: (buildContext, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {

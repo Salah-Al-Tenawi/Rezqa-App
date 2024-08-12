@@ -36,16 +36,7 @@ class CustomFormProfileClient extends StatelessWidget {
                 ),
               ),
 
-              CustomTextformfild(
-                validator: (val) => inputvaild(val!, "username", 30, 2),
-                title: " المهنة أو العمل",
-                controller: controller.joptitle,
-                icon: Icon(
-                  Icons.work,
-                  color: MyColors.blackColor,
-                ),
-                keyboardType: TextInputType.name,
-              ),
+             
               CustomTextformfild(
                 validator: (val) => inputvaild(val!, "username", 30, 2),
                 title: "المدينة",
@@ -76,7 +67,7 @@ class CustomFormProfileClient extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 12.h,
+                height: 90.h,
               ),
 
               // Padding(

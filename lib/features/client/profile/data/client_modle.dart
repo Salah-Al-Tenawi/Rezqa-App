@@ -7,8 +7,8 @@ class ClientModel {
   String? gender;
   String? city;
   String? dateOfbirht;
-  String? profileImageId;
-  String? backgroundImageId;
+  int? profileImageId;
+  int? backgroundImageId;
   String? profileImageUrl;
   String? backgroundImageUrl;
 
@@ -30,34 +30,25 @@ class ClientModel {
     gender = json[ApiKey.data][ApiKey.gender] ?? "";
     city = json[ApiKey.data][ApiKey.city] ?? "";
     dateOfbirht = json[ApiKey.data][ApiKey.dataOfBirht] ?? "";
-    profileImageId = json[ApiKey.data][ApiKey.profileImageID] ?? "";
-    backgroundImageId = json[ApiKey.data][ApiKey.backgroundImageID] ?? "";
+    profileImageId = json[ApiKey.data][ApiKey.profileImageID] ?? 0;
+    backgroundImageId = json[ApiKey.data][ApiKey.backgroundImageID] ?? 0;
     profileImageUrl = json[ApiKey.data][ApiKey.profileimageUrl] ?? "";
     backgroundImageUrl = json[ApiKey.data][ApiKey.backgroundimageUrl] ?? "";
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
-      'profileImageUrl': profileImageUrl,
-      'backgroundImageUrl': backgroundImageUrl,
-      'profileImageId': profileImageId,
-      'backgroundImageId': backgroundImageId,
-      'username': username,
-      'city': city,
+      "data": {
+        'id': id,
+        'profileImageUrl': profileImageUrl,
+        'backgroundImageUrl': backgroundImageUrl,
+        'profileImageId': profileImageId,
+        'backgroundImageId': backgroundImageId,
+        'username': username,
+        'city': city,
+        "date_of_birth": dateOfbirht
+      }
     };
-  }
-
-  factory ClientModel.fromCash(Map<String, dynamic> json) {
-    return ClientModel(
-      id: json["id"],
-      profileImageUrl: json["profileImageUrl"],
-      backgroundImageUrl: json["backgroundImageUrl"],
-      profileImageId: json["profileImageId"],
-      backgroundImageId: json["backgroundImageId"],
-      username: json["username"],
-      city: json["city"],
-    );
   }
 }
 // {

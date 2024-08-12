@@ -23,6 +23,10 @@ abstract class ShardApiFuntions {
   );
   Future<Either<String, dynamic>> uploadFile(File file, String title);
   whoIam();
+
+  getFreelancer();
+  getClient();
+  getCompany();
 }
 
 class SharedApiFunctionIm extends ShardApiFuntions {
@@ -73,19 +77,34 @@ class SharedApiFunctionIm extends ShardApiFuntions {
     return user;
   }
 
-Future<Either<String, dynamic>> logout() async {
-  String ?token;
-  token = await getToken();
+  Future<Either<String, dynamic>> logout() async {
+    String? token;
+    token = await getToken();
     try {
-      final response = await api.post(ApiEndPoint.logout, header: {
-        ApiKey.authorization:token
-      });
+      final response = await api
+          .post(ApiEndPoint.logout, header: {ApiKey.authorization: token});
 
       return right(response);
     } on ServerExpcptions catch (e) {
       return left(e.errormodel.errormassagr.toString());
     }
   }
-
-
+  
+  @override
+  getClient() {
+    // TODO: implement getClient
+    throw UnimplementedError();
+  }
+  
+  @override
+  getCompany() {
+    // TODO: implement getCompany
+    throw UnimplementedError();
+  }
+  
+  @override
+  getFreelancer() {
+    // TODO: implement getFreelancer
+    throw UnimplementedError();
+  }
 }

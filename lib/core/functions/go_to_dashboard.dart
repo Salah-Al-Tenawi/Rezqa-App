@@ -13,8 +13,8 @@ gotoDashbord() {
     case "company":
       Get.offAllNamed(MyRoute.dashbord);
     case "freelancer":
-      Get.offAllNamed(MyRoute.dashBoardFreelancer);
+      Get.offAllNamed(MyRoute.dashbord);
     case "client":
-      Get.offAllNamed(MyRoute.dashBoardClint);
+      Get.offAllNamed(MyRoute.dashbord);
   }
 }
