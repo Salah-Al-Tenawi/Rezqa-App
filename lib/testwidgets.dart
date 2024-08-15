@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:freelanc/core/widgets/custom_dropdown.dart';
+import 'package:freelanc/features/chat/controller/chat_controller.dart';
 import 'package:freelanc/features/freelancer/profile/controller/freelancer_profile_controller.dart';
 import 'package:freelanc/features/profiles/controller/any_profile_controlelr.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,8 @@ class TestWidgets extends StatelessWidget {
           children: [
             IconButton(
                 onPressed: () async {
-                  controller.controller.getfreelancer(3);
+                  
+                  await controller.controller.createConversation(3);
                 },
                 icon: Icon(Icons.abc))
           ],
@@ -37,7 +39,8 @@ class TestWidgets extends StatelessWidget {
 }
 
 class TestController extends GetxController {
-  AnyProfileControllerIm controller = Get.put(AnyProfileControllerIm());
+  // AnyProfileControllerIm controller = Get.put(AnyProfileControllerIm());
+  ChatControllerIm controller = Get.put(ChatControllerIm());
 
   // void addItem(String item) {
   //   if (!selectedItems.contains(item)) {

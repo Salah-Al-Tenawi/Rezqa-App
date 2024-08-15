@@ -1,133 +1,66 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:freelanc/core/constant/imageurl.dart';
-// import 'package:freelanc/core/themes/color_app.dart';
-// import 'package:freelanc/core/themes/text_styles_app.dart';
-
-// class Chat extends StatelessWidget {
-//   const Chat({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         backgroundColor: MyColors.blueColor,
-//         actions: [
-//           SizedBox(
-//             width: 30.w,
-//           ),
-//           CircleAvatar(
-//             backgroundColor: MyColors.greyColor,
-//             child: Image.asset(ImagesUrl.imagetest),
-//           ),
-//           SizedBox(
-//             width: 30.w,
-//           ),
-//           Text(
-//             "salah al tenawi",
-//             style: font17greynormal,
-//           ),
-//           const Spacer(),
-//         ],
-//       ),
-//       body: ListView(),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:freelanc/features/chat/controller/chat_controller.dart';
-import 'package:freelanc/features/chat/ui/widget/text_form_wiht_button_chat.dart';
-import 'package:get/get.dart';
 import 'package:freelanc/core/constant/imageurl.dart';
+import 'package:freelanc/core/functions/show_full_image.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
+import 'package:freelanc/core/widgets/my_button.dart';
+import 'package:freelanc/features/chat/controller/chat_controller.dart';
+import 'package:freelanc/features/chat/data/paticipants_model.dart';
+import 'package:freelanc/features/chat/ui/widget/body_chat.dart';
+import 'package:freelanc/features/chat/ui/widget/chat_appbar.dart';
+import 'package:freelanc/features/chat/ui/widget/text_form_wiht_button_chat.dart';
+import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class Chat extends StatelessWidget {
-  const Chat({super.key});
+  String? urlImage;
+  List<ParticipantsModel>? users;
+  String? name;
+  Chat({super.key});
 
   @override
   Widget build(BuildContext context) {
     final ChatControllerIm controller = Get.put(ChatControllerIm());
+    users = controller.converSationModel?.participants;
+    print("==============================================");
+    print(users![0].userId);
+    print("==============================================");
+    urlImage = users![0].userId == controller.myid
+        ? users![1].profileImageUrl
+        : users![0].profileImageUrl;
+    name = users![0].userId == controller.myid
+        ? users![1].username
+        : users![0].username!;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: MyColors.blueColor,
-        actions: [
-          SizedBox(
-            width: 30.w,
-          ),
-          CircleAvatar(
-            backgroundColor: MyColors.greyColor,
-            child: Image.asset(ImagesUrl.imagetest),
-          ),
-          SizedBox(
-            width: 30.w,
-          ),
-          Text(
-            "salah al tenawi",
-            style: font17greynormal,
-          ),
-          const Spacer(),
-        ],
-      ),
+      appBar:
+      AppBarChat(
+          controller: controller,
+        ),
       body: Column(
         children: [
-          Expanded(
-            child: Obx(() => ListView.builder(
-                  itemCount: controller.messages.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 20.0),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Column(
-                          // crossAxisAlignment: index % 2 == 0 ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-                          children: [
-                            if (controller.messages[index]['reply']!.isNotEmpty)
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.grey[300],
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                padding: const EdgeInsets.all(8.0),
-                                margin: const EdgeInsets.only(bottom: 5.0),
-                                child: Text(
-                                  controller.messages[index]['reply']!,
-                                  style: const TextStyle(
-                                      color: Colors.black54,
-                                      fontStyle: FontStyle.italic),
-                                ),
-                              ),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: index % 2 == 0
-                                    ? MyColors.blueColor
-                                    : MyColors.greyColor,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                controller.messages[index]['message']!,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                )),
+          ChatBody(
+            controller: controller,
           ),
           TextFromWithBottomCaht(
             messagecontroller: controller.messagecontroller,
             onPressed: () {
               if (controller.messagecontroller.text.isNotEmpty) {
-                controller.messages.add(controller.messagecontroller.text);
+                controller.sendMessage(controller.converSationModel!.id!,
+                    controller.messagecontroller.text);
+                controller.scrollToBottom();
+                controller.messagecontroller.clear();
               }
             },
-          )
+          ),
+          MyButton(
+              onPressed: () async {
+                // print(controller.converSationModel!.id);
+                await controller.getMessage(controller.converSationModel!.id!);
+                
+              },
+              child: const Text("getmessages"))
         ],
       ),
     );

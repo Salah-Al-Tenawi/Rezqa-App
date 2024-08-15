@@ -98,7 +98,7 @@ class MyDrawerAndAppbarControllerIm extends MyDrawerAndAppbarController {
   verFiyLogout() {
     Get.defaultDialog(
         title: "تسجيل خروج",
-        content: Text("هل تريد تسجيل الخروج من حسابك"),
+        content: const Text("هل تريد تسجيل الخروج من حسابك"),
         actions: [
           MyButton(
               onPressed: () async {

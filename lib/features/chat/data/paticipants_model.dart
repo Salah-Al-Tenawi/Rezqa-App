@@ -1,73 +1,40 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:freelanc/core/api/api_end_points.dart';
-import 'package:freelanc/features/chat/data/paticipants_model.dart';
 
-class ConverSationModel {
-  int? id;
-  List<ParticipantsModel>? participants;
-  ConverSationModel({
-    required this.id,
-    this.participants,
+class ParticipantsModel {
+  int userId;
+  String? username;
+  String firstname;
+  String lastname;
+  String? profileImageUrl;
+  bool online;
+  ParticipantsModel({
+    required this.userId,
+    required this.firstname,
+    required this.lastname,
+    required this.online,
+    this.username,
+    this.profileImageUrl,
   });
-
-  factory ConverSationModel.fromJson(Map<String, dynamic> json) {
-    return ConverSationModel(
-        id: json[ApiKey.conversationId] ?? 0,
-        participants: listParticaipants(json));
+  factory ParticipantsModel.fromJson(Map<String, dynamic> json) {
+    String firstname = json[ApiKey.firstname] ?? '';
+    String lastname = json[ApiKey.lastname] ?? '';
+    return ParticipantsModel(
+        userId: json[ApiKey.id] ?? 0,
+        firstname: json[ApiKey.firstname] ?? '',
+        lastname: json[ApiKey.lastname] ?? '',
+        online: json[ApiKey.online] ?? false,
+        username: '$firstname $lastname',
+        profileImageUrl: json[ApiKey.image]);
   }
-  static List<ParticipantsModel> listParticaipants(Map<String, dynamic> json) {
-    List<ParticipantsModel> participants = [];
-    List list = json[ApiKey.participants];
-    participants = list.map((e) => ParticipantsModel.fromJson(e)).toList();
-    return participants;
-  }
-
-//     "data": [
-//         {
-//             "id": 3,
-//             "participant": {
-//                 "id": 1,
-//                 "name": "client client",
-//                 "avatar": null
-//             },
-//             "last_message": {
-//                 "message": "هااااااااااااااي",
-//                 "created_at": "2024-08-15T15:27:48+03:00"
-//             },
-//             "created_at": "2024-08-15T15:20:29+03:00",
-//             "updated_at": "2024-08-15T15:20:29+03:00"
-//         }
-//     ]
-// }
-
-  
-
-
-
-
-
-
-
-
-
-
-// {
-//     "data": [
-//         {
-//             "id": 1,
-//             "created_at": "2021-01-01T00:00:00.000000Z",
-//             "updated_at": "2021-01-01T00:00:00.000000Z"
-//         },
-  //
-//     ]
-// }
-
-  // String? name;
-  // String? imgeurl;
 }
 
-// {
+
+
+
+
+  
 // "message": "Conversation created successfully",
 // "conversation_id": 2,
 // "participants": [

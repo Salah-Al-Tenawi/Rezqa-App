@@ -117,6 +117,14 @@ class ApiKey {
 
   static String userId = "user_id";
   static String message = "message";
+  static String conversationId = "conversation_id";
+  static String participants = "participants";
+  static String participant = "participant";
+  static String lastMessage = "last_message";
+  static String avatar = "avatar";
+
+  static String online = "online";
+
   // conacted
 
   static String massage = "message";

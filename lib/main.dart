@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
           title: "freelancer projectes with get x",
           getPages: appRoute.list,
-          initialRoute: MyRoute.chat,
+          initialRoute: MyRoute.onboarding,
           initialBinding: ChatBindings(),
           debugShowCheckedModeBanner: false,
           textDirection: TextDirection.rtl,

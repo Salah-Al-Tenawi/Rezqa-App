@@ -70,30 +70,30 @@ class ShowMYPortfolio extends StatelessWidget {
                 )),
           ],
         ),
-        FutureBuilder<List<PortfolioModel>> (
-            future: controllerIm.getAllPortfolio(),
-            // initialData: ,
-            builder: (buildContext, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: Lottie.asset(ImagesUrl.loadingLottie2));
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              }
-               else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(
-                    child: Text(
-                  'لا يوجد أعمال',
-                ));
-              }
-              else {
-                print("===========================else${snapshot.data}");
-                return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (buildContext, index) {
-                      final portfolio = snapshot.data![index];
+        // FutureBuilder<List<PortfolioModel>> (
+        //     future: controllerIm.getAllPortfolio(),
+        //     // initialData: ,
+        //     builder: (buildContext, snapshot) {
+        //       if (snapshot.connectionState == ConnectionState.waiting) {
+        //         return Center(child: Lottie.asset(ImagesUrl.loadingLottie2));
+        //       } else if (snapshot.hasError) {
+        //         return Center(child: Text('Error: ${snapshot.error}'));
+        //       }
+        //        else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        //         return const Center(
+        //             child: Text(
+        //           'لا يوجد أعمال',
+        //         ));
+        //       }
+        //       else {
+        //         print("===========================else${snapshot.data}");
+        //         return ListView.builder(
+        //             itemCount: snapshot.data!.length,
+        //             itemBuilder: (buildContext, index) {
+        //               final portfolio = snapshot.data![index];
 
-                      return Text(portfolio.title);
-                      //                   Column(
+        //               return Text(portfolio.title);
+        //               //                   Column(
                       //                     children: [
                       //                       const Divider(
                       //                         endIndent: 20,
@@ -163,9 +163,9 @@ class ShowMYPortfolio extends StatelessWidget {
                       //                       )
                       //                     ],
                       //                   );
-                    });
-              }
-            }),
+                    // });
+              // }
+            // }),
       ],
     )
 

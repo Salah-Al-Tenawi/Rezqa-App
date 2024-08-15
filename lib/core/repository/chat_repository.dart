@@ -1,28 +1,32 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:freelanc/core/api/api_end_points.dart';
 import 'package:freelanc/core/api/dio_consumer.dart';
 import 'package:freelanc/core/errors/excptions.dart';
 import 'package:freelanc/core/functions/get_token.dart';
-import 'package:freelanc/features/chat/data/message_model.dart';
+import 'package:freelanc/features/chat/data/all_chat_model.dart';
+import 'package:freelanc/features/chat/data/conversation_modle.dart';
+import 'package:freelanc/features/chat/data/meassgeModle.dart';
 
 abstract class ChatRepo {
   DioConSumer api = DioConSumer();
+  // edit
   creatConversation(int userId);
   sendmessage(int idConversation, String message);
-  getmeassge(int idConversation);
+    getmeassges(int idConversation);
+  // edit
+
   getallConversation();
 }
 
 class ChatRepoIm extends ChatRepo {
   @override
-  Future<Either<String, dynamic>> creatConversation(int userId) async {
+  Future<Either<String, ConverSationModel>> creatConversation(int userId) async {
     String? token = await getToken();
     try {
       final response = await api.post(ApiEndPoint.conversations,
           header: {ApiKey.authorization: token}, data: {ApiKey.userId: userId});
 
-      return right(response);
+      return right(ConverSationModel.fromJson(response));
     } on ServerExpcptions catch (e) {
       return left(e.errormodel.errormassagr.toString());
     }
@@ -44,27 +48,27 @@ class ChatRepoIm extends ChatRepo {
   }
 
   @override
-  Future<Either<String, MessageModel>> getmeassge(int idConversation) async {
+  Future<Either<String, List<MessageModel>>> getmeassges(
+      int idConversation) async {
     String? token = await getToken();
     try {
       final response = await api.get(
           "${ApiEndPoint.conversations}/$idConversation/${ApiEndPoint.messages}",
           header: {ApiKey.authorization: token});
 
-      return right(MessageModel.fromJson(response));
+      return right(MessageModel.messages(response));
     } on ServerExpcptions catch (e) {
       return left(e.errormodel.errormassagr.toString());
     }
   }
 
   @override
-  Future<Either<String, dynamic>> getallConversation() async {
+  Future<Either<String, List<ChatModel>>> getallConversation() async {
     String? token = await getToken();
     try {
-      final response = await api.get(ApiEndPoint.conversations ,header: { 
-        ApiKey.authorization:token
-      });
-      return right(response);
+      final response = await api.get(ApiEndPoint.conversations,
+          header: {ApiKey.authorization: token});
+      return right(ChatModel.listChatModel(response));
     } on ServerExpcptions catch (e) {
       return left(e.errormodel.errormassagr.toString());
     }

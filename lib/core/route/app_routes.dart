@@ -119,7 +119,7 @@ class AppRoute {
     GetPage(name: MyRoute.showAnyportfolio, page: ()=> ShowAnyPortfolio()),
 
     //chat
-    GetPage(name: MyRoute.chat, page: () => const Chat()),
+    GetPage(name: MyRoute.chat, page: () =>  Chat()),
 
     // test page
     GetPage(name: MyRoute.test, page: () => const TestWidgets()),

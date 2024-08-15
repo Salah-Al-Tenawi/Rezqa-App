@@ -143,7 +143,7 @@ class FreelancerPortfolioControllerIm extends FreelancerPortfolioController {
           ),
           MyButton(
             onPressed: () {
-              Get.toNamed(MyRoute.showMyportfolio);
+              Get.toNamed(MyRoute.dashbord);
             },
             child: Text("التالي "),
             color: MyColors.blueColor,
