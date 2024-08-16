@@ -10,8 +10,8 @@ import 'package:get/get.dart';
 
 abstract class LoginController extends GetxController {
   // ignore: prefer_final_fields
-  SinginGoogleController _singinGoogleController =
-      Get.put(SinginGoogleController());
+  // SinginGoogleController _singinGoogleController =
+  //     Get.put(SinginGoogleController());
   late TextEditingController email;
   late TextEditingController password;
   late GlobalKey<FormState> formkey = GlobalKey<FormState>();
@@ -92,6 +92,6 @@ class LoginControllerIm extends LoginController {
 
   @override
   loginwithgoogle() {
-    _singinGoogleController.login();
+    // _singinGoogleController.login();
   }
 }
