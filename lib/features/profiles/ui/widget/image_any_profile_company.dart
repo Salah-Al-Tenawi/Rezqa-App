@@ -23,7 +23,8 @@ class ImagesAnyProfileCompany extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              if (controllerIm.companyModel?.backgroundImageUrl != null) {
+              if (controllerIm.companyModel?.backgroundImageUrl != null &&
+                  controllerIm.companyModel?.backgroundImageUrl != "") {
                 showFullImage(controllerIm.companyModel!.backgroundImageUrl!);
               }
             },
@@ -35,7 +36,8 @@ class ImagesAnyProfileCompany extends StatelessWidget {
                     return SizedBox(
                         width: double.infinity,
                         child: controllerIm.companyModel?.backgroundImageUrl ==
-                                null
+                                null || controllerIm.companyModel?.backgroundImageUrl ==
+                                ""
                             ? Image.asset(
                                 ImagesUrl.imagetest,
                                 fit: BoxFit.cover,
@@ -52,7 +54,7 @@ class ImagesAnyProfileCompany extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
               child: GestureDetector(onTap: () {
-                if (controllerIm.companyModel?.profileImageUrl != null) {
+                if (controllerIm.companyModel?.profileImageUrl != null  && controllerIm.companyModel?.profileImageUrl != "" ) {
                   showFullImage(controllerIm.companyModel!.profileImageUrl!);
                 }
               }, child: GetBuilder<AnyProfileControllerIm>(builder: (_) {
@@ -60,7 +62,8 @@ class ImagesAnyProfileCompany extends StatelessWidget {
                   backgroundColor: MyColors.blueColor,
                   radius: 90,
                   backgroundImage: controllerIm.companyModel?.profileImageUrl ==
-                          null
+                          null ||  controllerIm.companyModel?.profileImageUrl ==
+                          "" 
                       ? const AssetImage(ImagesUrl.imagetest) as ImageProvider
                       : NetworkImage(
                               controllerIm.companyModel!.profileImageUrl!)

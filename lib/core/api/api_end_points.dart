@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 
 class ApiEndPoint {
-  static String basrurl = "https://freelancer-l1w8.onrender.com/api/";
+  static String basrurl = "http://192.168.84.45:8000/api/";
 
   // storage
 

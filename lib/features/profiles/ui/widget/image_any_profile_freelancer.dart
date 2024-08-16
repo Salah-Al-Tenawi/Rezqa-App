@@ -23,8 +23,10 @@ class ImagesAnyProfileFreelancer extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              if (controllerIm.freelancerModel?.backgroundImageUrl != null) {
-                showFullImage(controllerIm.freelancerModel!.backgroundImageUrl!);
+              if (controllerIm.freelancerModel?.backgroundImageUrl != null &&
+                  controllerIm.freelancerModel?.backgroundImageUrl != "") {
+                showFullImage(
+                    controllerIm.freelancerModel!.backgroundImageUrl!);
               }
             },
             child: SizedBox(
@@ -34,16 +36,21 @@ class ImagesAnyProfileFreelancer extends StatelessWidget {
                   builder: (_) {
                     return SizedBox(
                         width: double.infinity,
-                        child: controllerIm.freelancerModel?.backgroundImageUrl ==
-                                null
-                            ? Image.asset(
-                                ImagesUrl.imagetest,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.network(
-                                controllerIm.freelancerModel!.backgroundImageUrl!,
-                                fit: BoxFit.cover,
-                              ));
+                        child:
+                            controllerIm.freelancerModel?.backgroundImageUrl ==
+                                        null ||
+                                    controllerIm.freelancerModel
+                                            ?.backgroundImageUrl ==
+                                        ""
+                                ? Image.asset(
+                                    ImagesUrl.imagetest,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.network(
+                                    controllerIm
+                                        .freelancerModel!.backgroundImageUrl!,
+                                    fit: BoxFit.cover,
+                                  ));
                   },
                 )),
           ),
@@ -52,15 +59,18 @@ class ImagesAnyProfileFreelancer extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
               child: GestureDetector(onTap: () {
-                if (controllerIm.freelancerModel?.profileImageUrl != null) {
+                if (controllerIm.freelancerModel?.profileImageUrl != null &&
+                    controllerIm.freelancerModel?.profileImageUrl != "") {
                   showFullImage(controllerIm.freelancerModel!.profileImageUrl!);
                 }
               }, child: GetBuilder<AnyProfileControllerIm>(builder: (_) {
                 return CircleAvatar(
                   backgroundColor: MyColors.blueColor,
                   radius: 90,
-                  backgroundImage: controllerIm.freelancerModel?.profileImageUrl ==
-                          null
+                  backgroundImage: controllerIm
+                                  .freelancerModel?.profileImageUrl ==
+                              null ||
+                          controllerIm.freelancerModel?.profileImageUrl == ""
                       ? const AssetImage(ImagesUrl.imagetest) as ImageProvider
                       : NetworkImage(
                               controllerIm.freelancerModel!.profileImageUrl!)

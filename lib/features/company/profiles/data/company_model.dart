@@ -6,8 +6,8 @@ class CompanyModel {
   int? id;
   String? profileImageUrl;
   String? backgroundImageUrl;
-  String? profileImageId;
-  String? backgroundImageId;
+  int? profileImageId;
+  int? backgroundImageId;
   String? namecompany;
   String? username;
   String? descreption;

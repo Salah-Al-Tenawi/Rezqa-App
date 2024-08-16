@@ -24,14 +24,19 @@ class ImagesAnyProfileClient extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              showFullImage(controllerIm.clientModel!.backgroundImageUrl ?? "");
+              if (controllerIm.clientModel!.backgroundImageUrl != null &&
+                  controllerIm.clientModel!.backgroundImageUrl != "") {
+                showFullImage(controllerIm.clientModel!.backgroundImageUrl!);
+              }
             },
             child: SizedBox(
                 width: double.infinity,
                 height: 250.h,
                 child: SizedBox(
                     width: double.infinity,
-                    child: controllerIm.clientModel!.backgroundImageUrl == null
+                    child: controllerIm.clientModel!.backgroundImageUrl ==
+                                null ||
+                            controllerIm.clientModel!.backgroundImageUrl == ""
                         ? Image.asset(
                             ImagesUrl.imagetest,
                             fit: BoxFit.cover,
@@ -47,14 +52,17 @@ class ImagesAnyProfileClient extends StatelessWidget {
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
               child: GestureDetector(
                   onTap: () {
-                    showFullImage(
-                        controllerIm.clientModel!.profileImageUrl ?? "");
+                    if (controllerIm.clientModel!.profileImageUrl != null &&
+                        controllerIm.clientModel!.profileImageUrl != "") {
+                      showFullImage(controllerIm.clientModel!.profileImageUrl!);
+                    }
                   },
                   child: CircleAvatar(
                     backgroundColor: MyColors.blueColor,
                     radius: 90,
                     backgroundImage:
-                        controllerIm.clientModel!.profileImageUrl == null
+                        controllerIm.clientModel!.profileImageUrl == null ||
+                                controllerIm.clientModel!.profileImageUrl == ""
                             ? const AssetImage(ImagesUrl.imagetest)
                                 as ImageProvider
                             : NetworkImage(

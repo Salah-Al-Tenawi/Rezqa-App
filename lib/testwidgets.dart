@@ -28,7 +28,7 @@ class TestWidgets extends StatelessWidget {
             IconButton(
                 onPressed: () async {
                   
-                  await controller.controller.createConversation(3);
+                  await controller.controller.getClient(1);
                 },
                 icon: Icon(Icons.abc))
           ],
@@ -39,8 +39,8 @@ class TestWidgets extends StatelessWidget {
 }
 
 class TestController extends GetxController {
-  // AnyProfileControllerIm controller = Get.put(AnyProfileControllerIm());
-  ChatControllerIm controller = Get.put(ChatControllerIm());
+  AnyProfileControllerIm controller = Get.put(AnyProfileControllerIm());
+  // ChatControllerIm controller = Get.put(ChatControllerIm());
 
   // void addItem(String item) {
   //   if (!selectedItems.contains(item)) {

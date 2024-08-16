@@ -7,6 +7,7 @@ import 'package:freelanc/features/profiles/ui/widget/details_any_profile_client.
 import 'package:freelanc/features/profiles/ui/widget/images_any_profile_client.dart';
 import 'package:get/get.dart';
 
+// ignore: must_be_immutable
 class AnyProfileClient extends StatelessWidget {
   AnyProfileControllerIm controllerIm = Get.put(AnyProfileControllerIm());
   AnyProfileClient({super.key});

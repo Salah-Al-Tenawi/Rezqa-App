@@ -9,7 +9,6 @@ import 'package:freelanc/features/chat/data/conversation_modle.dart';
 import 'package:freelanc/features/chat/data/meassgeModle.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 // import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 abstract class ChatController extends GetxController {
@@ -60,7 +59,6 @@ class ChatControllerIm extends ChatController {
 
   @override
   void scrollToBottom() {
-    // Function to scroll to the bottom of the ListView
     if (scrollController.hasClients) {
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
