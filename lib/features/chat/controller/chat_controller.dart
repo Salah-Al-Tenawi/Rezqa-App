@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:freelanc/core/constant/key_shared.dart';
 import 'package:freelanc/core/repository/chat_repository.dart';
 import 'package:freelanc/core/route/routes.dart';
@@ -32,11 +34,28 @@ class ChatControllerIm extends ChatController {
 
   bool? isSender;
   int? myid;
-
+  Timer? timer;
   @override
   void onInit() async {
     myid = myServices.sharedpref.getInt(KeyShardpref.roleID);
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+
+    timer = Timer.periodic(const Duration(seconds: 7), (Timer t) {
+      if (converSationModel != null) {
+        getMessage(converSationModel!.id!);
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    timer?.cancel();
+    super.onClose();
   }
 
   @override

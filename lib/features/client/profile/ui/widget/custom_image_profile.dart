@@ -23,59 +23,62 @@ class CustomImageprofileClient extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Stack(
         children: [
-          // GestureDetector(
-          //   onTap: () {
-          //     showFullImage(controllerIm.backgroundImageUrl ?? "");
-          //   },
-          //   onLongPress: () {
-          //     Get.bottomSheet(Container(
-          //       width: double.infinity,
-          //       height: 200.h,
-          //       color: MyColors.greyColor,
-          //       child: Column(
-          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //         children: [
-          //           Text(
-          //             "المعرض",
-          //             style: font23boldblack,
-          //           ),
-          //           MyButton(
-          //               onPressed: () {
-          //                 controllerIm.addImageback();
-
-          //               },
-          //               width: 100,
-          //               height: 100,
-          //               borderRadius: true,
-          //               color: MyColors.blueColor,
-          //               child: Icon(
-          //                 Icons.image,
-          //                 color: MyColors.greyColor,
-          //                 size: 50.sp,
-          //               )),
-          //         ],
-          //       ),
-          //     ));
-          //   },
-          //   child: SizedBox(
-          //       width: double.infinity,
-          //       height: 250.h,
-          //       child: GetBuilder<ClientProfileControllerIm>(
-          //         builder: (_) {
-          //           return SizedBox(
-          //               width: double.infinity,
-          //               child: controllerIm.backgroundImageUrl == null
-          //                   ? Image.asset(
-          //                       ImagesUrl.imagetest,
-          //                       fit: BoxFit.cover,
-          //                     )
-          //                   : Image.network(
-          //                       controllerIm.backgroundImageUrl!,
-          //                       fit: BoxFit.cover,
-          //                     ));
-          //         },
-          //       )),
-          // ),
+          GestureDetector(
+            onTap: () {
+              if (controllerIm.backgroundImageUrl != null &&
+                  controllerIm.backgroundImageUrl != "") {
+                showFullImage(controllerIm.backgroundImageUrl!);
+              }
+            },
+            onLongPress: () {
+              Get.bottomSheet(Container(
+                width: double.infinity,
+                height: 200.h,
+                color: MyColors.greyColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      "المعرض",
+                      style: font23boldblack,
+                    ),
+                    MyButton(
+                        onPressed: () {
+                          controllerIm.addImageback();
+                        },
+                        width: 100,
+                        height: 100,
+                        borderRadius: true,
+                        color: MyColors.blueColor,
+                        child: Icon(
+                          Icons.image,
+                          color: MyColors.greyColor,
+                          size: 50.sp,
+                        )),
+                  ],
+                ),
+              ));
+            },
+            child: SizedBox(
+                width: double.infinity,
+                height: 250.h,
+                child: GetBuilder<ClientProfileControllerIm>(
+                  builder: (_) {
+                    return SizedBox(
+                        width: double.infinity,
+                        child: controllerIm.backgroundImageUrl == null ||
+                                controllerIm.backgroundImageUrl == ""
+                            ? Image.asset(
+                                ImagesUrl.imagetest,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.network(
+                                controllerIm.backgroundImageUrl!,
+                                fit: BoxFit.cover,
+                              ));
+                  },
+                )),
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -109,14 +112,16 @@ class CustomImageprofileClient extends StatelessWidget {
                   ),
                 ));
               }, onTap: () {
-                if (controllerIm.profileImgeUrl != null) {
+                if (controllerIm.profileImgeUrl != null &&
+                    controllerIm.profileImgeUrl != "") {
                   showFullImage(controllerIm.profileImgeUrl!);
                 }
               }, child: GetBuilder<ClientProfileControllerIm>(builder: (_) {
                 return CircleAvatar(
                   backgroundColor: MyColors.blueColor,
                   radius: 90,
-                  backgroundImage: controllerIm.profileImgeUrl == null
+                  backgroundImage: controllerIm.profileImgeUrl == null ||
+                          controllerIm.profileImgeUrl == ""
                       ? const AssetImage(ImagesUrl.imagetest) as ImageProvider
                       : NetworkImage(controllerIm.profileImgeUrl!)
                           as ImageProvider,

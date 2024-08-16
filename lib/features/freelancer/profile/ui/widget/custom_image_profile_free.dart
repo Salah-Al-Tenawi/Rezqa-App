@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:freelanc/core/constant/imageurl.dart';
 import 'package:freelanc/core/functions/show_full_image.dart';
 import 'package:freelanc/core/themes/color_app.dart';
-import 'package:freelanc/features/company/profiles/controller/_info_comapny_profile_controller.dart';
 import 'package:freelanc/features/freelancer/profile/controller/freelancer_profile_controller.dart';
 import 'package:get/get.dart';
 
@@ -24,7 +23,8 @@ class CustomimageprofileFree extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              if (controllerIm.backgroundImageUrl != null) {
+              if (controllerIm.backgroundImageUrl != null &&
+                  controllerIm.backgroundImageUrl != "") {
                 showFullImage(controllerIm.backgroundImageUrl!);
               }
             },
@@ -38,7 +38,8 @@ class CustomimageprofileFree extends StatelessWidget {
                   builder: (_) {
                     return SizedBox(
                         width: double.infinity,
-                        child: controllerIm.backgroundImageUrl == null
+                        child: controllerIm.backgroundImageUrl == null ||
+                                controllerIm.backgroundImageUrl == ""
                             ? Image.asset(
                                 ImagesUrl.imagetest,
                                 fit: BoxFit.cover,
@@ -55,7 +56,8 @@ class CustomimageprofileFree extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(top: 125.h, bottom: 10.h),
               child: GestureDetector(onTap: () {
-                if (controllerIm.profileImageUrl != null) {
+                if (controllerIm.profileImageUrl != null &&
+                    controllerIm.profileImageUrl != "") {
                   showFullImage(controllerIm.profileImageUrl!);
                 }
               }, onLongPress: () {
@@ -64,7 +66,8 @@ class CustomimageprofileFree extends StatelessWidget {
                 return CircleAvatar(
                   backgroundColor: MyColors.blueColor,
                   radius: 90,
-                  backgroundImage: controllerIm.profileImageUrl == null
+                  backgroundImage: controllerIm.profileImageUrl == null ||
+                          controllerIm.profileImageUrl == ""
                       ? const AssetImage(ImagesUrl.imagetest) as ImageProvider
                       : NetworkImage(controllerIm.profileImageUrl!)
                           as ImageProvider,

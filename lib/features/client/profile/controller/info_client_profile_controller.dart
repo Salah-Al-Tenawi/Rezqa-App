@@ -176,7 +176,6 @@ class ClientProfileControllerIm extends ClientProfileController {
 
   @override
   getClientFromCash() async {
-   
     String? json = myServices.sharedpref.getString(KeyShardpref.clientJson);
     if (json != null) {
       var mapjson = await jsonDecode(json);

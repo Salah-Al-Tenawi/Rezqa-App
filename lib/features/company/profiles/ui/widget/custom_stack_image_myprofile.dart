@@ -27,7 +27,7 @@ class Customimageprofile extends StatelessWidget {
           GestureDetector( 
             
             onTap: () {
-              if (controllerIm.imagebackUrl != null) {
+              if (controllerIm.imagebackUrl != null && controllerIm.imagebackUrl != "" ) {
                 controllerIm.showFullImage(controllerIm.imagebackUrl!);
               }
             },
@@ -68,7 +68,7 @@ class Customimageprofile extends StatelessWidget {
                   builder: (_) {
                     return SizedBox(
                         width: double.infinity,
-                        child: controllerIm.imagebackUrl == null
+                        child: controllerIm.imagebackUrl == null || controllerIm.imagebackUrl == ""
                             ? Image.asset(
                                 ImagesUrl.imagetest,
                                 fit: BoxFit.cover,
@@ -121,7 +121,7 @@ class Customimageprofile extends StatelessWidget {
                 return CircleAvatar(
                   backgroundColor: MyColors.blueColor,
                   radius: 90,
-                  backgroundImage: controllerIm.imagefrontUrl == null
+                  backgroundImage: controllerIm.imagefrontUrl == null || controllerIm.imagefrontUrl == "" 
                       ? const AssetImage(ImagesUrl.imagetest) as ImageProvider
                       : NetworkImage(controllerIm.imagefrontUrl!)
                           as ImageProvider,

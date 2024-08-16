@@ -13,7 +13,7 @@ class ImagesUrl {
   static const String imageforgetpass = "$imageroot/forgetpassword.png";
   static const String imageRepassowrd = "$imageroot/repassword.png";
   static const String imageSucssesVerfiy = "$imageroot/sucsses.png";
-  static const String imagetest = "$imageroot/test.png";
+  static const String imagetest = "$imageroot/profiles.jpg";
   static const String imagegoogle = "$imageroot/google.png";
 
   // lottie images
@@ -24,9 +24,7 @@ class ImagesUrl {
   // svgs images
   static String imageRootSvgs = "assets/svgs";
   static String loginSvg = "$imageRootSvgs/undraw_login_re_4vu2.svg";
-   static String forgetpasswordSvg = "$imageRootSvgs/undraw_forgot_password_re_hxwm.svg";
-static String portfolio = "$imageRootSvgs/portfolio.svg";
-
-
-   
+  static String forgetpasswordSvg =
+      "$imageRootSvgs/undraw_forgot_password_re_hxwm.svg";
+  static String portfolio = "$imageRootSvgs/portfolio.svg";
 }
