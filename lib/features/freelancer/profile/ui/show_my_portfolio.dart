@@ -70,7 +70,7 @@ class ShowMYPortfolio extends StatelessWidget {
                 )),
           ],
         ),
-        // FutureBuilder<List<PortfolioModel>> (
+        // FutureBuilder<List<PortfolioModel>>(
         //     future: controllerIm.getAllPortfolio(),
         //     // initialData: ,
         //     builder: (buildContext, snapshot) {
@@ -78,94 +78,94 @@ class ShowMYPortfolio extends StatelessWidget {
         //         return Center(child: Lottie.asset(ImagesUrl.loadingLottie2));
         //       } else if (snapshot.hasError) {
         //         return Center(child: Text('Error: ${snapshot.error}'));
-        //       }
-        //        else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+        //       } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
         //         return const Center(
         //             child: Text(
         //           'لا يوجد أعمال',
         //         ));
-        //       }
-        //       else {
+        //       } else {
         //         print("===========================else${snapshot.data}");
         //         return ListView.builder(
         //             itemCount: snapshot.data!.length,
         //             itemBuilder: (buildContext, index) {
         //               final portfolio = snapshot.data![index];
 
-        //               return Text(portfolio.title);
-        //               //                   Column(
-                      //                     children: [
-                      //                       const Divider(
-                      //                         endIndent: 20,
-                      //                         indent: 20,
-                      //                       ),
-                      //                       const Divider(
-                      //                         endIndent: 40,
-                      //                         indent: 40,
-                      //                       ),
-                      //                       const Divider(
-                      //                         endIndent: 60,
-                      //                         indent: 60,
-                      //                       ),
-                      //                       const Divider(
-                      //                         endIndent: 80,
-                      //                         indent: 80,
-                      //                       ),
-                      //                       NameWithIconPortfolio(
-                      //                         name: portfolio.title,
-                      //                         icon: Icons.work_history_outlined,
-                      //                       ),
-                      //                       DescrptionsPortfolio(
-                      //                           descrptions: portfolio.description),
-                      //                       Row(
-                      //                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      //                         children: [
-                      //                           Text(
-                      //                             "تاريخ الانجاز",
-                      //                             style: font16blacknormal,
-                      //                           ),
-                      //                           Icon(
-                      //                             Icons.date_range_outlined,
-                      //                             color: MyColors.blackColor,
-                      //                             size: 27.sp,
-                      //                           ),
-                      //                           SizedBox(
-                      //                             width: 10.w,
-                      //                           ),
-                      //                           Text(portfolio.date)
-                      //                         ],
-                      //                       ),
-                      //                       NameWithIconPortfolio(
-                      //                           name: "صور المشروع", icon: Icons.image_outlined),
-                      //                       SizedBox(
-                      //                         height: 350.h,
-                      //                         width: 400.w,
-                      //                         child: PageView.builder(
-                      //                             itemCount: portfolio.images.length ?? 0,
-                      //                             itemBuilder: (buildContext, index) {
-                      //                               return InkWell(
-                      //                                 onTap: () {
-                      //                                   showFullImage(
-                      //                                       portfolio.images[index].url ?? "");
-                      //                                 },
-                      //                                 child: Image.network(
-                      //                                     portfolio.images[index].url!),
-                      //                               );
-                      //                             }),
-                      //                       ),
-                      //                       ShowFilesPortfolio(
-                      //                         lenghtList: portfolio.files.length,
-                      //                         files: portfolio.files,
-                      //                       ),
-                      //                       ShowSkillesProjectPortfolio(
-                      //                         data: portfolio.skills,
-                      //                         lenghtList: portfolio.skills.length,
-                      //                       )
-                      //                     ],
-                      //                   );
-                    // });
-              // }
-            // }),
+        //               return Column(
+        //                 children: [
+        //                   const Divider(
+        //                     endIndent: 20,
+        //                     indent: 20,
+        //                   ),
+        //                   const Divider(
+        //                     endIndent: 40,
+        //                     indent: 40,
+        //                   ),
+        //                   const Divider(
+        //                     endIndent: 60,
+        //                     indent: 60,
+        //                   ),
+        //                   const Divider(
+        //                     endIndent: 80,
+        //                     indent: 80,
+        //                   ),
+        //                   NameWithIconPortfolio(
+        //                     name: portfolio.title,
+        //                     icon: Icons.work_history_outlined,
+        //                   ),
+        //                   DescrptionsPortfolio(
+        //                       descrptions: portfolio.description),
+        //                   Row(
+        //                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+        //                     children: [
+        //                       Text(
+        //                         "تاريخ الانجاز",
+        //                         style: font16blacknormal,
+        //                       ),
+        //                       Icon(
+        //                         Icons.date_range_outlined,
+        //                         color: MyColors.blackColor,
+        //                         size: 27.sp,
+        //                       ),
+        //                       SizedBox(
+        //                         width: 10.w,
+        //                       ),
+        //                       Text(portfolio.date)
+        //                     ],
+        //                   ),
+        //                   NameWithIconPortfolio(
+        //                       name: "صور المشروع", icon: Icons.image_outlined),
+        //                   SizedBox(
+        //                     height: 350.h,
+        //                     width: 400.w,
+        //                     child: PageView.builder(
+        //                         itemCount: portfolio.images.length ?? 0,
+        //                         itemBuilder: (buildContext, index) {
+        //                           return InkWell(
+        //                             onTap: () {
+        //                               if (portfolio.images[index].url != null &&
+        //                                   portfolio.images[index].url != "") {
+        //                                 showFullImage(
+        //                                     portfolio.images[index].url ?? "");
+        //                               }
+        //                             },
+        //                             child: Image.network(
+        //                                 portfolio.images[index].url!),
+        //                           );
+        //                         }),
+        //                   ),
+        //                   ShowFilesPortfolio(
+        //                     lenghtList: portfolio.files.length,
+        //                     files: portfolio.files,
+        //                   ),
+        //                   ShowSkillesProjectPortfolio(
+        //                     data: portfolio.skills,
+        //                     lenghtList: portfolio.skills.length,
+        //                   )
+        //                 ],
+        //               );
+        //             });
+        //       }
+        //     }),
       ],
     )
 

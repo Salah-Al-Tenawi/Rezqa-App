@@ -36,10 +36,11 @@ abstract class MyDrawerAndAppbarController extends GetxController {
 class MyDrawerAndAppbarControllerIm extends MyDrawerAndAppbarController {
   @override
   void onInit() {
-    roleUser = myServices.sharedpref.getString(KeyShardpref.roleuser);
+    myServices.sharedpref.getString(KeyShardpref.roleuser);
     // MyServices myser = Get.find();
     // myser.sharedpref.clear();
 
+    print(myServices.sharedpref.getString(KeyShardpref.token));
     super.onInit();
   }
 

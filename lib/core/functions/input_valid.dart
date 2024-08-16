@@ -12,8 +12,8 @@ inputvaild(String val, String? type, int? max, int? min) {
       return "اسم المستخدم غير صالح";
     }
   }
-  if(type=="section"){ 
-     if (!isValidUsername(val)) {
+  if (type == "section") {
+    if (!isValidUsername(val)) {
       return "اسم مجال العمل غير صالح";
     }
   }
@@ -67,22 +67,23 @@ inputvaild(String val, String? type, int? max, int? min) {
     }
   }
 }
+
 String? validateSkills(List<SkilleModel?>? selectedItems) {
   if (selectedItems == null) {
     return "يجب اختيار خمسة مهارات على الأقل ";
   }
-  if (selectedItems.length < 5) {
+  if (selectedItems.isEmpty) {
     return 'يجب اختيار خمسة مهارات على الأقل';
   }
   return null;
- 
 }
-String?validatJoprole (JoproleModel? joprole) {
-              if (joprole == null) {
-                return "يجب اختبار مجال العمل ";
-              }
-                           return null;
-            }
+
+String? validatJoprole(JoproleModel? joprole) {
+  if (joprole == null) {
+    return "يجب اختبار مجال العمل ";
+  }
+  return null;
+}
 
 bool isValidUsername(String username) {
   // تعبير منتظم للتحقق من أن الاسم يحتوي فقط على الأحرف العربية أو الإنجليزية

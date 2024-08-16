@@ -228,7 +228,7 @@ class FreeProfileControllerIm extends FreeProfileController {
         Get.snackbar("error", error);
         isloading.value = false;
       }, (freelancerModel) async {
-        myServices.sharedpref.setInt(KeyShardpref.id, freelancerModel.id);
+        myServices.sharedpref.setInt(KeyShardpref.roleID, freelancerModel.id);
 
         String json = jsonEncode(freelancerModel.toJson());
         myServices.sharedpref.setString(KeyShardpref.freelancerJson, json);
@@ -286,7 +286,7 @@ class FreeProfileControllerIm extends FreeProfileController {
   @override
   Future<FreelancerModel?>? getMYFreelancer() async {
     FreelancerModel? free;
-    int? id = myServices.sharedpref.getInt(KeyShardpref.id) ?? 0;
+    int? id = myServices.sharedpref.getInt(KeyShardpref.roleID) ?? 0;
     if (id == 0) {
       UserModel? user = await sharedApiFunctionIm.whoIam();
       if (user != null) {

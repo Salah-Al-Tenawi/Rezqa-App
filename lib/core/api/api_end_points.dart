@@ -1,6 +1,6 @@
 
 class ApiEndPoint {
-  static String basrurl = "http://192.168.84.45:8000/api/";
+  static String basrurl = "https://freelancer-l1w8.onrender.com/api/";
 
   // storage
 

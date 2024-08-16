@@ -76,7 +76,7 @@ class FreelancerPortfolioControllerIm extends FreelancerPortfolioController {
 
   @override
   Future<List<PortfolioModel>> getAllPortfolio() async {
-    int? id = myServices.sharedpref.getInt(KeyShardpref.id);
+    int? id = myServices.sharedpref.getInt(KeyShardpref.roleID);
     // UserModel? user;
     // if (id == null) {
     //   user = await sharedApiFunctionIm.whoIam();
@@ -128,6 +128,7 @@ class FreelancerPortfolioControllerIm extends FreelancerPortfolioController {
         actions: [
           MyButton(
             onPressed: () {
+              section.clear();
               title.clear();
               url.clear();
               description.clear();
@@ -136,7 +137,9 @@ class FreelancerPortfolioControllerIm extends FreelancerPortfolioController {
               images = [];
               filemodel = [];
               fileIds = [];
+              update();
               Get.back();
+              isloading.value = false;
             },
             child: Text("اضافة المزيد"),
             color: MyColors.greyColor,

@@ -23,16 +23,13 @@ class CustomButtonPortfolio extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        
         Padding(
           padding: EdgeInsets.only(top: 60.h, left: 150.w, bottom: 0.h),
           child: Obx(() {
             return controllerIm.isloading.value == false
                 ? MyButton(
                     onPressed: () async {
-                    
-                        await controllerIm.savePortfoilo();
-                      
+                      await controllerIm.savePortfoilo();
                     },
                     width: 120.w,
                     height: 60.h,

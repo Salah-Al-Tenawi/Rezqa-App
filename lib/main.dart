@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
           getPages: appRoute.list,
           initialRoute: MyRoute.onboarding,
           initialBinding: ChatBindings(),
+          
           debugShowCheckedModeBanner: false,
           textDirection: TextDirection.rtl,
           theme: AppTheme.lighttheme),
