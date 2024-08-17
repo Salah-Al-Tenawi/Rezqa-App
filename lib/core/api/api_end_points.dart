@@ -21,15 +21,29 @@ class ApiEndPoint {
   // company
   static String getallinustry = "category/industry/search";
   static String savecompany = "company/store";
+  //company offer
+  static String sendjoboffer = "company/job_offer/store";
+  static String fetchonejoboffer = "company/job_offers/list-job-offer";
+  static String fetchJobsmyoffer = "company/job_offer/my-job-offers";
 
   static String company = "company";
   // client
   static String client = "client";
   static String saveclient = "client/store";
+  //client offer
+  static String submitOfferclient = "client-offer/client/store";
+  static String fetchJobsclintofferforall =
+      "client-offer/freelancer/freelancer-filter";
+  static String fetchJobsmyclintoffer = "client-offer/client/client-filter";
 
   // freelancer
   static String freelnacer = "freelancer";
   static String savefreelnacer = "freelancer/store";
+  //frelancer offer
+  static String submitOfferfrelancer = "freelancer-offer/freelancer/store";
+  static String fetchJobsfrelancer =
+      "freelancer-offer/freelancer/freelancer-filter";
+
 // freelnacerPortfolio
   static String getPortfolio = "freelancer/portfolio";
   static String storePortfolio = "freelancer/portfolio/store";
@@ -43,6 +57,22 @@ class ApiEndPoint {
 // chat
   static String conversations = "conversations";
   static String messages = "messages";
+//
+  static String fetchCategoriescategory = "category/category";
+  //proposal frelancerclient
+  static String submitJobOfferProposaltoclient =
+      "client-offer/freelancer/proposal/store";
+  static String fetchProposalsforclient = "client-offer/client/proposals";
+  static String clientacceptProposal = "client-offer/client/proposals/accept";
+  static String clientrejectProposal = "client-offer/client/proposals/reject";
+  //proposal companyfrelancer
+  static String submitJobOfferProposaltocompany = "job-offer-proposal/store";
+  static String fetchJobOfferProposalsforcompany = "job-offer-proposal/filter";
+  static String companyrejectProposal = "job-offer-proposal/reject";
+  static String companyacceptProposal = "job-offer-proposal/accept";
+  static String fetchJobOfferProposalsforfrelancer = "job-offer-proposal/index";
+  static String deleteJobOfferProposalfrelancer = "job-offer-proposal";
+  static String editJobOfferProposalfrelancer = "job-offer-proposal";
 }
 
 class ApiKey {

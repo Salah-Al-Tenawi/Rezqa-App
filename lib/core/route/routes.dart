@@ -15,6 +15,12 @@ class MyRoute {
 
   static const String verfiymyprofilecompany = "/verfiymyprofilecompany";
 
+    static const String ShowMyOfferCompany = "/ShowMyOfferCompany";
+        static const String addCompanyOffer = "/addCompanyOffer";
+        static const String JobOfferProposalCompanyPage = "/JobOfferProposalCompanyPage";
+
+
+
 // freelancer
 //    profile
   static const String infoprofileFreelancer = "/infoprofileFreelancer";
@@ -22,8 +28,13 @@ class MyRoute {
   static const String dashBoardFreelancer = "/dashBoardFreelancer";
   static const String addportfolio = "/addportfolio";
   static const String showMyportfolio = "/showMyportfolio";
+  static const String JobOfferProposalFrelancerPage = "/JobOfferProposalFrelancerPage";
 
 // client
+    static const String ShowMyOfferClient = "/ShowMyOfferClient";
+        static const String addClientOffer = "/addClientOffer";
+
+
 // profile DashBoardClint
   static const String infoprofileclient = "/infoprofileclient";
   static const String myprofileclient = "/ymyprofileclient";
@@ -39,7 +50,7 @@ class MyRoute {
   static String anyProfileCompany = '/AnyProfileControllerIm';
   static String anyProfileFreelancer = '/anyProfileFreelancer';
   static const String showAnyportfolio = "/showAnyportfolio";
-
+  
   //test
   static const String test = "/test";
 }

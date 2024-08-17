@@ -54,7 +54,21 @@ class MyDrawerAndAppbarControllerIm extends MyDrawerAndAppbarController {
     // TODO: implement gotoMynotifications
     throw UnimplementedError();
   }
-
+void navigateToAddOffer() {
+    switch (roleUser) {
+      case "company":
+        Get.toNamed(MyRoute.addCompanyOffer);
+        break;
+      case "freelancer":
+      //  Get.toNamed(MyRoute.addFreelancerOffer);
+        break;
+      case "client":
+        Get.toNamed(MyRoute.addClientOffer);
+        break;
+      default:
+        Get.snackbar("خطأ", "لا يمكن تحديد نوع المستخدم.");
+    }
+  }
   @override
   jumpToPage(int index) {
     selectedPage.value = index;
@@ -76,11 +90,11 @@ class MyDrawerAndAppbarControllerIm extends MyDrawerAndAppbarController {
   myOffers() {
     switch (roleUser) {
       case "company":
-      // Get.toNamed(MyRoute.verfiymyprofilecompany);
+       Get.toNamed(MyRoute.ShowMyOfferCompany);
       case "freelancer":
       // Get.toNamed(MyRoute.verfiymyprofileFreelancer);
       case "client":
-      // Get.toNamed(MyRoute.myprofileclient);
+       Get.toNamed(MyRoute.ShowMyOfferClient);
     }
   }
 

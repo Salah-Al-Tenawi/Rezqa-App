@@ -15,14 +15,20 @@ import 'package:freelanc/features/auth/sing_in_user/ui/sucsses_verfiy_email.dart
 import 'package:freelanc/features/auth/sing_in_user/ui/verfiy_email_sing.dart';
 import 'package:freelanc/features/chat/ui/all_chat.dart';
 import 'package:freelanc/features/chat/ui/chat.dart';
+import 'package:freelanc/features/client/addofferclient/ui/addofferClient_screen.dart';
 import 'package:freelanc/features/client/dashboard/ui/dash_board_client.dart';
 import 'package:freelanc/features/client/profile/ui/info_profile_client.dart';
 import 'package:freelanc/features/client/profile/ui/my_profile_client.dart';
+import 'package:freelanc/features/client/showClintoffer1/ui/showclientoffer.dart';
+import 'package:freelanc/features/company/addoffercompany/ui/addoffercompany_screen.dart';
+import 'package:freelanc/features/company/show_myoffer/ui/showmyOffer_company.dart';
 import 'package:freelanc/features/dashboard/ui/dashborad.dart';
 import 'package:freelanc/features/freelancer/profile/ui/add_portfolio.dart';
 import 'package:freelanc/features/freelancer/profile/ui/info_profile_freelancer.dart';
 import 'package:freelanc/features/freelancer/profile/ui/show_my_portfolio.dart';
 import 'package:freelanc/features/freelancer/profile/ui/verfiy_profile_freelancer.dart';
+import 'package:freelanc/features/jobofferproposalfrelancer&company/jobofferproposalcompany/ui/Displaylistproposalforcompany.dart';
+import 'package:freelanc/features/jobofferproposalfrelancer&company/jobofferproposalfrelancer/ui/Displaylistproposalforfreelancer.dart';
 import 'package:freelanc/features/onboarding/ui/onboarding.dart';
 import 'package:freelanc/features/company/profiles/ui/verfiy_profile_company.dart';
 import 'package:freelanc/features/company/profiles/ui/info_profile_company.dart';
@@ -123,6 +129,18 @@ class AppRoute {
 
     // test page
     GetPage(name: MyRoute.test, page: () => const TestWidgets()),
-    GetPage(name: MyRoute.allCaht, page: () => const AllCaht())
+    GetPage(name: MyRoute.allCaht, page: () => const AllCaht()),
+    //show company
+        GetPage(name: MyRoute.ShowMyOfferCompany, page: ()=>  ShowMyOfferCompany()),
+         GetPage(name: MyRoute.addCompanyOffer, page: ()=>  AddCompanyOfferScreen()),
+ GetPage(name: MyRoute.JobOfferProposalCompanyPage, page: ()=>  JobOfferProposalCompanyPage()),
+    //show client
+        GetPage(name: MyRoute.ShowMyOfferClient, page: ()=>  JobClintCard()),
+        GetPage(name: MyRoute.addClientOffer, page: ()=>  AddClintOfferscreen()),
+
+        //
+                GetPage(name: MyRoute.JobOfferProposalFrelancerPage, page: ()=>  JobOfferProposalFrelancerPage()),
+
+
   ];
 }

@@ -1,6 +1,8 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:freelanc/core/themes/color_app.dart';
+import 'package:freelanc/features/client/showAllClintoffer/ui/showAllclientoffer.dart';
+import 'package:freelanc/features/company/show_AllOffer/ui/showAllOffer_company.dart';
 import 'package:freelanc/features/dashboard/controller/drawer_and_appbar_board_controller.dart';
 import 'package:freelanc/features/dashboard/ui/widget/appBar_dashboard.dart';
 import 'package:freelanc/features/dashboard/ui/widget/my_drawer.dart';
@@ -17,9 +19,7 @@ class DashBoard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
-        child: MyDrawer(
-          controller: controller,
-        ),
+        child: MyDrawer(controller: controller),
       ),
       appBar: AppBarDashboard(controller: controller),
       bottomNavigationBar: ConvexAppBar(
@@ -36,14 +36,23 @@ class DashBoard extends StatelessWidget {
           controller.jumpToPage(index);
         },
       ),
-      body: Obx(() => IndexedStack(
-            index: controller.selectedPage.value,
-            children: const [
-              Center(child: Text('صفحة مستقلين')),
-              Center(child: Text('صفحة شركات')),
-              Center(child: Text('صفحة عملاء')),
-            ],
-          )),
+      body: Obx(
+        () => IndexedStack(
+          index: controller.selectedPage.value,
+          children: [
+            Center(child: Text('صفحة مستقلين')),
+            Jobofferallcombany(),
+            JobAllofferClintCard(),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.navigateToAddOffer();
+        },
+        backgroundColor: MyColors.blueColor,
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

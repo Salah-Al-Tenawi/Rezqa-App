@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:freelanc/core/route/routes.dart';
 import 'package:freelanc/core/themes/color_app.dart';
 import 'package:freelanc/core/themes/text_styles_app.dart';
 import 'package:freelanc/core/widgets/custom_listtile.dart';
 import 'package:freelanc/features/dashboard/controller/drawer_and_appbar_board_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 // ignore: must_be_immutable
 class MyDrawer extends StatelessWidget {
@@ -53,6 +56,24 @@ class MyDrawer extends StatelessWidget {
           ),
           controller.roleUser == "company"
               ? CustomListTile(
+                  title: "المتقدمين لعروضي",
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
+                  titleTextStyle: font15ggreyw600,
+                  onTap: () => {Get.toNamed(MyRoute.JobOfferProposalCompanyPage)},
+                  trailing: Icon(
+                    Icons.delete_outline,
+                    color: MyColors.blueColor,
+                    size: 30,
+                  ),
+                )
+              : const SizedBox(),
+          Divider(
+            color: MyColors.greyTextfildColor,
+            endIndent: 70,
+            indent: 70,
+          ),
+          controller.roleUser == "company"
+              ? CustomListTile(
                   title: "حذف حسابي",
                   padding: EdgeInsets.symmetric(horizontal: 15.w),
                   titleTextStyle: font15ggreyw600,
@@ -64,6 +85,24 @@ class MyDrawer extends StatelessWidget {
                   ),
                 )
               : const SizedBox(),
+              controller.roleUser == "freelancer"
+              ? CustomListTile(
+                  title: "عروض الشركات المقدم عليها",
+                  padding: EdgeInsets.symmetric(horizontal: 15.w),
+                  titleTextStyle: font15ggreyw600,
+                  onTap: () => {Get.toNamed(MyRoute.JobOfferProposalFrelancerPage)},
+                  trailing: Icon(
+                    Icons.delete_outline,
+                    color: MyColors.blueColor,
+                    size: 30,
+                  ),
+                )
+              : const SizedBox(),
+          Divider(
+            color: MyColors.greyTextfildColor,
+            endIndent: 70,
+            indent: 70,
+          ),
           Divider(
             color: MyColors.greyTextfildColor,
             endIndent: 70,
